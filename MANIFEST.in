@@ -1,0 +1,2 @@
+recursive-include tutorvision/patches *
+recursive-include tutorvision/templates *

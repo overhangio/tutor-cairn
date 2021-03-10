@@ -1,0 +1,10 @@
+vision-clickhouse-job:
+    image: {{ VISION_CLICKHOUSE_DOCKER_IMAGE }}
+    depends_on: {{ [("vision-clickhouse", VISION_RUN_CLICKHOUSE)]|list_if }}
+vision-redash-job:
+    image: {{ VISION_REDASH_DOCKER_IMAGE }}
+    command: create_db
+    env_file: ../plugins/vision/apps/redash/env
+    depends_on:
+        - vision-postgres
+        - vision-redis

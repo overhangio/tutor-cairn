@@ -1,0 +1,6 @@
+./manage.py database create_tables
+./manage.py users create_root --password={{ VISION_REDASH_ROOT_PASSWORD }} {{ VISION_REDASH_ROOT_EMAIL }} {{ VISION_REDASH_ROOT_USERNAME }} || echo "Skipping admin user creation"
+
+(./manage.py ds list | grep datalake && echo "datalake data source already exists") || \
+    (echo "creating datalake data source..." && \
+    ./manage.py ds new --type=clickhouse --options='{"url":"http://{{ VISION_CLICKHOUSE_HOST }}:{{ VISION_CLICKHOUSE_HTTP_PORT }}", "dbname": "{{ VISION_CLICKHOUSE_DATABASE }}"}' datalake)

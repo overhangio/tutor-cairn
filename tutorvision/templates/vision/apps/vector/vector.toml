@@ -1,0 +1,65 @@
+# Vector's API for introspection
+[api]
+enabled = true
+address = "127.0.0.1:8686"
+
+### Sources
+
+# Capture logs from all containers
+[sources.containers]
+type = "docker_logs"
+
+### Transforms
+[transforms.openedx_containers]
+type = "filter"
+inputs = ["containers"]
+condition.type = "check_fields"
+condition."label.com.docker.compose.regex" = "(lms|cms)"
+
+[transforms.nginx_containers]
+type = "filter"
+inputs = ["containers"]
+condition.type = "check_fields"
+condition."label.com.docker.compose.eq" = "nginx"
+
+[transforms.tracking_raw]
+type = "regex_parser"
+inputs = ["openedx_containers"]
+drop_failed = true
+drop_field = false
+field = "message"
+# 2021-03-09 13:08:41,292 INFO 21 [tracking] [user 3] [ip 172.18.0.1] logger.py:42 - {...}
+patterns = ["^.* \\[tracking\\] [^{}]* (?P<tracking_message>\\{.*\\})$"]
+
+[transforms.tracking]
+type = "remap"
+inputs = ["tracking_raw"]
+# Time formats: https://docs.rs/chrono/0.4.19/chrono/format/strftime/index.html#specifiers
+source = '''
+.message = .tracking_message
+.tracking_message = parse_json(.tracking_message)
+.time = parse_timestamp(.tracking_message.time, format="%+")
+del(.tracking_message)
+'''
+
+### Sinks
+
+# Log all events to stdout, for debugging
+[sinks.out]
+type = "console"
+inputs = ["tracking"]
+encoding.codec = "json"
+
+# Send logs to clickhouse
+[sinks.clickhouse]
+type = "clickhouse"
+encoding.only_fields = ["time", "message"]
+# Required: https://github.com/timberio/vector/issues/5797
+encoding.timestamp_format = "unix"
+inputs = ["tracking"]
+endpoint = "http://{{ VISION_CLICKHOUSE_HOST }}:{{ VISION_CLICKHOUSE_HTTP_PORT }}"
+database = "{{ VISION_CLICKHOUSE_DATABASE }}"
+table = "tracking"
+healthcheck = true
+
+{{ patch("vision-vector-toml") }}

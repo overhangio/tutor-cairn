@@ -1,0 +1,81 @@
+####### vision plugin
+
+# log collection
+vision-vector:
+    image: docker.io/timberio/vector:0.11.X-alpine
+    volumes:
+        - ../plugins/vision/apps/vector/vector.toml:/etc/vector/vector.toml:ro
+        - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+        - DOCKER_HOST=/var/run/docker.sock
+    restart: unless-stopped
+
+{% if VISION_RUN_CLICKHOUSE %}
+# log storage
+vision-clickhouse:
+    image: {{ VISION_CLICKHOUSE_DOCKER_IMAGE }}
+    volumes:
+        - ../../data/vision/clickhouse:/var/lib/clickhouse
+    ulimits:
+        nofile:
+            soft: 262144
+            hard: 262144
+    restart: unless-stopped
+{% endif %}
+
+# frontend
+vision-redash-server:
+    image: {{ VISION_REDASH_DOCKER_IMAGE }}
+    command: server
+    env_file: ../plugins/vision/apps/redash/env
+    environment:
+        REDASH_WEB_WORKERS: 4
+    restart: unless-stopped
+    depends_on:
+        - vision-postgres
+        - vision-redis
+vision-redash-scheduler:
+    image: {{ VISION_REDASH_DOCKER_IMAGE }}
+    command: scheduler
+    env_file: ../plugins/vision/apps/redash/env
+    environment:
+        QUEUES: "celery"
+        WORKERS_COUNT: 1
+    restart: unless-stopped
+    depends_on:
+        - vision-postgres
+        - vision-redis
+vision-redash-scheduled-worker:
+    image: {{ VISION_REDASH_DOCKER_IMAGE }}
+    command: worker
+    env_file: ../plugins/vision/apps/redash/env
+    environment:
+        QUEUES: "scheduled_queries,schemas"
+        WORKERS_COUNT: 1
+    restart: unless-stopped
+    depends_on:
+        - vision-postgres
+        - vision-redis
+vision-redash-adhoc-worker:
+    image: {{ VISION_REDASH_DOCKER_IMAGE }}
+    command: worker
+    env_file: ../plugins/vision/apps/redash/env
+    environment:
+        QUEUES: "queries"
+        WORKERS_COUNT: 2
+    restart: unless-stopped
+    depends_on:
+        - vision-postgres
+        - vision-redis
+vision-redis:
+    image: docker.io/redis:5.0-alpine
+    restart: unless-stopped
+vision-postgres:
+    image: docker.io/postgres:9.6-alpine
+    environment:
+        POSTGRES_USER: "{{ VISION_REDASH_POSTGRESQL_USER }}"
+        POSTGRES_PASSWORD: "{{ VISION_REDASH_POSTGRESQL_PASSWORD }}"
+        POSTGRES_DB: "{{ VISION_REDASH_POSTGRESQL_DB }}"
+    volumes:
+        - ../../data/vision/redash/postgres:/var/lib/postgresql/data
+    restart: unless-stopped

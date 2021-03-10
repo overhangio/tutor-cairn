@@ -1,0 +1,21 @@
+clickhouse-client --host {{ VISION_CLICKHOUSE_HOST }} --port {{ VISION_CLICKHOUSE_PORT }} \
+    --query "CREATE DATABASE IF NOT EXISTS {{ VISION_CLICKHOUSE_DATABASE }}"
+
+# TODO add PARTITION BY?
+clickhouse-client --host {{ VISION_CLICKHOUSE_HOST }} --port {{ VISION_CLICKHOUSE_PORT}} --database {{ VISION_CLICKHOUSE_DATABASE }} \
+    --query 'CREATE TABLE IF NOT EXISTS tracking (
+    `time` DateTime,
+    `message` String
+) ENGINE MergeTree ORDER BY time'
+
+# TODO add materialized view https://youtu.be/pZkKsfr8n3M?t=1731
+clickhouse-client --host {{ VISION_CLICKHOUSE_HOST }} --port {{ VISION_CLICKHOUSE_PORT}} --database {{ VISION_CLICKHOUSE_DATABASE }} \
+--query 'CREATE VIEW IF NOT EXISTS events AS
+    SELECT
+        time,
+        JSONExtractString(message, 'name') as name,
+        JSONExtract(message, 'context', 'course_id', 'String') as course_id,
+        JSONExtract(message, 'context', 'user_id', 'Int64') as user_id
+    FROM tracking
+    WHERE JSONExtractString(message, 'event_source')='browser'
+    ORDER BY time'
