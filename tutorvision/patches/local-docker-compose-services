@@ -24,8 +24,10 @@ vision-clickhouse:
     restart: unless-stopped
 {% endif %}
 
-# TODO make sure that we run the right services for redash 9.0 https://github.com/getredash/redash/blob/master/CHANGELOG.md
+# redash config docs:
 # https://github.com/getredash/setup/blob/master/data/docker-compose.yml
+# https://github.com/getredash/redash/blob/master/CHANGELOG.md
+
 # frontend
 vision-redash-server:
     image: {{ VISION_REDASH_DOCKER_IMAGE }}
@@ -41,31 +43,39 @@ vision-redash-scheduler:
     image: {{ VISION_REDASH_DOCKER_IMAGE }}
     command: scheduler
     env_file: ../plugins/vision/apps/redash/env
-    environment:
-        QUEUES: "celery"
-        WORKERS_COUNT: 1
     restart: unless-stopped
     depends_on:
         - vision-postgresql
         - vision-redis
-vision-redash-scheduled-worker:
+vision-redash-worker-scheduled:
     image: {{ VISION_REDASH_DOCKER_IMAGE }}
     command: worker
     env_file: ../plugins/vision/apps/redash/env
     environment:
-        QUEUES: "scheduled_queries,schemas"
+        QUEUES: "scheduled_queries schemas"
         WORKERS_COUNT: 1
     restart: unless-stopped
     depends_on:
         - vision-postgresql
         - vision-redis
-vision-redash-adhoc-worker:
+vision-redash-worker-queries:
     image: {{ VISION_REDASH_DOCKER_IMAGE }}
     command: worker
     env_file: ../plugins/vision/apps/redash/env
     environment:
         QUEUES: "queries"
         WORKERS_COUNT: 2
+    restart: unless-stopped
+    depends_on:
+        - vision-postgresql
+        - vision-redis
+vision-redash-worker-default:
+    image: {{ VISION_REDASH_DOCKER_IMAGE }}
+    command: worker
+    env_file: ../plugins/vision/apps/redash/env
+    environment:
+        QUEUES: "periodic emails default"
+        WORKERS_COUNT: 1
     restart: unless-stopped
     depends_on:
         - vision-postgresql
