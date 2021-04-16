@@ -1,21 +1,44 @@
-clickhouse-client --host {{ VISION_CLICKHOUSE_HOST }} --port {{ VISION_CLICKHOUSE_PORT }} \
-    --query "CREATE DATABASE IF NOT EXISTS {{ VISION_CLICKHOUSE_DATABASE }}"
+clickhouse_client_base() {
+    clickhouse client --host {{ VISION_CLICKHOUSE_HOST }} --port {{ VISION_CLICKHOUSE_PORT }} \
+        --user {{ VISION_CLICKHOUSE_USERNAME }} \
+        --password {{ VISION_CLICKHOUSE_PASSWORD }} "$@"
+}
+clickhouse_client() {
+    clickhouse_client_base --database={{ VISION_CLICKHOUSE_DATABASE }} "$@"
+}
+clickhouse_client_query() {
+        clickhouse_client --query "$1"
+}
+clickhouse_client_file() {
+    clickhouse_client --multiquery --multiline < "$1"
+}
+run_migration() {
+    migration_name=$(basename "$1")
+    echo -n "Applying migration $migration_name... "
+    is_applied=$(clickhouse_client_query "SELECT 'applied' FROM migrations WHERE name='$migration_name'")
+    if [ "$is_applied" = "applied" ]
+    then
+        echo "SKIP"
+        return
+    fi
+    clickhouse_client_file "$1"
+    clickhouse_client_query "INSERT INTO migrations (name) VALUES ('$migration_name')"
+    echo "OK"
+}
+run_migrations() {
+    for migration in /etc/clickhouse-server/migrations.d/*.sql
+    do
+        run_migration $migration
+    done
+}
+init_db() {
+    # Create database
+    clickhouse_client_base --query "CREATE DATABASE IF NOT EXISTS {{ VISION_CLICKHOUSE_DATABASE }}"
+    # Create migrations table
+    clickhouse_client_query "CREATE TABLE IF NOT EXISTS migrations (name String) ENGINE = MergeTree PRIMARY KEY(name) ORDER BY name"
+}
 
-# TODO add PARTITION BY?
-clickhouse-client --host {{ VISION_CLICKHOUSE_HOST }} --port {{ VISION_CLICKHOUSE_PORT}} --database {{ VISION_CLICKHOUSE_DATABASE }} \
-    --query 'CREATE TABLE IF NOT EXISTS tracking (
-    `time` DateTime,
-    `message` String
-) ENGINE MergeTree ORDER BY time'
+init_db
+run_migrations
 
-# TODO add materialized view https://youtu.be/pZkKsfr8n3M?t=1731
-clickhouse-client --host {{ VISION_CLICKHOUSE_HOST }} --port {{ VISION_CLICKHOUSE_PORT}} --database {{ VISION_CLICKHOUSE_DATABASE }} \
---query 'CREATE VIEW IF NOT EXISTS events AS
-    SELECT
-        time,
-        JSONExtractString(message, 'name') as name,
-        JSONExtract(message, 'context', 'course_id', 'String') as course_id,
-        JSONExtract(message, 'context', 'user_id', 'Int64') as user_id
-    FROM tracking
-    WHERE JSONExtractString(message, 'event_source')='browser'
-    ORDER BY time'
+# TODO enable live views https://clickhouse.tech/docs/en/sql-reference/statements/create/view/#live-view

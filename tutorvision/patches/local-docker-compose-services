@@ -16,6 +16,7 @@ vision-clickhouse:
     image: {{ VISION_CLICKHOUSE_DOCKER_IMAGE }}
     volumes:
         - ../../data/vision/clickhouse:/var/lib/clickhouse
+        - ../plugins/vision/apps/clickhouse/users.d/vision.xml:/etc/clickhouse-server/users.d/vision.xml:ro
     ulimits:
         nofile:
             soft: 262144
@@ -23,6 +24,8 @@ vision-clickhouse:
     restart: unless-stopped
 {% endif %}
 
+# TODO make sure that we run the right services for redash 9.0 https://github.com/getredash/redash/blob/master/CHANGELOG.md
+# https://github.com/getredash/setup/blob/master/data/docker-compose.yml
 # frontend
 vision-redash-server:
     image: {{ VISION_REDASH_DOCKER_IMAGE }}
@@ -32,7 +35,7 @@ vision-redash-server:
         REDASH_WEB_WORKERS: 4
     restart: unless-stopped
     depends_on:
-        - vision-postgres
+        - vision-postgresql
         - vision-redis
 vision-redash-scheduler:
     image: {{ VISION_REDASH_DOCKER_IMAGE }}
@@ -43,7 +46,7 @@ vision-redash-scheduler:
         WORKERS_COUNT: 1
     restart: unless-stopped
     depends_on:
-        - vision-postgres
+        - vision-postgresql
         - vision-redis
 vision-redash-scheduled-worker:
     image: {{ VISION_REDASH_DOCKER_IMAGE }}
@@ -54,7 +57,7 @@ vision-redash-scheduled-worker:
         WORKERS_COUNT: 1
     restart: unless-stopped
     depends_on:
-        - vision-postgres
+        - vision-postgresql
         - vision-redis
 vision-redash-adhoc-worker:
     image: {{ VISION_REDASH_DOCKER_IMAGE }}
@@ -65,17 +68,17 @@ vision-redash-adhoc-worker:
         WORKERS_COUNT: 2
     restart: unless-stopped
     depends_on:
-        - vision-postgres
+        - vision-postgresql
         - vision-redis
 vision-redis:
     image: docker.io/redis:5.0-alpine
     restart: unless-stopped
-vision-postgres:
+vision-postgresql:
     image: docker.io/postgres:9.6-alpine
     environment:
-        POSTGRES_USER: "{{ VISION_REDASH_POSTGRESQL_USER }}"
-        POSTGRES_PASSWORD: "{{ VISION_REDASH_POSTGRESQL_PASSWORD }}"
-        POSTGRES_DB: "{{ VISION_REDASH_POSTGRESQL_DB }}"
+        POSTGRES_USER: "{{ VISION_POSTGRESQL_USER }}"
+        POSTGRES_PASSWORD: "{{ VISION_POSTGRESQL_PASSWORD }}"
+        POSTGRES_DB: "{{ VISION_POSTGRESQL_DB }}"
     volumes:
-        - ../../data/vision/redash/postgres:/var/lib/postgresql/data
+        - ../../data/vision/postgresql:/var/lib/postgresql/data
     restart: unless-stopped
