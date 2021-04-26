@@ -20,9 +20,15 @@ CREATE TABLE openedx_userprofiles
 )
 ENGINE = MySQL('{{ MYSQL_HOST }}:{{ MYSQL_PORT }}', '{{ OPENEDX_MYSQL_DATABASE }}', 'auth_userprofile', '{{ OPENEDX_MYSQL_USERNAME }}', '{{ OPENEDX_MYSQL_PASSWORD }}');
 
+-- enable live views
+set allow_experimental_live_view = 1;
+
 CREATE LIVE VIEW courseenrollments WITH PERIODIC REFRESH 30 AS
 SELECT
     openedx_courseenrollments.course_id AS course_id,
+    openedx_courseenrollments.created AS enrollment_created,
+    openedx_courseenrollments.is_active AS enrollment_is_active,
+    openedx_courseenrollments.mode AS enrollment_mode,
     openedx_courseenrollments.user_id AS user_id,
     openedx_userprofiles.year_of_birth AS user_year_of_birth,
     openedx_userprofiles.gender AS user_gender,

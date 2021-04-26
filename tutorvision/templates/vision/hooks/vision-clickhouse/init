@@ -40,5 +40,3 @@ init_db() {
 
 init_db
 run_migrations
-
-# TODO enable live views https://clickhouse.tech/docs/en/sql-reference/statements/create/view/#live-view

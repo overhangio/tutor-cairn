@@ -44,7 +44,11 @@ def datalake_setpermissions(context, username, course_ids):
                 for course_id in course_ids
             ]
         )
+    # TODO rename courseenrollments to course_enrollments (and other tables as well)
+    # Note that the "CREATE TEMPORARY TABLE" grant is required to make use of "numbers()" functions.
     query = f"""
+GRANT CREATE TEMPORARY TABLE ON *.* TO {username};
+
 GRANT SELECT ON events TO {username};
 CREATE ROW POLICY OR REPLACE {username} ON events AS RESTRICTIVE FOR SELECT USING {condition} TO {username};
 
@@ -53,6 +57,12 @@ CREATE ROW POLICY OR REPLACE {username} ON coursegrades AS RESTRICTIVE FOR SELEC
 
 GRANT SELECT ON courseenrollments TO {username};
 CREATE ROW POLICY OR REPLACE {username} ON courseenrollments AS RESTRICTIVE FOR SELECT USING {condition} TO {username};
+
+GRANT SELECT ON video_events TO {username};
+CREATE ROW POLICY OR REPLACE {username} ON video_events AS RESTRICTIVE FOR SELECT USING {condition} TO {username};
+
+GRANT SELECT ON video_view_segments TO {username};
+CREATE ROW POLICY OR REPLACE {username} ON video_view_segments AS RESTRICTIVE FOR SELECT USING {condition} TO {username};
 """
     run_datalake_query(context.root, query)
 

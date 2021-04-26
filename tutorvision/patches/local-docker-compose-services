@@ -29,7 +29,7 @@ vision-clickhouse:
 # https://github.com/getredash/redash/blob/master/CHANGELOG.md
 
 # frontend
-vision-redash-server:
+vision-redash:
     image: {{ VISION_REDASH_DOCKER_IMAGE }}
     command: server
     env_file: ../plugins/vision/apps/redash/env

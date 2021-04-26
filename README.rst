@@ -13,11 +13,7 @@ TODO:
     - make database name a tutor config
     - make clickhouse host a tutor config
     - specify TTL for tables?
-    - don't connect with default user, but use a dedicated openedx user
-    - rename database to "openedx"
-    - set permissions for each course/org: one datasource per org/course???
-    - how to handle migrations?
-    - prevent access to the full tracking message in the tracking table
+    - set permissions for each org:
 - Expose data with redash
     - Provision dashboards
     - Custom users
@@ -76,6 +72,11 @@ To add a new, non-admin user::
 Development
 -----------
 
+
+To reload Vector configuration after changes to vector.toml, run::
+
+    tutor config save && tutor local exec vision-vector sh kill -s HUP
+
 To explore the clickhouse database as root, run::
 
     tutor local run vision-clickhouse clickhouse-client --host vision-clickhouse \
@@ -83,9 +84,9 @@ To explore the clickhouse database as root, run::
         --user $(tutor config printvalue VISION_CLICKHOUSE_USERNAME) \
         --password $(tutor config printvalue VISION_CLICKHOUSE_PASSWORD)
 
-To reload Vector configuration after changes to vector.toml, run::
+To launch a Python shell in Redash, run::
 
-    tutor config save && tutor local exec vision-vector sh kill -s HUP
+    tutor local run vision-redash ./manage.py shell
 
 License
 -------

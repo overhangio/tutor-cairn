@@ -1,6 +1,6 @@
 # Vision
 upstream vision-backend {
-    server vision-redash-server:5000 fail_timeout=0;
+    server vision-redash:5000 fail_timeout=0;
 }
 server {
   listen 80;

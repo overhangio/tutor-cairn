@@ -1,8 +1,9 @@
 CREATE TABLE tracking
 (
     `time` DateTime,
-    `message` String,
-) ENGINE MergeTree
+    `message` String
+)
+ENGINE MergeTree
 ORDER BY time;
 
 CREATE TABLE events
@@ -26,5 +27,5 @@ SELECT
     JSONExtractString(message, 'event_source') AS event_source
 FROM tracking;
 
--- Grant everyone access to the view
+-- Grant everyone access to the events table
 CREATE ROW POLICY common ON events FOR SELECT USING 1 TO ALL;
