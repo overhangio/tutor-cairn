@@ -35,6 +35,8 @@ vision-redash:
     env_file: ../plugins/vision/apps/redash/env
     environment:
         REDASH_WEB_WORKERS: 4
+    volumes:
+        - ../plugins/vision/apps/redash/scripts/:/redash/scripts/:ro
     restart: unless-stopped
     depends_on:
         - vision-postgresql

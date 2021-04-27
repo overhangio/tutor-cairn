@@ -63,15 +63,3 @@ WHERE end_event IN ('pause_video', 'stop_video', 'seek_video');
 
 CREATE ROW POLICY common ON video_events FOR SELECT USING 1 TO ALL;
 CREATE ROW POLICY common ON video_view_segments FOR SELECT USING 1 TO ALL;
-
--- TODO remove this
--- SELECT arrayJoin(range(toUInt64(floor(start_position)), toUInt64(ceil(end_position)))) AS bin,
---        count(*) AS total_views,
---        count(distinct(user_id)) AS unique_views,
---        total_views - unique_views AS replay_views,
---        video_id
--- FROM video_view_segments
--- WHERE video_id = 'DEFINE_ME_video_id'
--- GROUP BY bin,
---          video_id
--- ORDER BY bin

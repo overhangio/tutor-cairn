@@ -2,22 +2,31 @@ import io
 import os
 from setuptools import setup, find_packages
 
-here = os.path.abspath(os.path.dirname(__file__))
+HERE = os.path.abspath(os.path.dirname(__file__))
 
-with io.open(os.path.join(here, "README.rst"), "rt", encoding="utf8") as f:
-    readme = f.read()
 
-about = {}
-with io.open(
-    os.path.join(here, "tutorvision", "__about__.py"),
-    "rt",
-    encoding="utf-8",
-) as f:
-    exec(f.read(), about)
+def load_readme():
+    with io.open(os.path.join(HERE, "README.rst"), "rt", encoding="utf8") as f:
+        return f.read()
+
+
+def load_about():
+    about = {}
+    with io.open(
+        os.path.join(HERE, "tutorvision", "__about__.py"),
+        "rt",
+        encoding="utf-8",
+    ) as f:
+        exec(f.read(), about)  # pylint: disable=exec-used
+    return about
+
+
+ABOUT = load_about()
+
 
 setup(
     name="tutor-vision",
-    version=about["__version__"],
+    version=ABOUT["__version__"],
     url="https://github.com/overhangio/tutor-vision",
     project_urls={
         "Code": "https://github.com/overhangio/tutor-vision",
@@ -26,16 +35,12 @@ setup(
     license="AGPLv3",
     author="Overhang.IO",
     description="vision plugin for Tutor",
-    long_description=readme,
+    long_description=load_readme(),
     packages=find_packages(exclude=["tests*"]),
     include_package_data=True,
     python_requires=">=3.5",
     install_requires=["tutor-openedx"],
-    entry_points={
-        "tutor.plugin.v0": [
-            "vision = tutorvision.plugin"
-        ]
-    },
+    entry_points={"tutor.plugin.v0": ["vision = tutorvision.plugin"]},
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",

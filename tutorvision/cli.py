@@ -110,18 +110,14 @@ def frontend_command():
 @click.pass_obj
 def frontend_createuser(context, password, is_root, username, email):
     config = tutor_config.load(context.root)
-    config.update(
-        {
-            "password": password,
-            "is_root": is_root,
-            "username": username,
-            "email": email,
-        }
+    command = "python /redash/scripts/createuser.py {is_root} --password={password} {username} {email}".format(
+        is_root="--root" if is_root else "",
+        password=password,
+        username=username,
+        email=email,
     )
     runner = ComposeJobRunner(context.root, config, local_docker_compose)
-    runner.run_job_from_template(
-        "vision-redash", "vision", "hooks", "vision-redash", "createuser"
-    )
+    runner.run_job("vision-redash", command)
 
 
 datalake.add_command(datalake_createuser)

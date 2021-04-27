@@ -88,6 +88,19 @@ To launch a Python shell in Redash, run::
 
     tutor local run vision-redash ./manage.py shell
 
+To backup an existing dashboard, with all its related queries and widgets, first find the dashboard slug from its url. Create a world-writable destination folder::
+
+    mkdir ./dashboards
+    chmod a+rwx dashboards
+
+Then run::
+
+    tutor local run -v $(pwd)/dashboards:/tmp/dashboards vision-redash python /redash/scripts/serialize.py dump --output /tmp/dashboards/dashboard.json <your username> <dashboard slug> > ./dashboard.json
+
+You can then re-import this dashboard, for instance to create the same dashboard in another user account::
+
+    tutor local run -v $(pwd)/dashboards:/tmp/dashboards vision-redash python /redash/scripts/serialize.py load /tmp/dashboards/dashboard.json <your username>
+
 License
 -------
 

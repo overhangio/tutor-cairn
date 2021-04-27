@@ -7,6 +7,8 @@ vision-redash-job:
     image: {{ VISION_REDASH_DOCKER_IMAGE }}
     command: create_db
     env_file: ../plugins/vision/apps/redash/env
+    volumes:
+        - ../plugins/vision/apps/redash/scripts/:/redash/scripts/:ro
     depends_on:
         - vision-postgresql
         - vision-redis
