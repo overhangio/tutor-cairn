@@ -2,10 +2,10 @@
 
 # log collection
 vision-vector:
-    image: docker.io/timberio/vector:0.11.X-alpine
+    image: docker.io/timberio/vector:0.13.X-alpine
     volumes:
         - ../plugins/vision/apps/vector/vector.toml:/etc/vector/vector.toml:ro
-        - /var/run/docker.sock:/var/run/docker.sock:ro
+        {% if VISION_DOCKER_HOST %}- {{ VISION_DOCKER_HOST }}:/var/run/docker.sock:ro{% endif %}
     environment:
         - DOCKER_HOST=/var/run/docker.sock
     restart: unless-stopped

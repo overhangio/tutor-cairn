@@ -34,16 +34,27 @@ def datalake_createuser(context, username):
         "access to multiple courses."
     ),
 )
+@click.option(
+    "-o",
+    "--org-id",
+    "org_ids",
+    multiple=True,
+    help=(
+        "Grant access to the course data of an organization. This option may be used multiple times to grant "
+        "access to multiple organizations."
+    ),
+)
 @click.pass_obj
-def datalake_setpermissions(context, username, course_ids):
+def datalake_setpermissions(context, username, course_ids, org_ids):
+    conditions = []
+    for course_id in course_ids:
+        conditions.append(f"course_id = '{course_id}'")
+    for org_id in org_ids:
+        conditions.append(f"course_id LIKE 'course-v1:{org_id}+%'")
     condition = "1"
-    if course_ids:
-        condition = " OR ".join(
-            [
-                "course_id = '{course_id}'".format(course_id=course_id)
-                for course_id in course_ids
-            ]
-        )
+    if conditions:
+        condition = " OR ".join(conditions)
+
     # TODO rename courseenrollments to course_enrollments (and other tables as well)
     # Note that the "CREATE TEMPORARY TABLE" grant is required to make use of "numbers()" functions.
     query = f"""
@@ -69,9 +80,9 @@ CREATE ROW POLICY OR REPLACE {username} ON video_view_segments AS RESTRICTIVE FO
 
 def run_datalake_query(root, query):
     config = tutor_config.load(root)
+    command_secure_opt = "--secure" if config["VISION_CLICKHOUSE_SCHEME"] == "https" else ""
     command = f"""clickhouse client \
-    --host={config["VISION_CLICKHOUSE_HOST"]} \
-    --port={config["VISION_CLICKHOUSE_PORT"]} \
+    {command_secure_opt} --host={config["VISION_CLICKHOUSE_HOST"]} --port={config["VISION_CLICKHOUSE_PORT"]} \
     --user={config["VISION_CLICKHOUSE_USERNAME"]} \
     --password={config["VISION_CLICKHOUSE_PASSWORD"]} \
     --database={config["VISION_CLICKHOUSE_DATABASE"]} \

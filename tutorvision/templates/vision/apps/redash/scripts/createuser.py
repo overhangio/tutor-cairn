@@ -115,8 +115,10 @@ def get_datasource(org, group, username):
     # Get or create datasource
     options = ConfigurationContainer(
         {
-            "url": "http://{}:{}".format(
-                os.environ["CLICKHOUSE_HOST"], os.environ["CLICKHOUSE_PORT"]
+            "url": "{}://{}:{}".format(
+                os.environ["CLICKHOUSE_SCHEME"],
+                os.environ["CLICKHOUSE_HOST"],
+                os.environ["CLICKHOUSE_PORT"],
             ),
             "user": username,
             "password": "",

@@ -10,36 +10,45 @@ address = "127.0.0.1:8686"
 type = "docker_logs"
 
 ### Transforms
+
+# Select lms & cms containers
 [transforms.openedx_containers]
 type = "filter"
 inputs = ["containers"]
-condition.type = "check_fields"
-condition."label.com.docker.compose.regex" = "(lms|cms)"
+condition = 'includes(["lms", "cms"], .label."com.docker.compose.service")'
 
-[transforms.nginx_containers]
-type = "filter"
-inputs = ["containers"]
-condition.type = "check_fields"
-condition."label.com.docker.compose.eq" = "nginx"
-
-[transforms.tracking_raw]
-type = "regex_parser"
-inputs = ["openedx_containers"]
-drop_failed = true
-drop_field = false
-field = "message"
-# 2021-03-09 13:08:41,292 INFO 21 [tracking] [user 3] [ip 172.18.0.1] logger.py:42 - {...}
-patterns = ["^.* \\[tracking\\] [^{}]* (?P<tracking_message>\\{.*\\})$"]
-
+# Parse tracking logs: extract time
 [transforms.tracking]
 type = "remap"
-inputs = ["tracking_raw"]
+inputs = ["openedx_containers"]
 # Time formats: https://docs.rs/chrono/0.4.19/chrono/format/strftime/index.html#specifiers
 source = '''
-.message = .tracking_message
-.tracking_message = parse_json(.tracking_message)
-.time = parse_timestamp(.tracking_message.time, format="%+")
-del(.tracking_message)
+parsed, err_regex = parse_regex(.message, r'^.* \[tracking\] [^{}]* (?P<tracking_message>\{.*\})$')
+if err_regex != null {
+  abort
+}
+message = parsed.tracking_message
+parsed_json, err_json = parse_json(parsed.tracking_message)
+if err_json != null {
+  log("Unable to parse JSON from tracking log message: " + err_json, level: "error")
+  abort
+}
+time, err_timestamp = parse_timestamp(parsed_json.time, "%+")
+if err_timestamp != null {
+  log("Unable to parse timestamp from tracking log message: " + err_timestamp, level: "error")
+  abort
+}
+. = {"time": time, "message": message}
+'''
+drop_on_error = true
+drop_on_abort = true
+
+[transforms.tracking_debug]
+type = "remap"
+inputs = ["tracking"]
+# Time formats: https://docs.rs/chrono/0.4.19/chrono/format/strftime/index.html#specifiers
+source = '''
+.message = parse_json!(.message)
 '''
 
 ### Sinks
@@ -47,17 +56,17 @@ del(.tracking_message)
 # Log all events to stdout, for debugging
 [sinks.out]
 type = "console"
-inputs = ["tracking"]
+inputs = ["tracking_debug"]
 encoding.codec = "json"
+encoding.only_fields = ["time", "message.context.course_id", "message.context.user_id", "message.name"]
 
-# Send logs to clickhouse
+# # Send logs to clickhouse
 [sinks.clickhouse]
 type = "clickhouse"
-encoding.only_fields = ["time", "message"]
 # Required: https://github.com/timberio/vector/issues/5797
 encoding.timestamp_format = "unix"
 inputs = ["tracking"]
-endpoint = "http://{{ VISION_CLICKHOUSE_HOST }}:{{ VISION_CLICKHOUSE_HTTP_PORT }}"
+endpoint = "{{ VISION_CLICKHOUSE_SCHEME }}://{{ VISION_CLICKHOUSE_HOST }}:{{ VISION_CLICKHOUSE_HTTP_PORT }}"
 database = "{{ VISION_CLICKHOUSE_DATABASE }}"
 table = "tracking"
 healthcheck = true

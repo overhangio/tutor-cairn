@@ -1,5 +1,6 @@
 clickhouse_client_base() {
-    clickhouse client --host {{ VISION_CLICKHOUSE_HOST }} --port {{ VISION_CLICKHOUSE_PORT }} \
+    clickhouse client \
+        {% if VISION_CLICKHOUSE_SCHEME == "https" %}--secure{% endif %} --host {{ VISION_CLICKHOUSE_HOST }} --port {{ VISION_CLICKHOUSE_PORT }} \
         --user {{ VISION_CLICKHOUSE_USERNAME }} \
         --password {{ VISION_CLICKHOUSE_PASSWORD }} "$@"
 }

@@ -19,11 +19,13 @@ config = {
     "defaults": {
         "CLICKHOUSE_DOCKER_IMAGE": "docker.io/yandex/clickhouse-server:21.2.7.11",
         "RUN_CLICKHOUSE": True,
+        "CLICKHOUSE_SCHEME": "http",
         "CLICKHOUSE_HOST": "vision-clickhouse",
         "CLICKHOUSE_HTTP_PORT": 8123,
         "CLICKHOUSE_PORT": 9000,
         "CLICKHOUSE_DATABASE": "openedx",
         "CLICKHOUSE_USERNAME": "openedx",
+        "DOCKER_HOST": "/var/run/docker.sock",
         "POSTGRESQL_USER": "redash",
         "POSTGRESQL_DB": "redash",
         "REDASH_DOCKER_IMAGE": "docker.io/redash/redash:9.0.0-beta.b42121",

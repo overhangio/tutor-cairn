@@ -1,31 +1,15 @@
-vision plugin for `Tutor <https://docs.tutor.overhang.io>`__
-===================================================================================
+Tutor Vision: scalable, real-time analytics for Open edX
+========================================================
 
 TODO:
-- Collect data with Vector
-    - Collect tracking logs
-    - Collect nginx logs
-    - Send logs to clickhouse
-    - Make it optional to mount /var/run/docker.sock
-    - adjust vector verbosity
-    - log everything to file instead of console? -> tmp volume
-- Provision clickhouse
-    - make database name a tutor config
-    - make clickhouse host a tutor config
-    - specify TTL for tables?
-    - set permissions for each org:
+
 - Expose data with redash
     - Provision dashboards
-    - Custom users
     - Expose grades
     - Reproduce dashboards from https://edx.readthedocs.io/projects/edx-insights/en/latest/Overview.html
-    - prevent users from running TRUNCATE from redash
+    - Reproduce dashboards from https://datastudio.google.com/embed/u/0/reporting/1gd-YXUtHFzHm3qddPTO8r272kyRD-uDG/page/4f5xB
     - frontend user creation:
         - generate random frontend user password in "tutor vision frontend createuser"
-        - create root users
-        - add delete user command
-        - add users to shared openedx organization
-- Utility tools for authentication
 - Kubernetes compatibility
 - Sweet readme
 
@@ -34,7 +18,7 @@ Installation
 
 ::
 
-    pip install git+https://github.com/overhangio/tutor-vision
+    tutor license install tutor-vision
 
 Usage
 -----
@@ -69,13 +53,17 @@ To add a new, non-admin user::
     # Create a corresponding user on the frontend
     tutor vision frontend createuser yourusername yourusername@youremail.com
 
+Note that you may grant a user access to the data of an organization instead of just a course. To do so, run::
+
+    tutor vision datalake setpermissions --org-id yourorg yourusername
+
 Development
 -----------
 
 
 To reload Vector configuration after changes to vector.toml, run::
 
-    tutor config save && tutor local exec vision-vector sh kill -s HUP
+    tutor config save && tutor local exec vision-vector sh -c "kill -s HUP 1"
 
 To explore the clickhouse database as root, run::
 
