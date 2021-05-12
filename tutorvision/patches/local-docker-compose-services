@@ -31,7 +31,7 @@ vision-clickhouse:
 # frontend
 vision-redash:
     image: {{ VISION_REDASH_DOCKER_IMAGE }}
-    command: server
+    command: gunicorn -b 0.0.0.0:5000 --name redash --workers=2 --max-requests=1000 --max-requests-jitter=100 --timeout=120 redash.wsgi:app
     env_file: ../plugins/vision/apps/redash/env
     environment:
         REDASH_WEB_WORKERS: 4
