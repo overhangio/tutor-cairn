@@ -73,9 +73,11 @@ def get_group(org, username, is_root=False):
         print("Group '{}' already exists".format(username))
     else:
         excluded_permissions = [] if is_root else ["list_users"]
-        permissions = filter(
-            lambda p: p not in excluded_permissions, models.Group.DEFAULT_PERMISSIONS
-        )
+        permissions = [
+            permission
+            for permission in models.Group.DEFAULT_PERMISSIONS
+            if permission not in excluded_permissions
+        ]
         group = models.Group(name=username, org=org, permissions=permissions)
         models.db.session.add(group)
         models.db.session.commit()
