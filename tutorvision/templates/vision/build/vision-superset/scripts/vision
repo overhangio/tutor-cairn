@@ -1,0 +1,249 @@
+#! /usr/bin/env python3
+
+import argparse
+from getpass import getpass
+import json
+import os
+from time import time
+
+from superset.app import create_app
+
+app = create_app()
+app.app_context().push()
+
+from superset.connectors.sqla.models import SqlaTable
+from superset.models.core import Database
+from superset.models.slice import Slice
+from superset.extensions import db, security_manager
+import superset.dashboards.commands.importers.v0 as importers
+from superset.utils.core import get_or_create_db
+from werkzeug.security import generate_password_hash
+
+
+now = time()
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Bootstrap user creation and dashboards"
+    )
+    subparsers = parser.add_subparsers()
+
+    # Create user
+    parser_user = subparsers.add_parser("createuser", help="Create or update user")
+    parser_user.add_argument(
+        "-d",
+        "--db",
+        "--database",
+        help=(
+            "Name of the Superset database to which the user should be granted access."
+            " Defaults to the username."
+        ),
+    )
+    parser_user.add_argument(
+        "-r",
+        "--role",
+        help=(
+            "Name of the role to which the user should be assigned."
+            " Defaults to the username."
+        ),
+    )
+    parser_user.add_argument(
+        "-p",
+        "--password",
+        help="User password. If undefined, you will be prompted for one.",
+    )
+    parser_user.add_argument(
+        "--firstname", default="", help="User first name (optional)."
+    )
+    parser_user.add_argument(
+        "--lastname", default="", help="User last name (optional)."
+    )
+    parser_user.add_argument("username")
+    parser_user.add_argument("email")
+    parser_user.set_defaults(func=bootstrap_user)
+
+    # Bootstrap dashboards
+    parser_dashboards = subparsers.add_parser(
+        "bootstrap-dashboards",
+        help="Bootstrap datasets and dashboards for a given user",
+    )
+    parser_dashboards.add_argument(
+        "-d",
+        "--db",
+        "--database",
+        help=(
+            "Name of the Superset database to which the objects should be linked."
+            " By default, this will be the same as the username."
+        ),
+    )
+    parser_dashboards.add_argument("username")
+    parser_dashboards.add_argument("path", nargs="+")
+    parser_dashboards.set_defaults(func=bootstrap_dashboards)
+
+    args = parser.parse_args()
+    args.func(args)
+
+
+def bootstrap_user(args):
+    # Bootstrap database
+    database_name = args.db or args.username
+
+    # Get or create user
+    user = security_manager.find_user(args.username)
+    if user:
+        print(f"User '{args.username}' already exists. Skipping creation.")
+        if args.password:
+            print("Setting user password...")
+            user.password = generate_password_hash(args.password)
+            db.session.add(user)
+            db.session.commit()
+    else:
+        print(f"Creating user '{args.username}'...")
+        password = args.password
+        while not password:
+            password = getpass()
+        security_manager.add_user(
+            args.username,
+            args.firstname,
+            args.lastname,
+            args.email,
+            security_manager.find_role("Gamma"),
+            password=password,
+        )
+        user = security_manager.find_user(args.username)
+
+    # Associate role with the same name to user, if it exists
+    role_name = args.role or args.username
+
+    def check_permission(permission_view):
+        permission_name = str(permission_view)
+        if permission_name in [
+            "can save on Datasource",
+            "can sqllab on Superset",
+            "can sql json on Superset",
+            "menu access on Datasets",
+            "menu access on SQL Lab",
+        ]:
+            return True
+        if permission_name.startswith(f"database access on [{database_name}]"):
+            return True
+        if permission_name.startswith(f"schema access on [{database_name}]"):
+            return True
+        return False
+
+    security_manager.set_role(role_name, check_permission)
+    role = security_manager.find_role(role_name)
+    if role in user.roles:
+        print(f"Role '{role_name}' is already associated to user.")
+    else:
+        print(f"Associating role '{role_name}' to user...")
+        user.roles.append(role)
+        db.session.add(user)
+        db.session.commit()
+    print("Done.")
+
+
+def bootstrap_database(database_name):
+    host = os.environ["VISION_CLICKHOUSE_HOST"]
+    port = os.environ["VISION_CLICKHOUSE_PORT"]
+    database = os.environ["VISION_CLICKHOUSE_DATABASE"]
+    uri = f"clickhouse+native://{username}:@{host}:{port}/{database}"
+    get_or_create_db(database_name, uri, always_create=True)
+
+
+def bootstrap_dashboards(args):
+    database_name = args.db or args.username
+    database = load_database(database_name)
+    user = load_user(args.username)
+
+    for path in args.path:
+        print(
+            "importing dashboard {} for user='{}' db='{}'... ".format(
+                path, user.username, database.database_name
+            )
+        )
+        dashboard = load_dashboard_file(path)
+        import_dashboard(dashboard, user, database)
+
+
+def load_database(database_name):
+    return (
+        db.session.query(Database).filter(Database.database_name == database_name).one()
+    )
+
+
+def load_user(username):
+    return (
+        db.session.query(security_manager.user_model)
+        .filter(security_manager.user_model.username == username)
+        .one()
+    )
+
+
+def load_dashboard_file(path):
+    with open(path) as f:
+        return json.load(f, object_hook=importers.decode_dashboards)
+
+
+def import_dashboard(data, user, database):
+    # Load datasets
+    for dataset in data["datasources"]:
+        dataset.params = "{}"
+        # This should overwrite the existing dataset, if any with the same name
+        new_dataset_id = importers.import_dataset(dataset, database.id, now)
+        new_dataset = db.session.query(SqlaTable).get(new_dataset_id)
+        # Make current user the new owner
+        new_dataset.owners.append(user)
+        db.session.add(new_dataset)
+        # db.session.commit()
+
+    for dashboard in data["dashboards"]:
+        # Load slices
+        new_slices = []
+        slices = dashboard.slices[:]
+        old_to_new_slice_id_map = {}
+
+        for slice in slices:
+            # Make sure the new slice does not point to the old slice
+            params_dict = slice.params_dict
+            params_dict["database_name"] = database.name
+            params_dict.pop("remote_id")
+            slice.params = json.dumps(params_dict)
+            old_slice_id = slice.id
+            slice.id = None
+            # Create new slice
+            new_slice_id = importers.import_chart(slice, None, now)
+            new_slice = db.session.query(Slice).get(new_slice_id)
+            old_to_new_slice_id_map[old_slice_id] = new_slice_id
+            # Make current user the new owner
+            new_slice.owners.append(user)
+            new_slices.append(new_slice)
+            db.session.add(new_slice)
+            # db.session.commit()
+
+        # Add slices to dashboard
+        dashboard.slices = new_slices
+        # Set dashboard owner
+        dashboard.owners.append(user)
+        # Update position JSON
+        position = dashboard.position.copy()
+        for chart in position.values():
+            if (
+                "meta" in chart
+                and isinstance(chart["meta"], dict)
+                and "chartId" in chart["meta"]
+            ):
+                chart["meta"]["chartId"] = old_to_new_slice_id_map[
+                    chart["meta"]["chartId"]
+                ]
+        dashboard.position_json = json.dumps(position)
+        # Load dashboard
+        db.session.add(dashboard)
+
+        # Commit changes
+        db.session.commit()
+
+
+if __name__ == "__main__":
+    main()

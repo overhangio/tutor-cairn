@@ -17,6 +17,7 @@ vision-clickhouse:
     volumes:
         - ../../data/vision/clickhouse:/var/lib/clickhouse
         - ../plugins/vision/apps/clickhouse/users.d/vision.xml:/etc/clickhouse-server/users.d/vision.xml:ro
+    env_file: ../plugins/vision/apps/env
     ulimits:
         nofile:
             soft: 262144
@@ -24,64 +25,34 @@ vision-clickhouse:
     restart: unless-stopped
 {% endif %}
 
-# redash config docs:
-# https://github.com/getredash/setup/blob/master/data/docker-compose.yml
-# https://github.com/getredash/redash/blob/master/CHANGELOG.md
-
-# frontend
-vision-redash:
-    image: {{ VISION_REDASH_DOCKER_IMAGE }}
-    command: gunicorn -b 0.0.0.0:5000 --name redash --workers=2 --max-requests=1000 --max-requests-jitter=100 --timeout=120 redash.wsgi:app
-    env_file: ../plugins/vision/apps/redash/env
-    environment:
-        REDASH_WEB_WORKERS: 4
+vision-superset:
+    image: {{ VISION_SUPERSET_DOCKER_IMAGE }}
     volumes:
-        - ../plugins/vision/apps/redash/scripts/:/redash/scripts/:ro
+        - ../plugins/vision/apps/superset/superset_config.py:/app/superset_config.py:ro
+        - ../plugins/vision/apps/superset/bootstrap:/app/bootstrap
+    env_file: ../plugins/vision/apps/env
     restart: unless-stopped
     depends_on:
-        - vision-postgresql
         - vision-redis
-vision-redash-scheduler:
-    image: {{ VISION_REDASH_DOCKER_IMAGE }}
-    command: scheduler
-    env_file: ../plugins/vision/apps/redash/env
+        - vision-postgresql
+vision-superset-worker:
+    image: {{ VISION_SUPERSET_DOCKER_IMAGE }}
+    volumes:
+        - ../plugins/vision/apps/superset/superset_config.py:/app/superset_config.py:ro
+    command: celery worker --app=superset.tasks.celery_app:app -Ofair -l INFO
     restart: unless-stopped
     depends_on:
-        - vision-postgresql
         - vision-redis
-vision-redash-worker-scheduled:
-    image: {{ VISION_REDASH_DOCKER_IMAGE }}
-    command: worker
-    env_file: ../plugins/vision/apps/redash/env
-    environment:
-        QUEUES: "scheduled_queries schemas"
-        WORKERS_COUNT: 1
+        - vision-postgresql
+vision-superset-worker-beat:
+    image: {{ VISION_SUPERSET_DOCKER_IMAGE }}
+    volumes:
+        - ../plugins/vision/apps/superset/superset_config.py:/app/superset_config.py:ro
+    command: celery beat --app=superset.tasks.celery_app:app --pidfile /tmp/celerybeat.pid -l INFO --schedule=/tmp/celerybeat-schedule
     restart: unless-stopped
     depends_on:
-        - vision-postgresql
         - vision-redis
-vision-redash-worker-queries:
-    image: {{ VISION_REDASH_DOCKER_IMAGE }}
-    command: worker
-    env_file: ../plugins/vision/apps/redash/env
-    environment:
-        QUEUES: "queries"
-        WORKERS_COUNT: 2
-    restart: unless-stopped
-    depends_on:
         - vision-postgresql
-        - vision-redis
-vision-redash-worker-default:
-    image: {{ VISION_REDASH_DOCKER_IMAGE }}
-    command: worker
-    env_file: ../plugins/vision/apps/redash/env
-    environment:
-        QUEUES: "periodic emails default"
-        WORKERS_COUNT: 1
-    restart: unless-stopped
-    depends_on:
-        - vision-postgresql
-        - vision-redis
 vision-redis:
     image: docker.io/redis:5.0-alpine
     restart: unless-stopped

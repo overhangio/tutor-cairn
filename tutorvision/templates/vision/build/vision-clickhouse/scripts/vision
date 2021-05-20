@@ -1,0 +1,105 @@
+#! /usr/bin/env python3
+import argparse
+import os
+import subprocess
+
+
+def main():
+    parser = argparse.ArgumentParser("Manage your Clickhouse instance")
+    subparsers = parser.add_subparsers()
+
+    # Run a clickhouse client
+    parser_client = subparsers.add_parser("client")
+    parser_client.set_defaults(func=command_client)
+
+    # Create user
+    parser_createuser = subparsers.add_parser("createuser")
+    parser_createuser.add_argument(
+        "-c",
+        "--course-id",
+        action="append",
+        help="Restrict user to access data only from these courses.",
+    )
+    parser_createuser.add_argument(
+        "-o",
+        "--org-id",
+        action="append",
+        help="Restrict user to access data only from these organizations.",
+    )
+    parser_createuser.add_argument("username")
+    parser_createuser.set_defaults(func=command_create_user)
+
+    args = parser.parse_args()
+    args.func(args)
+
+
+def command_client(args):
+    run_query()
+
+
+def command_create_user(args):
+    conditions = []
+    course_ids = args.course_id or []
+    org_ids = args.org_id or []
+    for course_id in course_ids:
+        conditions.append(f"course_id = '{course_id}'")
+    for org_id in org_ids:
+        conditions.append(f"course_id LIKE 'course-v1:{org_id}+%'")
+    condition = " OR ".join(conditions) if conditions else "1"
+    username = args.username
+    # Note that the "CREATE TEMPORARY TABLE" grant is required to make use of "numbers()" functions.
+    # TODO how to automatically list the tables to which users should be granted access?
+    query = f"""
+CREATE USER IF NOT EXISTS {username};
+GRANT CREATE TEMPORARY TABLE ON *.* TO {username};
+
+GRANT SELECT ON events TO {username};
+CREATE ROW POLICY OR REPLACE {username} ON events AS RESTRICTIVE FOR SELECT USING {condition} TO {username};
+
+GRANT SELECT ON course_grades TO {username};
+CREATE ROW POLICY OR REPLACE {username} ON course_grades AS RESTRICTIVE FOR SELECT USING {condition} TO {username};
+
+GRANT SELECT ON course_enrollments TO {username};
+CREATE ROW POLICY OR REPLACE {username} ON course_enrollments AS RESTRICTIVE FOR SELECT USING {condition} TO {username};
+
+GRANT SELECT ON video_events TO {username};
+CREATE ROW POLICY OR REPLACE {username} ON video_events AS RESTRICTIVE FOR SELECT USING {condition} TO {username};
+
+GRANT SELECT ON video_view_segments TO {username};
+CREATE ROW POLICY OR REPLACE {username} ON video_view_segments AS RESTRICTIVE FOR SELECT USING {condition} TO {username};
+
+GRANT SELECT ON course_block_completion TO {username};
+CREATE ROW POLICY OR REPLACE {username} ON course_block_completion AS RESTRICTIVE FOR SELECT USING {condition} TO {username};
+"""
+    run_query(query)
+
+
+def run_query(query=None):
+    args = []
+    if os.environ.get("VISION_CLICKHOUSE_SCHEME") == "https":
+        args.append("--secure")
+    if query:
+        args += ["--query", query]
+    command = [
+        "clickhouse",
+        "client",
+        "--host",
+        os.environ["VISION_CLICKHOUSE_HOST"],
+        "--port",
+        os.environ["VISION_CLICKHOUSE_PORT"],
+        "--user",
+        os.environ["VISION_CLICKHOUSE_USERNAME"],
+        "--password",
+        os.environ["VISION_CLICKHOUSE_PASSWORD"],
+        "--database",
+        os.environ["VISION_CLICKHOUSE_DATABASE"],
+        "--multiline",
+        "--multiquery",
+        *args,
+    ]
+    print(" ".join(command))
+    subprocess.check_call(command)
+
+
+if __name__ == "__main__":
+    main()

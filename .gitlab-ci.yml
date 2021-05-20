@@ -1,9 +1,9 @@
 variables:
     TUTOR_PLUGIN: vision
+    TUTOR_IMAGES: vision-clickhouse vision-superset
     TUTOR_PYPI_PRIVATE_PACKAGE: tutor-vision
     OPENEDX_RELEASE: koa
 
 include:
   - project: 'community/tutor-ci'
     file: 'plugin-gitlab-ci.yml'
-

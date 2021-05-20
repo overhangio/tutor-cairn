@@ -3,12 +3,10 @@ vision-clickhouse-job:
     depends_on: {{ [("vision-clickhouse", VISION_RUN_CLICKHOUSE)]|list_if }}
     volumes:
         - ../plugins/vision/apps/clickhouse/migrations.d/:/etc/clickhouse-server/migrations.d/:ro
-vision-redash-job:
-    image: {{ VISION_REDASH_DOCKER_IMAGE }}
-    command: create_db
-    env_file: ../plugins/vision/apps/redash/env
+vision-superset-job:
+    image: {{ VISION_SUPERSET_DOCKER_IMAGE }}
     volumes:
-        - ../plugins/vision/apps/redash/scripts/:/redash/scripts/:ro
+        - ../plugins/vision/apps/superset/superset_config.py:/app/superset_config.py:ro
     depends_on:
         - vision-postgresql
         - vision-redis

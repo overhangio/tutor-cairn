@@ -1,0 +1,446 @@
+{
+    "dashboards": [
+        {
+            "__Dashboard__": {
+                "css": "",
+                "dashboard_title": "Student Demographics",
+                "description": null,
+                "json_metadata": "{\"timed_refresh_immune_slices\": [], \"expanded_slices\": {}, \"refresh_frequency\": 0, \"default_filters\": \"{\\\"7\\\": {\\\"__time_range\\\": \\\"No filter\\\"}}\", \"color_scheme\": null, \"filter_scopes\": {\"7\": {\"course_id\": {\"scope\": [\"ROOT_ID\"], \"immune\": []}, \"__time_range\": {\"scope\": [\"ROOT_ID\"], \"immune\": []}}}, \"remote_id\": 3}",
+                "position_json": "{\"CHART-CzBvnn-6dh\":{\"children\":[],\"id\":\"CHART-CzBvnn-6dh\",\"meta\":{\"chartId\":9,\"height\":50,\"sliceName\":\"Enrolled learners level of education\",\"uuid\":\"7ecc94c7-576e-48ca-bbd8-0e2831117b35\",\"width\":4},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-EMm5Btin1\"],\"type\":\"CHART\"},\"CHART-ITeQKYqMxt\":{\"children\":[],\"id\":\"CHART-ITeQKYqMxt\",\"meta\":{\"chartId\":10,\"height\":50,\"sliceName\":\"Enrolled learners gender\",\"uuid\":\"74763712-0193-4c3b-84ef-1a34b2aa17d8\",\"width\":4},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-EMm5Btin1\"],\"type\":\"CHART\"},\"CHART-JDUlfaXdNk\":{\"children\":[],\"id\":\"CHART-JDUlfaXdNk\",\"meta\":{\"chartId\":7,\"height\":50,\"sliceName\":\"Select course ID\",\"uuid\":\"b156195f-4dfd-42b7-aa51-68e23a759914\",\"width\":4},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-EMm5Btin1\"],\"type\":\"CHART\"},\"DASHBOARD_VERSION_KEY\":\"v2\",\"GRID_ID\":{\"children\":[\"ROW-EMm5Btin1\"],\"id\":\"GRID_ID\",\"parents\":[\"ROOT_ID\"],\"type\":\"GRID\"},\"HEADER_ID\":{\"id\":\"HEADER_ID\",\"meta\":{\"text\":\"Student Demographics\"},\"type\":\"HEADER\"},\"ROOT_ID\":{\"children\":[\"GRID_ID\"],\"id\":\"ROOT_ID\",\"type\":\"ROOT\"},\"ROW-EMm5Btin1\":{\"children\":[\"CHART-JDUlfaXdNk\",\"CHART-CzBvnn-6dh\",\"CHART-ITeQKYqMxt\"],\"id\":\"ROW-EMm5Btin1\",\"meta\":{\"0\":\"ROOT_ID\",\"background\":\"BACKGROUND_TRANSPARENT\"},\"parents\":[\"ROOT_ID\",\"GRID_ID\"],\"type\":\"ROW\"}}",
+                "slices": [
+                    {
+                        "__Slice__": {
+                            "cache_timeout": null,
+                            "datasource_name": "openedx.Course enrollments",
+                            "datasource_type": "table",
+                            "id": 9,
+                            "params": "{\"adhoc_filters\": [{\"clause\": \"WHERE\", \"comparator\": \"1\", \"expressionType\": \"SIMPLE\", \"filterOptionName\": \"filter_tx1k2g8b0zg_muir0gyx6u8\", \"isExtra\": false, \"isNew\": false, \"operator\": \"==\", \"sqlExpression\": null, \"subject\": \"enrollment_is_active\"}], \"color_scheme\": \"supersetColors\", \"datasource\": \"10__table\", \"date_format\": \"smart_date\", \"donut\": true, \"extra_form_data\": {}, \"groupby\": [\"level_of_education\"], \"innerRadius\": 43, \"label_line\": true, \"label_type\": \"key\", \"labels_outside\": true, \"legendOrientation\": \"top\", \"legendType\": \"scroll\", \"metric\": \"count\", \"number_format\": \"SMART_NUMBER\", \"outerRadius\": 70, \"row_limit\": 1000, \"show_labels\": true, \"show_labels_threshold\": 1, \"show_legend\": true, \"time_range\": \"No filter\", \"time_range_endpoints\": [\"inclusive\", \"exclusive\"], \"viz_type\": \"pie\", \"remote_id\": 9, \"datasource_name\": \"Course enrollments\", \"schema\": \"openedx\", \"database_name\": \"admin\"}",
+                            "slice_name": "Enrolled learners level of education",
+                            "viz_type": "pie"
+                        }
+                    },
+                    {
+                        "__Slice__": {
+                            "cache_timeout": null,
+                            "datasource_name": "openedx.Course enrollments",
+                            "datasource_type": "table",
+                            "id": 10,
+                            "params": "{\"adhoc_filters\": [{\"clause\": \"WHERE\", \"comparator\": \"1\", \"expressionType\": \"SIMPLE\", \"filterOptionName\": \"filter_tx1k2g8b0zg_muir0gyx6u8\", \"isExtra\": false, \"isNew\": false, \"operator\": \"==\", \"sqlExpression\": null, \"subject\": \"enrollment_is_active\"}], \"color_scheme\": \"bnbColors\", \"datasource\": \"10__table\", \"date_format\": \"smart_date\", \"donut\": true, \"extra_form_data\": {}, \"groupby\": [\"gender\"], \"innerRadius\": 43, \"label_line\": true, \"label_type\": \"key\", \"labels_outside\": true, \"legendOrientation\": \"top\", \"legendType\": \"scroll\", \"metric\": \"count\", \"number_format\": \"SMART_NUMBER\", \"outerRadius\": 70, \"row_limit\": 10, \"show_labels\": true, \"show_labels_threshold\": 1, \"show_legend\": true, \"time_range\": \"No filter\", \"time_range_endpoints\": [\"inclusive\", \"exclusive\"], \"url_params\": {}, \"viz_type\": \"pie\", \"remote_id\": 10, \"datasource_name\": \"Course enrollments\", \"schema\": \"openedx\", \"database_name\": \"admin\"}",
+                            "slice_name": "Enrolled learners gender",
+                            "viz_type": "pie"
+                        }
+                    },
+                    {
+                        "__Slice__": {
+                            "cache_timeout": null,
+                            "datasource_name": "openedx.Course enrollments",
+                            "datasource_type": "table",
+                            "id": 7,
+                            "params": "{\"adhoc_filters\": [], \"datasource\": \"10__table\", \"date_filter\": false, \"extra_form_data\": {}, \"filter_configs\": [{\"asc\": true, \"clearable\": true, \"column\": \"course_id\", \"key\": \"CQE2v7Ajx\", \"label\": \"Course ID\", \"multiple\": true, \"searchAllOptions\": false}], \"slice_id\": 7, \"time_grain_sqla\": \"P1D\", \"time_range\": \"Last week\", \"time_range_endpoints\": [\"inclusive\", \"exclusive\"], \"url_params\": {}, \"viz_type\": \"filter_box\", \"remote_id\": 7, \"datasource_name\": \"Course enrollments\", \"schema\": \"openedx\", \"database_name\": \"admin\"}",
+                            "slice_name": "Select course ID",
+                            "viz_type": "filter_box"
+                        }
+                    }
+                ],
+                "slug": null
+            }
+        }
+    ],
+    "datasources": [
+        {
+            "__SqlaTable__": {
+                "cache_timeout": null,
+                "columns": [
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T16:46:34"
+                            },
+                            "column_name": "course_id",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T16:41:16"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 51,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 10,
+                            "type": "STRING",
+                            "uuid": "f30d1ace-61e7-417d-bb42-cbe2202ba77d",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T16:46:34"
+                            },
+                            "column_name": "enrollment_created",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T16:41:16"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 52,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 10,
+                            "type": "NULLABLE(DATETIME)",
+                            "uuid": "214e5525-f504-4967-98fe-594246784958",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T16:46:34"
+                            },
+                            "column_name": "enrollment_is_active",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T16:41:16"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 53,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 10,
+                            "type": "UINT8",
+                            "uuid": "adda2e42-b890-4614-ad32-70b29df97a50",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T16:46:34"
+                            },
+                            "column_name": "enrollment_mode",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T16:41:16"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 54,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 10,
+                            "type": "STRING",
+                            "uuid": "95b86e16-a423-46dd-8572-aa59de477a49",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T16:46:34"
+                            },
+                            "column_name": "user_id",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T16:41:16"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 55,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 10,
+                            "type": "UINT64",
+                            "uuid": "349b4226-71f9-4e36-919a-f3166905519f",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T16:46:34"
+                            },
+                            "column_name": "user_year_of_birth",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T16:41:16"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 56,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 10,
+                            "type": "UINT32",
+                            "uuid": "a97a8573-d7f6-4a2f-a36a-ad6605649785",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T16:46:34"
+                            },
+                            "column_name": "user_gender",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T16:41:16"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 57,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 10,
+                            "type": "STRING",
+                            "uuid": "7a78fd5a-7408-4feb-9981-b8a1519305ec",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T16:46:34"
+                            },
+                            "column_name": "user_level_of_education",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T16:41:16"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 58,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 10,
+                            "type": "STRING",
+                            "uuid": "14b87739-fd01-460f-a3cc-cd1a222be651",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T16:46:34"
+                            },
+                            "column_name": "user_city",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T16:41:16"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 59,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 10,
+                            "type": "STRING",
+                            "uuid": "120e3998-09bd-4c4b-9c60-40bf6406c8ce",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T16:46:34"
+                            },
+                            "column_name": "user_state",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T16:41:16"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 60,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 10,
+                            "type": "STRING",
+                            "uuid": "2656d45a-c083-4966-9aef-1370fefda078",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T16:46:34"
+                            },
+                            "column_name": "user_country",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T16:41:16"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 61,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 10,
+                            "type": "STRING",
+                            "uuid": "06f431fd-e83d-4551-8fca-808bc2f39854",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T16:46:34"
+                            },
+                            "column_name": "level_of_education",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T16:41:16"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 62,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 10,
+                            "type": "NULLABLE(STRING)",
+                            "uuid": "0862dff7-c61f-4e72-be59-af77825af9ff",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T16:46:34"
+                            },
+                            "column_name": "level_of_education_order",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T16:41:16"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 63,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 10,
+                            "type": "NULLABLE(UINT8)",
+                            "uuid": "94f69a29-a2fb-4dee-b9ba-e612fed44a73",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T16:46:34"
+                            },
+                            "column_name": "gender",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T16:46:34"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 64,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 10,
+                            "type": "NULLABLE(STRING)",
+                            "uuid": "8b474ea7-40d3-4280-96d9-9a9e15c3997f",
+                            "verbose_name": null
+                        }
+                    }
+                ],
+                "database_id": 1,
+                "default_endpoint": null,
+                "description": null,
+                "extra": null,
+                "fetch_values_predicate": null,
+                "filter_select_enabled": false,
+                "main_dttm_col": null,
+                "metrics": [
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T16:46:34"
+                            },
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T16:41:16"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "count(*)",
+                            "extra": "{\"warning_markdown\":null}",
+                            "id": 16,
+                            "metric_name": "count",
+                            "metric_type": null,
+                            "table_id": 10,
+                            "uuid": "0967c3ab-96e0-4d06-9861-573e5beac200",
+                            "verbose_name": null,
+                            "warning_text": null
+                        }
+                    }
+                ],
+                "offset": 0,
+                "params": "{\"remote_id\": 10, \"database_name\": \"admin\", \"import_time\": 1622022621}",
+                "schema": "openedx",
+                "sql": "SELECT\r\n    *,\r\n    CASE\r\n        WHEN user_gender = 'f' THEN 'Female'\r\n        WHEN user_gender = 'm' THEN 'Male'\r\n        WHEN user_gender = 'o' THEN 'Other'\r\n    END AS gender,\r\n    CASE\r\n        WHEN user_level_of_education = 'none' THEN 'No formal education'\r\n        WHEN user_level_of_education = 'b' THEN 'Bachelor''s degree'\r\n        WHEN user_level_of_education = 'a' THEN 'Associate degree'\r\n        WHEN user_level_of_education = 'hs' THEN 'Secondary/high school'\r\n        WHEN user_level_of_education = 'jhs' THEN 'Junior secondary/junior high/middle school'\r\n        WHEN user_level_of_education = 'el' THEN 'Elementary/primary school'\r\n        WHEN user_level_of_education = 'm' THEN 'Master''s or professional degree'\r\n        WHEN user_level_of_education = 'p' THEN 'Doctorate'\r\n        WHEN user_level_of_education = 'other' THEN 'Other education'\r\n    END AS level_of_education,\r\n    CASE\r\n        WHEN user_level_of_education = 'none' THEN 1\r\n        WHEN user_level_of_education = 'b' THEN 2\r\n        WHEN user_level_of_education = 'a' THEN 3\r\n        WHEN user_level_of_education = 'hs' THEN 4\r\n        WHEN user_level_of_education = 'jhs' THEN 5\r\n        WHEN user_level_of_education = 'el' THEN 6\r\n        WHEN user_level_of_education = 'm' THEN 7\r\n        WHEN user_level_of_education = 'p' THEN 8\r\n        WHEN user_level_of_education = 'other' THEN 9\r\n    END AS level_of_education_order\r\nFROM openedx.course_enrollments",
+                "table_name": "Course enrollments",
+                "template_params": null
+            }
+        }
+    ]
+}

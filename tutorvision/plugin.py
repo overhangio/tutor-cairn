@@ -2,7 +2,7 @@ from glob import glob
 import os
 
 from .__about__ import __version__
-from .cli import vision_command
+# from .cli import vision_command # TODO remove this
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
@@ -12,12 +12,11 @@ config = {
     "add": {
         "CLICKHOUSE_PASSWORD": "{{ 20|random_string }}",
         "POSTGRESQL_PASSWORD": "{{ 20|random_string }}",
-        "REDASH_COOKIE_SECRET": "{{ 20|random_string }}",
-        "REDASH_PASSWORD": "{{ 20|random_string }}",
-        "REDASH_SECRET_KEY": "{{ 20|random_string }}",
+        "SUPERSET_SECRET_KEY": "{{ 20|random_string }}",
     },
     "defaults": {
-        "CLICKHOUSE_DOCKER_IMAGE": "docker.io/yandex/clickhouse-server:21.2.7.11",
+        "VERSION": __version__,
+        "CLICKHOUSE_DOCKER_IMAGE": "{{ DOCKER_REGISTRY }}overhangio/clickhouse:{{ VISION_VERSION }}",
         "RUN_CLICKHOUSE": True,
         "CLICKHOUSE_SCHEME": "http",
         "CLICKHOUSE_HOST": "vision-clickhouse",
@@ -26,17 +25,24 @@ config = {
         "CLICKHOUSE_DATABASE": "openedx",
         "CLICKHOUSE_USERNAME": "openedx",
         "DOCKER_HOST": "/var/run/docker.sock",
-        "POSTGRESQL_USER": "redash",
-        "POSTGRESQL_DB": "redash",
-        "REDASH_DOCKER_IMAGE": "docker.io/redash/redash:9.0.0-beta.b42121",
-        "REDASH_HOST": "vision.{{ LMS_HOST }}",
-        "REDASH_USERNAME": "admin",
-        "REDASH_EMAIL": "{{ CONTACT_EMAIL }}",
+        # TODO move data to mysql?
+        "POSTGRESQL_USER": "superset",
+        "POSTGRESQL_DB": "superset",
+        "RUN_CLICKHOUSE": True,
+        "SUPERSET_DOCKER_IMAGE": "{{ DOCKER_REGISTRY }}overhangio/superset:{{ VISION_VERSION }}",
+        "SUPERSET_HOST": "vision.{{ LMS_HOST }}",
+        "SUPERSET_DATABASE": "openedx",
     },
 }
 
-hooks = {"init": ["vision-clickhouse", "vision-redash"]}
-command = vision_command
+hooks = {
+    "build-image": {
+        "vision-clickhouse": "{{ VISION_CLICKHOUSE_DOCKER_IMAGE }}",
+        "vision-superset": "{{ VISION_SUPERSET_DOCKER_IMAGE }}"
+    },
+    "init": ["vision-clickhouse", "vision-superset"],
+}
+# command = vision_command # TODO remove this
 
 
 def patches():

@@ -1,0 +1,893 @@
+{
+    "dashboards": [
+        {
+            "__Dashboard__": {
+                "css": "",
+                "dashboard_title": "Video insights",
+                "description": null,
+                "json_metadata": "{\"timed_refresh_immune_slices\": [], \"filter_scopes\": {\"2\": {\"video_id\": {\"scope\": [\"ROOT_ID\"], \"immune\": []}}, \"15\": {\"__time_range\": {\"scope\": [\"ROOT_ID\"], \"immune\": []}}, \"18\": {\"course_id\": {\"scope\": [\"ROOT_ID\"], \"immune\": []}}}, \"expanded_slices\": {}, \"refresh_frequency\": 0, \"default_filters\": \"{\\\"15\\\": {\\\"__time_range\\\": \\\"Last week\\\"}}\", \"color_scheme\": null, \"remote_id\": 8}",
+                "position_json": "{\"CHART-4D6dMxMeMT\":{\"children\":[],\"id\":\"CHART-4D6dMxMeMT\",\"meta\":{\"chartId\":16,\"height\":31,\"sliceName\":\"Average learner watch time\",\"uuid\":\"bfbf6b44-928c-4141-a9c8-ae99cc5a87c4\",\"width\":2},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-Y2wbakJtSE\"],\"type\":\"CHART\"},\"CHART-VhAIYfUByf\":{\"children\":[],\"id\":\"CHART-VhAIYfUByf\",\"meta\":{\"chartId\":18,\"height\":22,\"sliceName\":\"Select video course ID\",\"uuid\":\"1ee17d19-94d5-4b95-8b05-abca22775d41\",\"width\":4},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-o8xUPCrbfL\"],\"type\":\"CHART\"},\"CHART-WHW9xRSdwN\":{\"children\":[],\"id\":\"CHART-WHW9xRSdwN\",\"meta\":{\"chartId\":4,\"height\":50,\"sliceName\":\"Video X-Ray\",\"uuid\":\"34e9ed3f-c83a-46d2-8e24-e05170104376\",\"width\":6},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-Y2wbakJtSE\"],\"type\":\"CHART\"},\"CHART-cYIhXnlqIn\":{\"children\":[],\"id\":\"CHART-cYIhXnlqIn\",\"meta\":{\"chartId\":14,\"height\":31,\"sliceName\":\"Unique viewers\",\"uuid\":\"e2bc6e71-eefa-457b-b7d8-8bee1ae8bae9\",\"width\":2},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-Y2wbakJtSE\"],\"type\":\"CHART\"},\"CHART-kjX2iwL1Bv\":{\"children\":[],\"id\":\"CHART-kjX2iwL1Bv\",\"meta\":{\"chartId\":15,\"height\":22,\"sliceName\":\"Video event time range\",\"sliceNameOverride\":\"Select time range\",\"uuid\":\"2aca5461-3b26-499d-b6d6-a1edb7f45def\",\"width\":4},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-o8xUPCrbfL\"],\"type\":\"CHART\"},\"CHART-ozRb_PBpqs\":{\"children\":[],\"id\":\"CHART-ozRb_PBpqs\",\"meta\":{\"chartId\":2,\"height\":22,\"sliceName\":\"Select video ID\",\"uuid\":\"270b8fd9-561b-4b9c-8e4e-9688b43ef283\",\"width\":4},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-o8xUPCrbfL\"],\"type\":\"CHART\"},\"CHART-qiBNxe25XS\":{\"children\":[],\"id\":\"CHART-qiBNxe25XS\",\"meta\":{\"chartId\":13,\"height\":31,\"sliceName\":\"Total watch time\",\"uuid\":\"9688f829-fa3d-4b0d-a715-cb2beedffe2d\",\"width\":2},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-Y2wbakJtSE\"],\"type\":\"CHART\"},\"DASHBOARD_VERSION_KEY\":\"v2\",\"GRID_ID\":{\"children\":[\"ROW-o8xUPCrbfL\",\"ROW-Y2wbakJtSE\"],\"id\":\"GRID_ID\",\"parents\":[\"ROOT_ID\"],\"type\":\"GRID\"},\"HEADER_ID\":{\"id\":\"HEADER_ID\",\"meta\":{\"text\":\"Video insights\"},\"type\":\"HEADER\"},\"ROOT_ID\":{\"children\":[\"GRID_ID\"],\"id\":\"ROOT_ID\",\"type\":\"ROOT\"},\"ROW-Y2wbakJtSE\":{\"children\":[\"CHART-cYIhXnlqIn\",\"CHART-qiBNxe25XS\",\"CHART-4D6dMxMeMT\",\"CHART-WHW9xRSdwN\"],\"id\":\"ROW-Y2wbakJtSE\",\"meta\":{\"background\":\"BACKGROUND_TRANSPARENT\"},\"parents\":[\"ROOT_ID\",\"GRID_ID\"],\"type\":\"ROW\"},\"ROW-o8xUPCrbfL\":{\"children\":[\"CHART-VhAIYfUByf\",\"CHART-ozRb_PBpqs\",\"CHART-kjX2iwL1Bv\"],\"id\":\"ROW-o8xUPCrbfL\",\"meta\":{\"background\":\"BACKGROUND_TRANSPARENT\"},\"parents\":[\"ROOT_ID\",\"GRID_ID\"],\"type\":\"ROW\"}}",
+                "slices": [
+                    {
+                        "__Slice__": {
+                            "cache_timeout": null,
+                            "datasource_name": "openedx.Video views",
+                            "datasource_type": "table",
+                            "id": 4,
+                            "params": "{\"adhoc_filters\": [], \"bar_stacked\": true, \"bottom_margin\": \"auto\", \"color_scheme\": \"supersetColors\", \"columns\": [], \"datasource\": \"5__table\", \"extra_form_data\": {}, \"granularity_sqla\": \"start_time\", \"groupby\": [\"bin\"], \"label_colors\": {}, \"metrics\": [\"Unique viewers\", \"Replay views\"], \"order_bars\": true, \"order_desc\": false, \"row_limit\": 10000, \"show_controls\": true, \"slice_id\": 4, \"time_range\": \"No filter\", \"time_range_endpoints\": [\"inclusive\", \"exclusive\"], \"timeseries_limit_metric\": {\"aggregate\": null, \"column\": null, \"expressionType\": \"SQL\", \"hasCustomLabel\": false, \"isNew\": false, \"label\": \"bin\", \"optionName\": \"metric_87t090k54u_lu4sqilcuz\", \"sqlExpression\": \"bin\"}, \"url_params\": {}, \"viz_type\": \"dist_bar\", \"x_ticks_layout\": \"auto\", \"y_axis_bounds\": [null, null], \"y_axis_format\": \"SMART_NUMBER\", \"remote_id\": 4, \"datasource_name\": \"Video views\", \"schema\": \"openedx\", \"database_name\": \"admin\"}",
+                            "slice_name": "Video X-Ray",
+                            "viz_type": "dist_bar"
+                        }
+                    },
+                    {
+                        "__Slice__": {
+                            "cache_timeout": null,
+                            "datasource_name": "openedx.Video views",
+                            "datasource_type": "table",
+                            "id": 14,
+                            "params": "{\"adhoc_filters\": [], \"datasource\": \"5__table\", \"extra_form_data\": {}, \"granularity_sqla\": \"start_time\", \"header_font_size\": 0.4, \"metric\": \"Unique viewers\", \"subheader_font_size\": 0.15, \"time_range\": \"No filter\", \"time_range_endpoints\": [\"inclusive\", \"exclusive\"], \"url_params\": {}, \"viz_type\": \"big_number_total\", \"y_axis_format\": \"SMART_NUMBER\", \"remote_id\": 14, \"datasource_name\": \"Video views\", \"schema\": \"openedx\", \"database_name\": \"admin\"}",
+                            "slice_name": "Unique viewers",
+                            "viz_type": "big_number_total"
+                        }
+                    },
+                    {
+                        "__Slice__": {
+                            "cache_timeout": null,
+                            "datasource_name": "openedx.video_view_segments",
+                            "datasource_type": "table",
+                            "id": 13,
+                            "params": "{\"adhoc_filters\": [], \"datasource\": \"12__table\", \"extra_form_data\": {}, \"granularity_sqla\": \"start_time\", \"header_font_size\": 0.4, \"metric\": \"Watch time (ms)\", \"slice_id\": 13, \"subheader\": \"\", \"subheader_font_size\": 0.15, \"time_range\": \"No filter\", \"time_range_endpoints\": [\"inclusive\", \"exclusive\"], \"url_params\": {}, \"viz_type\": \"big_number_total\", \"y_axis_format\": \"DURATION\", \"remote_id\": 13, \"datasource_name\": \"video_view_segments\", \"schema\": \"openedx\", \"database_name\": \"admin\"}",
+                            "slice_name": "Total watch time",
+                            "viz_type": "big_number_total"
+                        }
+                    },
+                    {
+                        "__Slice__": {
+                            "cache_timeout": null,
+                            "datasource_name": "openedx.video_view_segments",
+                            "datasource_type": "table",
+                            "id": 16,
+                            "params": "{\"adhoc_filters\": [], \"datasource\": \"12__table\", \"extra_form_data\": {}, \"granularity_sqla\": \"start_time\", \"header_font_size\": 0.4, \"metric\": \"Average watch time (ms)\", \"subheader\": \"\", \"subheader_font_size\": 0.15, \"time_range\": \"No filter\", \"time_range_endpoints\": [\"inclusive\", \"exclusive\"], \"url_params\": {}, \"viz_type\": \"big_number_total\", \"y_axis_format\": \"DURATION\", \"remote_id\": 16, \"datasource_name\": \"video_view_segments\", \"schema\": \"openedx\", \"database_name\": \"admin\"}",
+                            "slice_name": "Average learner watch time",
+                            "viz_type": "big_number_total"
+                        }
+                    },
+                    {
+                        "__Slice__": {
+                            "cache_timeout": null,
+                            "datasource_name": "openedx.video_events",
+                            "datasource_type": "table",
+                            "id": 2,
+                            "params": "{\"adhoc_filters\": [], \"datasource\": \"6__table\", \"date_filter\": false, \"extra_form_data\": {}, \"filter_configs\": [{\"asc\": true, \"clearable\": false, \"column\": \"video_id\", \"key\": \"9k_yQUvjp\", \"label\": \"Video ID\", \"multiple\": false, \"searchAllOptions\": false}], \"granularity_sqla\": \"time\", \"slice_id\": 2, \"time_grain_sqla\": null, \"time_range\": \"No filter\", \"time_range_endpoints\": [\"inclusive\", \"exclusive\"], \"url_params\": {}, \"viz_type\": \"filter_box\", \"remote_id\": 2, \"datasource_name\": \"video_events\", \"schema\": \"openedx\", \"database_name\": \"admin\"}",
+                            "slice_name": "Select video ID",
+                            "viz_type": "filter_box"
+                        }
+                    },
+                    {
+                        "__Slice__": {
+                            "cache_timeout": null,
+                            "datasource_name": "openedx.video_events",
+                            "datasource_type": "table",
+                            "id": 18,
+                            "params": "{\"adhoc_filters\": [], \"datasource\": \"6__table\", \"date_filter\": false, \"extra_form_data\": {}, \"filter_configs\": [{\"asc\": true, \"clearable\": true, \"column\": \"course_id\", \"key\": \"CQE2v7Ajx\", \"label\": \"Course ID\", \"multiple\": true, \"searchAllOptions\": false}], \"granularity_sqla\": \"time\", \"time_grain_sqla\": \"P1D\", \"time_range\": \"Last week\", \"time_range_endpoints\": [\"inclusive\", \"exclusive\"], \"url_params\": {}, \"viz_type\": \"filter_box\", \"remote_id\": 18, \"datasource_name\": \"video_events\", \"schema\": \"openedx\", \"database_name\": \"admin\"}",
+                            "slice_name": "Select video course ID",
+                            "viz_type": "filter_box"
+                        }
+                    },
+                    {
+                        "__Slice__": {
+                            "cache_timeout": null,
+                            "datasource_name": "openedx.video_events",
+                            "datasource_type": "table",
+                            "id": 15,
+                            "params": "{\"adhoc_filters\": [], \"datasource\": \"6__table\", \"date_filter\": true, \"extra_form_data\": {}, \"filter_configs\": [], \"granularity_sqla\": \"time\", \"slice_id\": 15, \"time_grain_sqla\": null, \"time_range\": \"Last week\", \"time_range_endpoints\": [\"inclusive\", \"exclusive\"], \"url_params\": {}, \"viz_type\": \"filter_box\", \"remote_id\": 15, \"datasource_name\": \"video_events\", \"schema\": \"openedx\", \"database_name\": \"admin\"}",
+                            "slice_name": "Video event time range",
+                            "viz_type": "filter_box"
+                        }
+                    }
+                ],
+                "slug": null
+            }
+        }
+    ],
+    "datasources": [
+        {
+            "__SqlaTable__": {
+                "cache_timeout": null,
+                "columns": [
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:12:39"
+                            },
+                            "column_name": "course_id",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-24T10:12:00"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 69,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 12,
+                            "type": "STRING",
+                            "uuid": "c0f70f90-5f3d-4aca-b69f-56512daff155",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:12:39"
+                            },
+                            "column_name": "video_id",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-24T10:12:00"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 70,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 12,
+                            "type": "STRING",
+                            "uuid": "83683155-54ab-4921-b16b-9e5d9abe541b",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:12:39"
+                            },
+                            "column_name": "user_id",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-24T10:12:00"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 71,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 12,
+                            "type": "INT64",
+                            "uuid": "5ef88039-a246-4df0-a255-8a895005f740",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:12:39"
+                            },
+                            "column_name": "start_time",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-24T10:12:00"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 72,
+                            "is_active": null,
+                            "is_dttm": true,
+                            "python_date_format": null,
+                            "table_id": 12,
+                            "type": "DATETIME",
+                            "uuid": "a844854f-59d6-4811-8b8b-573b06a91006",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:12:39"
+                            },
+                            "column_name": "start_position",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-24T10:12:00"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 73,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 12,
+                            "type": "FLOAT",
+                            "uuid": "124ccd6b-6dd6-46c5-b268-b7bf66fc7595",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:12:39"
+                            },
+                            "column_name": "start_event",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-24T10:12:00"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 74,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 12,
+                            "type": "STRING",
+                            "uuid": "dec56e1c-cf31-4566-804d-4d8efd741037",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:12:39"
+                            },
+                            "column_name": "end_time",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-24T10:12:00"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 75,
+                            "is_active": null,
+                            "is_dttm": true,
+                            "python_date_format": null,
+                            "table_id": 12,
+                            "type": "DATETIME",
+                            "uuid": "65c2d28c-50dd-4862-951f-baa527c4fa67",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:12:39"
+                            },
+                            "column_name": "end_position",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-24T10:12:00"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 76,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 12,
+                            "type": "FLOAT",
+                            "uuid": "9881998d-ecfb-4cac-a74e-b6b457059aa8",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:12:39"
+                            },
+                            "column_name": "end_event",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-24T10:12:00"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 77,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 12,
+                            "type": "STRING",
+                            "uuid": "ae4b8ee8-7f9d-4682-8da3-a61d685d90fe",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:12:39"
+                            },
+                            "column_name": "duration",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-24T10:12:00"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 78,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 12,
+                            "type": "FLOAT",
+                            "uuid": "bf49c6fe-26ad-476d-ab49-234a053ceb74",
+                            "verbose_name": null
+                        }
+                    }
+                ],
+                "database_id": 1,
+                "default_endpoint": null,
+                "description": null,
+                "extra": null,
+                "fetch_values_predicate": null,
+                "filter_select_enabled": false,
+                "main_dttm_col": "start_time",
+                "metrics": [
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:12:39"
+                            },
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-24T10:12:00"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "COUNT(*)",
+                            "extra": "{\"warning_markdown\":null}",
+                            "id": 20,
+                            "metric_name": "count",
+                            "metric_type": null,
+                            "table_id": 12,
+                            "uuid": "79c9721e-ac8d-41a0-b36e-06ff33f16a6a",
+                            "verbose_name": "COUNT(*)",
+                            "warning_text": null
+                        }
+                    },
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T15:43:59"
+                            },
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-24T10:19:14"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "SUM(end_position - start_position) * 1000",
+                            "extra": "{\"warning_markdown\":null}",
+                            "id": 22,
+                            "metric_name": "Watch time (ms)",
+                            "metric_type": null,
+                            "table_id": 12,
+                            "uuid": "70ceb0e6-7397-43bb-8565-e5b97ab9f536",
+                            "verbose_name": "",
+                            "warning_text": null
+                        }
+                    },
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T16:04:29"
+                            },
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-24T15:43:59"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "MAX(end_position) - MIN(start_position)",
+                            "extra": "{\"warning_markdown\":null}",
+                            "id": 23,
+                            "metric_name": "Portion viewed per user",
+                            "metric_type": null,
+                            "table_id": 12,
+                            "uuid": "bb800160-8987-4f93-8715-7d50e7a060d9",
+                            "verbose_name": "",
+                            "warning_text": null
+                        }
+                    },
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T16:05:52"
+                            },
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-24T16:04:29"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "SUM(end_position - start_position) * 1000 / COUNT(DISTINCT(user_id))",
+                            "extra": "{\"warning_markdown\":null}",
+                            "id": 24,
+                            "metric_name": "Average watch time (ms)",
+                            "metric_type": null,
+                            "table_id": 12,
+                            "uuid": "42b1b78b-275c-4181-88ff-99d6cf158c8e",
+                            "verbose_name": "",
+                            "warning_text": null
+                        }
+                    }
+                ],
+                "offset": 0,
+                "params": "{\"remote_id\": 12, \"database_name\": \"admin\", \"import_time\": 1621942851}",
+                "schema": "openedx",
+                "sql": "",
+                "table_name": "video_view_segments",
+                "template_params": null
+            }
+        },
+        {
+            "__SqlaTable__": {
+                "cache_timeout": null,
+                "columns": [
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T11:20:55"
+                            },
+                            "column_name": "bin",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T10:59:59"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 24,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 5,
+                            "type": "UINT64",
+                            "uuid": "c05a60c8-f85a-42e6-92a4-d7c7743fe517",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T11:33:27"
+                            },
+                            "column_name": "video_id",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T11:23:48"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 34,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 5,
+                            "type": "STRING",
+                            "uuid": "482c34a7-ab7b-431f-96e2-a85a4e11ca7c",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T11:35:16"
+                            },
+                            "column_name": "start_time",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T11:33:38"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 36,
+                            "is_active": null,
+                            "is_dttm": true,
+                            "python_date_format": null,
+                            "table_id": 5,
+                            "type": "DATETIME",
+                            "uuid": "25d3ef61-62d2-429c-9601-b2644e3b7b40",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T15:52:44"
+                            },
+                            "column_name": "user_id",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T14:43:16"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 37,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 5,
+                            "type": "INT64",
+                            "uuid": "883b1869-5061-416b-a87a-5d4f58e65935",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T15:52:44"
+                            },
+                            "column_name": "course_id",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T14:43:16"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 38,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 5,
+                            "type": "STRING",
+                            "uuid": "73186ac4-bef3-418d-a87e-d12d0797dc77",
+                            "verbose_name": null
+                        }
+                    }
+                ],
+                "database_id": 1,
+                "default_endpoint": null,
+                "description": null,
+                "extra": null,
+                "fetch_values_predicate": null,
+                "filter_select_enabled": false,
+                "main_dttm_col": null,
+                "metrics": [
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T11:33:27"
+                            },
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T11:25:39"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "count(*)",
+                            "extra": "{\"warning_markdown\":null}",
+                            "id": 9,
+                            "metric_name": "Total views",
+                            "metric_type": null,
+                            "table_id": 5,
+                            "uuid": "b72919ce-a9df-4b3d-b827-a1a6a1c8a7d2",
+                            "verbose_name": "",
+                            "warning_text": null
+                        }
+                    },
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T11:33:27"
+                            },
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T11:29:01"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "count(distinct(user_id))",
+                            "extra": "{\"warning_markdown\":null}",
+                            "id": 10,
+                            "metric_name": "Unique viewers",
+                            "metric_type": null,
+                            "table_id": 5,
+                            "uuid": "1a29c35b-1dbf-4145-9ef0-403b9b0562e5",
+                            "verbose_name": "",
+                            "warning_text": null
+                        }
+                    },
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T11:33:27"
+                            },
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T11:29:01"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "count(*) - count(distinct(user_id))",
+                            "extra": "{\"warning_markdown\":null}",
+                            "id": 11,
+                            "metric_name": "Replay views",
+                            "metric_type": null,
+                            "table_id": 5,
+                            "uuid": "2d9e87a5-1cc4-44ec-8b6a-4d8c48e6d2d0",
+                            "verbose_name": "",
+                            "warning_text": null
+                        }
+                    }
+                ],
+                "offset": 0,
+                "params": "{\"remote_id\": 5, \"database_name\": \"admin\", \"import_time\": 1621942851}",
+                "schema": "openedx",
+                "sql": "SELECT arrayJoin(range(toUInt64(floor(start_position)), toUInt64(ceil(end_position)))) AS bin,\r\n      start_time,\r\n      user_id,\r\n      video_id,\r\n      course_id\r\nFROM video_view_segments\r\nORDER BY bin",
+                "table_name": "Video views",
+                "template_params": ""
+            }
+        },
+        {
+            "__SqlaTable__": {
+                "cache_timeout": null,
+                "columns": [
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:07:01"
+                            },
+                            "column_name": "course_id",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T11:11:29"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 28,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 6,
+                            "type": "STRING",
+                            "uuid": "cc99f7d6-a643-4989-a1bb-07b2dfaed0c8",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:07:01"
+                            },
+                            "column_name": "video_id",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T11:11:29"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 29,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 6,
+                            "type": "STRING",
+                            "uuid": "77f01447-3b85-42b2-a00d-23accf89f0a4",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:07:01"
+                            },
+                            "column_name": "user_id",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T11:11:29"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 30,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 6,
+                            "type": "INT64",
+                            "uuid": "37e2fff6-1c54-4569-aee3-160ada330b15",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:07:01"
+                            },
+                            "column_name": "name",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T11:11:29"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 31,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 6,
+                            "type": "STRING",
+                            "uuid": "522466fd-fef8-405e-b5e5-dc800348f821",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:07:01"
+                            },
+                            "column_name": "time",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T11:11:29"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 32,
+                            "is_active": null,
+                            "is_dttm": true,
+                            "python_date_format": null,
+                            "table_id": 6,
+                            "type": "DATETIME",
+                            "uuid": "b4581512-5a65-4178-b8e3-fbfd7b30d2a3",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:07:01"
+                            },
+                            "column_name": "position",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T11:11:29"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 33,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 6,
+                            "type": "FLOAT",
+                            "uuid": "9057df8b-e555-4a85-ad6a-50dcdb2e778f",
+                            "verbose_name": null
+                        }
+                    }
+                ],
+                "database_id": 1,
+                "default_endpoint": null,
+                "description": null,
+                "extra": null,
+                "fetch_values_predicate": null,
+                "filter_select_enabled": false,
+                "main_dttm_col": "time",
+                "metrics": [
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:07:01"
+                            },
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T11:11:29"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "COUNT(*)",
+                            "extra": "{\"warning_markdown\":null}",
+                            "id": 8,
+                            "metric_name": "count",
+                            "metric_type": null,
+                            "table_id": 6,
+                            "uuid": "8df32dd0-fa09-4805-bf56-b720bfbbd1d1",
+                            "verbose_name": "COUNT(*)",
+                            "warning_text": null
+                        }
+                    },
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:07:01"
+                            },
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-24T10:07:01"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "sum(end_position - start_position)",
+                            "extra": "{}",
+                            "id": 19,
+                            "metric_name": "View time",
+                            "metric_type": null,
+                            "table_id": 6,
+                            "uuid": "cf034920-8bba-43d6-95da-8bb6ec8ef1d5",
+                            "verbose_name": "",
+                            "warning_text": null
+                        }
+                    }
+                ],
+                "offset": 0,
+                "params": "{\"remote_id\": 6, \"database_name\": \"admin\", \"import_time\": 1621942851}",
+                "schema": "openedx",
+                "sql": "",
+                "table_name": "video_events",
+                "template_params": null
+            }
+        }
+    ]
+}

@@ -1,10 +1,10 @@
 # Vision
 upstream vision-backend {
-    server vision-redash:5000 fail_timeout=0;
+    server vision-superset:8000 fail_timeout=0;
 }
 server {
   listen 80;
-  server_name {{ VISION_REDASH_HOST }};
+  server_name {{ VISION_SUPERSET_HOST }};
 
   # Disables server version feedback on pages and in headers
   server_tokens off;

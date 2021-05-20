@@ -3,15 +3,16 @@ Tutor Vision: scalable, real-time analytics for Open edX
 
 TODO:
 
-- Expose data with redash
-    - Provision dashboards
-    - Expose grades
+- Expose data with superset
+    - Expose grades and certificates
     - Reproduce dashboards from https://edx.readthedocs.io/projects/edx-insights/en/latest/Overview.html
     - Reproduce dashboards from https://datastudio.google.com/embed/u/0/reporting/1gd-YXUtHFzHm3qddPTO8r272kyRD-uDG/page/4f5xB
     - frontend user creation:
         - generate random frontend user password in "tutor vision frontend createuser"
+    - try out alerts
 - Kubernetes compatibility
 - Sweet readme
+- Rename to ocean?
 
 Installation
 ------------
@@ -28,34 +29,25 @@ Usage
     tutor plugins enable vision
     tutor local quickstart
 
-Create a root user to access the frontend::
+Create an admin user to access the frontend::
 
-    # You will be prompted for your password
-    tutor vision frontend createuser --root admin admin@youremail.com
+    # You will be prompted for a new password
+    tutor local run vision-superset superset fab create-admin --username yourusername --email user@example.com
 
-Grant this user access to all data::
-
-    tutor vision datalake createuser admin
-    tutor vision datalake setpermissions admin
-
-You can then access the frontend with the user credentials you just created. Open http(s)://vision.<YOUR_LMS_HOST> in your browser. When running locally, this will be http://vision.local.overhang.io.
-
+You can then access the frontend with the user credentials you just created. Open http(s)://vision.<YOUR_LMS_HOST> in your browser. When running locally, this will be http://vision.local.overhang.io. The admin user will automatically be granted access to the "openedx" database in Superset and will be able to query all tables.
 
 Management
 ----------
 
-To add a new, non-admin user::
+Most of your users should probably not have access to all data from all courses. To restrict a given user to one or more courses or organizations, select the course IDs and/or organization IDS to which the user should have access and create a user with limited access to the datalake::
 
-    # Create a datalake user
-    tutor vision datalake createuser yourusername
-    # Remember to restrict access, otherwise the new user will have access to everything
-    tutor vision datalake setpermissions --course-id 'course-v1:edX+DemoX+Demo_Course' yourusername
-    # Create a corresponding user on the frontend
-    tutor vision frontend createuser yourusername yourusername@youremail.com
+    tutor local run vision-clickhouse vision createuser --course-id='course-v1:edX+DemoX+Demo_Course' --org-id='edX' yourusername
 
-Note that you may grant a user access to the data of an organization instead of just a course. To do so, run::
+Then, create the corresponding user on the frontend::
 
-    tutor vision datalake setpermissions --org-id yourorg yourusername
+    tutor local run vision-superset vision createuser yourusername yourusername@youremail.com
+
+Your frontend user will automatically be associated to the datalake database you created, provided they share the same name.
 
 Development
 -----------
@@ -67,27 +59,12 @@ To reload Vector configuration after changes to vector.toml, run::
 
 To explore the clickhouse database as root, run::
 
-    tutor local run vision-clickhouse clickhouse-client --host vision-clickhouse \
-        --database $(tutor config printvalue VISION_CLICKHOUSE_DATABASE) \
-        --user $(tutor config printvalue VISION_CLICKHOUSE_USERNAME) \
-        --password $(tutor config printvalue VISION_CLICKHOUSE_PASSWORD)
+    tutor local run vision-clickhouse vision client
 
-To launch a Python shell in Redash, run::
+To launch a Python shell in Superset, run::
 
-    tutor local run vision-redash ./manage.py shell
+    tutor local run vision-superset superset shell
 
-To backup an existing dashboard, with all its related queries and widgets, first find the dashboard slug from its url. Create a world-writable destination folder::
-
-    mkdir ./dashboards
-    chmod a+rwx dashboards
-
-Then run::
-
-    tutor local run -v $(pwd)/dashboards:/tmp/dashboards vision-redash python /redash/scripts/serialize.py dump --output /tmp/dashboards/dashboard.json <your username> <dashboard slug> > ./dashboard.json
-
-You can then re-import this dashboard, for instance to create the same dashboard in another user account::
-
-    tutor local run -v $(pwd)/dashboards:/tmp/dashboards vision-redash python /redash/scripts/serialize.py load /tmp/dashboards/dashboard.json <your username>
 
 License
 -------
