@@ -2,7 +2,6 @@ from glob import glob
 import os
 
 from .__about__ import __version__
-# from .cli import vision_command # TODO remove this
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
@@ -40,9 +39,8 @@ hooks = {
         "vision-clickhouse": "{{ VISION_CLICKHOUSE_DOCKER_IMAGE }}",
         "vision-superset": "{{ VISION_SUPERSET_DOCKER_IMAGE }}"
     },
-    "init": ["vision-clickhouse", "vision-superset"],
+    "init": ["vision-clickhouse", "vision-superset", "vision-openedx"],
 }
-# command = vision_command # TODO remove this
 
 
 def patches():

@@ -3,13 +3,6 @@ Tutor Vision: scalable, real-time analytics for Open edX
 
 TODO:
 
-- Expose data with superset
-    - Expose grades and certificates
-    - Reproduce dashboards from https://edx.readthedocs.io/projects/edx-insights/en/latest/Overview.html
-    - Reproduce dashboards from https://datastudio.google.com/embed/u/0/reporting/1gd-YXUtHFzHm3qddPTO8r272kyRD-uDG/page/4f5xB
-    - frontend user creation:
-        - generate random frontend user password in "tutor vision frontend createuser"
-    - try out alerts
 - Kubernetes compatibility
 - Sweet readme
 - Rename to ocean?
@@ -48,6 +41,16 @@ Then, create the corresponding user on the frontend::
     tutor local run vision-superset vision createuser yourusername yourusername@youremail.com
 
 Your frontend user will automatically be associated to the datalake database you created, provided they share the same name.
+
+Course block IDs and names are loaded from the Open edX modulestore into the datalake. After making changes to your course, you might want to refresh the course structure stored in the datalake. To do so, run::
+
+    tutor local init --limit=vision
+
+Or, if you want to avoid running the full plugin initialization::
+
+    tutor local run -v $(tutor config printroot)/env/plugins/vision/apps/openedx/scripts/:/openedx/scripts lms \
+        python /openedx/scripts/importcoursedata.py \
+        "http://$(tutor config printvalue VISION_CLICKHOUSE_USERNAME):$(tutor config printvalue VISION_CLICKHOUSE_PASSWORD)@$(tutor config printvalue VISION_CLICKHOUSE_HOST):$(tutor config printvalue VISION_CLICKHOUSE_HTTP_PORT)/?database=$(tutor config printvalue VISION_CLICKHOUSE_DATABASE)"
 
 Development
 -----------

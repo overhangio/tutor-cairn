@@ -1,0 +1,1 @@
+python /openedx/scripts/importcoursedata.py http://{{ VISION_CLICKHOUSE_USERNAME }}:{{ VISION_CLICKHOUSE_PASSWORD }}@{{ VISION_CLICKHOUSE_HOST }}:{{ VISION_CLICKHOUSE_HTTP_PORT }}/?database={{ VISION_CLICKHOUSE_DATABASE }}
