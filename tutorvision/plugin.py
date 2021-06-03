@@ -24,10 +24,10 @@ config = {
         "CLICKHOUSE_DATABASE": "openedx",
         "CLICKHOUSE_USERNAME": "openedx",
         "DOCKER_HOST": "/var/run/docker.sock",
-        # TODO move data to mysql?
         "POSTGRESQL_USER": "superset",
         "POSTGRESQL_DB": "superset",
         "RUN_CLICKHOUSE": True,
+        "RUN_POSTGRESQL": True,
         "SUPERSET_DOCKER_IMAGE": "{{ DOCKER_REGISTRY }}overhangio/superset:{{ VISION_VERSION }}",
         "SUPERSET_HOST": "vision.{{ LMS_HOST }}",
         "SUPERSET_DATABASE": "openedx",

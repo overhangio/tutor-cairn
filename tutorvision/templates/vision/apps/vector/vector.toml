@@ -68,7 +68,7 @@ encoding.timestamp_format = "unix"
 inputs = ["tracking"]
 endpoint = "{{ VISION_CLICKHOUSE_SCHEME }}://{{ VISION_CLICKHOUSE_HOST }}:{{ VISION_CLICKHOUSE_HTTP_PORT }}"
 database = "{{ VISION_CLICKHOUSE_DATABASE }}"
-table = "tracking"
+table = "_tracking"
 healthcheck = true
 
 {{ patch("vision-vector-toml") }}

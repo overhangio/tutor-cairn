@@ -48,30 +48,16 @@ def command_create_user(args):
     condition = " OR ".join(conditions) if conditions else "1"
     username = args.username
     # Note that the "CREATE TEMPORARY TABLE" grant is required to make use of "numbers()" functions.
-    # TODO how to automatically list the tables to which users should be granted access?
-    query = f"""
-CREATE USER IF NOT EXISTS {username};
-GRANT CREATE TEMPORARY TABLE ON *.* TO {username};
-
-GRANT SELECT ON events TO {username};
-CREATE ROW POLICY OR REPLACE {username} ON events AS RESTRICTIVE FOR SELECT USING {condition} TO {username};
-
-GRANT SELECT ON course_grades TO {username};
-CREATE ROW POLICY OR REPLACE {username} ON course_grades AS RESTRICTIVE FOR SELECT USING {condition} TO {username};
-
-GRANT SELECT ON course_enrollments TO {username};
-CREATE ROW POLICY OR REPLACE {username} ON course_enrollments AS RESTRICTIVE FOR SELECT USING {condition} TO {username};
-
-GRANT SELECT ON video_events TO {username};
-CREATE ROW POLICY OR REPLACE {username} ON video_events AS RESTRICTIVE FOR SELECT USING {condition} TO {username};
-
-GRANT SELECT ON video_view_segments TO {username};
-CREATE ROW POLICY OR REPLACE {username} ON video_view_segments AS RESTRICTIVE FOR SELECT USING {condition} TO {username};
-
-GRANT SELECT ON course_block_completion TO {username};
-CREATE ROW POLICY OR REPLACE {username} ON course_block_completion AS RESTRICTIVE FOR SELECT USING {condition} TO {username};
-"""
-    run_query(query)
+    run_query(f"""CREATE USER IF NOT EXISTS {username};
+GRANT CREATE TEMPORARY TABLE ON *.* TO {username};""")
+    # Find the list of tables to which the user should have access: all tables that do not start with "_"
+    tables = run_query("SHOW TABLES").strip().split("\n")
+    for table in tables:
+        if not table.startswith("_"):
+            query = f"""GRANT SELECT ON {table} TO {username};
+CREATE ROW POLICY OR REPLACE {username} ON {table} AS RESTRICTIVE FOR SELECT USING {condition} TO {username};"""
+            print(query)
+            run_query(query)
 
 
 def run_query(query=None):
@@ -98,7 +84,7 @@ def run_query(query=None):
         *args,
     ]
     print(" ".join(command))
-    subprocess.check_call(command)
+    return subprocess.check_output(command).decode()
 
 
 if __name__ == "__main__":

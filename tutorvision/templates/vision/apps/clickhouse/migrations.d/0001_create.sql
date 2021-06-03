@@ -1,4 +1,4 @@
-CREATE TABLE tracking
+CREATE TABLE _tracking
 (
     `time` DateTime,
     `message` String
@@ -18,14 +18,14 @@ CREATE TABLE events
 ENGINE MergeTree
 ORDER BY time;
 
-CREATE MATERIALIZED VIEW events_mv TO events AS
+CREATE MATERIALIZED VIEW _events_mv TO events AS
 SELECT
     time,
     JSONExtractString(message, 'name') AS name,
     JSONExtract(message, 'context', 'course_id', 'String') AS course_id,
     JSONExtract(message, 'context', 'user_id', 'Int64') AS user_id,
     JSONExtractString(message, 'event_source') AS event_source
-FROM tracking;
+FROM _tracking;
 
 -- Grant everyone access to the events table
 CREATE ROW POLICY common ON events FOR SELECT USING 1 TO ALL;
