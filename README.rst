@@ -1,11 +1,7 @@
 Tutor Vision: scalable, real-time analytics for Open edX
 ========================================================
 
-TODO:
-
-- Kubernetes compatibility
-- Sweet readme
-- Rename to ocean?
+TODO: Sweet readme
 
 Installation
 ------------
@@ -42,15 +38,28 @@ Then, create the corresponding user on the frontend::
 
 Your frontend user will automatically be associated to the datalake database you created, provided they share the same name.
 
+Vision comes with a convenient pre-built dashboard that you can add to any user account::
+
+    tutor local run vision-superset vision bootstrap-dashboards yourusername /app/bootstrap/courseoverview.json
+
 Course block IDs and names are loaded from the Open edX modulestore into the datalake. After making changes to your course, you might want to refresh the course structure stored in the datalake. To do so, run::
 
     tutor local init --limit=vision
 
 Or, if you want to avoid running the full plugin initialization::
 
-    tutor local run -v $(tutor config printroot)/env/plugins/vision/apps/openedx/scripts/:/openedx/scripts lms \
-        python /openedx/scripts/importcoursedata.py \
-        "http://$(tutor config printvalue VISION_CLICKHOUSE_USERNAME):$(tutor config printvalue VISION_CLICKHOUSE_PASSWORD)@$(tutor config printvalue VISION_CLICKHOUSE_HOST):$(tutor config printvalue VISION_CLICKHOUSE_HTTP_PORT)/?database=$(tutor config printvalue VISION_CLICKHOUSE_DATABASE)"
+    tutor local run \
+        -v $(tutor config printroot)/env/plugins/vision/apps/openedx/scripts/:/openedx/scripts \
+        -v $(tutor config printroot)/env/plugins/vision/apps/clickhouse/auth.json:/openedx/clickhouse-auth.json \
+        lms python /openedx/scripts/importcoursedata.py
+
+When running on Kubernetes instead of locally, most commands above can be re-written with `tutor k8s exec service "command"` instead of `tutor local run service command`. For instance::
+
+    # Privileved user creation
+    tutor k8s exec vision-superset "superset fab create-admin --username yourusername --email user@example.com"
+    # Unprivileged user creation
+    tutor k8s exec vision-clickhouse "vision createuser --course-id='course-v1:edX+DemoX+Demo_Course' --org-id='edX' yourusername"
+    tutor k8s exec vision-superset "vision createuser yourusername yourusername@youremail.com"
 
 Development
 -----------

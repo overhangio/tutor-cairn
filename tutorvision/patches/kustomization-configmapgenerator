@@ -1,0 +1,21 @@
+- name: vision-vector-config
+  files:
+    - plugins/vision/apps/vector/vector.toml
+- name: vision-clickhouse-user-config
+  files:
+    - plugins/vision/apps/clickhouse/users.d/vision.xml
+- name: vision-clickhouse-migrations
+  files:{% for file in "vision/apps/clickhouse/migrations.d"|walk_templates %}
+    - plugins/{{ file }}{% endfor %}
+- name: vision-clickhouse-auth
+  files:
+    - plugins/vision/apps/clickhouse/auth.json
+- name: vision-superset-config
+  files:
+    - plugins/vision/apps/superset/superset_config.py
+- name: vision-superset-bootstrap
+  files:{% for file in "vision/apps/superset/bootstrap"|walk_templates %}
+    - plugins/{{ file }}{% endfor %}
+- name: vision-openedx-scripts
+  files:{% for file in "vision/apps/openedx/scripts"|walk_templates %}
+    - plugins/{{ file }}{% endfor %}

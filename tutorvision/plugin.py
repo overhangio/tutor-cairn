@@ -15,20 +15,20 @@ config = {
     },
     "defaults": {
         "VERSION": __version__,
-        "CLICKHOUSE_DOCKER_IMAGE": "{{ DOCKER_REGISTRY }}overhangio/clickhouse:{{ VISION_VERSION }}",
+        "CLICKHOUSE_DOCKER_IMAGE": "{{ DOCKER_REGISTRY }}overhangio/vision-clickhouse:{{ VISION_VERSION }}",
         "RUN_CLICKHOUSE": True,
-        "CLICKHOUSE_SCHEME": "http",
         "CLICKHOUSE_HOST": "vision-clickhouse",
         "CLICKHOUSE_HTTP_PORT": 8123,
+        "CLICKHOUSE_HTTP_SCHEME": "http",
         "CLICKHOUSE_PORT": 9000,
         "CLICKHOUSE_DATABASE": "openedx",
         "CLICKHOUSE_USERNAME": "openedx",
-        "DOCKER_HOST": "/var/run/docker.sock",
+        "DOCKER_HOST_SOCK_PATH": "/var/run/docker.sock",
         "POSTGRESQL_USER": "superset",
         "POSTGRESQL_DB": "superset",
         "RUN_CLICKHOUSE": True,
         "RUN_POSTGRESQL": True,
-        "SUPERSET_DOCKER_IMAGE": "{{ DOCKER_REGISTRY }}overhangio/superset:{{ VISION_VERSION }}",
+        "SUPERSET_DOCKER_IMAGE": "{{ DOCKER_REGISTRY }}overhangio/vision-superset:{{ VISION_VERSION }}",
         "SUPERSET_HOST": "vision.{{ LMS_HOST }}",
         "SUPERSET_DATABASE": "openedx",
     },
@@ -37,7 +37,11 @@ config = {
 hooks = {
     "build-image": {
         "vision-clickhouse": "{{ VISION_CLICKHOUSE_DOCKER_IMAGE }}",
-        "vision-superset": "{{ VISION_SUPERSET_DOCKER_IMAGE }}"
+        "vision-superset": "{{ VISION_SUPERSET_DOCKER_IMAGE }}",
+    },
+    "remote-image": {
+        "vision-clickhouse": "{{ VISION_CLICKHOUSE_DOCKER_IMAGE }}",
+        "vision-superset": "{{ VISION_SUPERSET_DOCKER_IMAGE }}",
     },
     "init": ["vision-clickhouse", "vision-superset", "vision-openedx"],
 }

@@ -1,0 +1,91 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: vision-clickhouse-job
+  labels:
+    app.kubernetes.io/component: job
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: vision-clickhouse
+          image: {{ VISION_CLICKHOUSE_DOCKER_IMAGE }}
+          volumeMounts:
+            - mountPath: /scripts/clickhouse-auth.json
+              name: clickhouse-auth
+              subPath: auth.json
+            - mountPath: /etc/clickhouse-server/migrations.d
+              name: migrations
+      volumes:
+        - name: clickhouse-auth
+          configMap:
+            name: vision-clickhouse-auth
+        - name: migrations
+          configMap:
+            name: vision-clickhouse-migrations
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: vision-superset-job
+  labels:
+    app.kubernetes.io/component: job
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: vision-superset
+          image: {{ VISION_SUPERSET_DOCKER_IMAGE }}
+          volumeMounts:
+            - mountPath: /app/superset_config.py
+              name: config
+              subPath: superset_config.py
+      volumes:
+        - name: config
+          configMap:
+            name: vision-superset-config
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: vision-openedx-job
+  labels:
+    app.kubernetes.io/component: job
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: vision-openedx
+          image: {{ DOCKER_IMAGE_OPENEDX }}
+          volumeMounts:
+            - mountPath: /openedx/edx-platform/lms/envs/tutor/
+              name: settings-lms
+            - mountPath: /openedx/edx-platform/cms/envs/tutor/
+              name: settings-cms
+            - mountPath: /openedx/config
+              name: config
+            - mountPath: /openedx/scripts
+              name: scripts
+            - mountPath: /openedx/clickhouse-auth.json
+              name: clickhouse-auth
+              subPath: auth.json
+      volumes:
+      - name: settings-lms
+        configMap:
+          name: openedx-settings-lms
+      - name: settings-cms
+        configMap:
+          name: openedx-settings-cms
+      - name: config
+        configMap:
+          name: openedx-config
+      - name: scripts
+        configMap:
+          name: vision-openedx-scripts
+      - name: clickhouse-auth
+        configMap:
+          name: vision-clickhouse-auth

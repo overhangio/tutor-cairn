@@ -2,6 +2,7 @@ vision-clickhouse-job:
     image: {{ VISION_CLICKHOUSE_DOCKER_IMAGE }}
     depends_on: {{ [("vision-clickhouse", VISION_RUN_CLICKHOUSE)]|list_if }}
     volumes:
+        - ../plugins/vision/apps/clickhouse/auth.json:/scripts/clickhouse-auth.json:ro
         - ../plugins/vision/apps/clickhouse/migrations.d/:/etc/clickhouse-server/migrations.d/:ro
 vision-superset-job:
     image: {{ VISION_SUPERSET_DOCKER_IMAGE }}
@@ -20,4 +21,5 @@ vision-openedx-job:
       - ../apps/openedx/settings/cms/:/openedx/edx-platform/cms/envs/tutor/:ro
       - ../apps/openedx/config/:/openedx/config/:ro
       - ../plugins/vision/apps/openedx/scripts/:/openedx/scripts/:ro
+      - ../plugins/vision/apps/clickhouse/auth.json:/openedx/clickhouse-auth.json:ro
     depends_on: {{ [("mysql", RUN_MYSQL), ("mongodb", RUN_MONGODB)]|list_if }}

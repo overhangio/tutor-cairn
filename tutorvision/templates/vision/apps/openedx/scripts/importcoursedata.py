@@ -1,4 +1,6 @@
 import argparse
+import json
+import os
 
 import requests
 from MySQLdb import escape_string as sql_escape_string
@@ -7,27 +9,30 @@ import lms.startup
 
 lms.startup.run()
 
-from courseware.courses import get_course
-from opaque_keys.edx.keys import CourseKey
+from lms.djangoapps.courseware.courses import get_course
 from xmodule.modulestore.django import modulestore
+
+with open(os.path.join(os.path.dirname(__file__), "..", "clickhouse-auth.json")) as f:
+    CLICKHOUSE_AUTH = json.load(f)
 
 
 def main():
     parser = argparse.ArgumentParser(
         description="Import course block information into the datalake"
     )
-    parser.add_argument("-c", "--course-id", action="append", help="Limit import to these courses")
-    parser.add_argument("uri", help="Clickhouse URI")
+    parser.add_argument(
+        "-c", "--course-id", action="append", help="Limit import to these courses"
+    )
     args = parser.parse_args()
 
     module_store = modulestore()
     course_ids = args.course_id or []
     for course in module_store.get_courses():
         if str(course.id) in course_ids or not course_ids:
-            import_course(course.id, args.uri)
+            import_course(course.id)
 
 
-def import_course(course_key, clickhouse_uri):
+def import_course(course_key):
     course_id = str(course_key)
     # Reload course to fetch all children items
     course = get_course(course_key, depth=None)
@@ -53,13 +58,12 @@ def import_course(course_key, clickhouse_uri):
                 "ALTER TABLE course_blocks DELETE WHERE course_id = '{}';",
                 course_id,
             ),
-            clickhouse_uri,
         )
         insert_query = sql_query(
             "INSERT INTO course_blocks (course_id, block_key, block_id, position, display_name, full_name) VALUES "
         )
         insert_query += ", ".join(values)
-        make_query(insert_query, clickhouse_uri)
+        make_query(insert_query)
 
 
 def iter_course_blocks(item, prefix=""):
@@ -76,8 +80,12 @@ def sql_query(template, *args, **kwargs):
     return template.format(*args, **kwargs)
 
 
-def make_query(query, url):
-    response = requests.post(url, data=query)
+def make_query(query):
+    clickhouse_uri = (
+        f"{CLICKHOUSE_AUTH['http_scheme']}://{CLICKHOUSE_AUTH['username']}:{CLICKHOUSE_AUTH['password']}@"
+        f"{CLICKHOUSE_AUTH['host']}:{CLICKHOUSE_AUTH['http_port']}/?database={CLICKHOUSE_AUTH['database']}"
+    )
+    response = requests.post(clickhouse_uri, data=query)
     if response.status_code != 200:
         print(response.content.decode())
         raise ValueError("An error occurred while attempting to post a query")

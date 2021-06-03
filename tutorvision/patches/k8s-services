@@ -1,0 +1,57 @@
+#### Vision services
+{% if VISION_RUN_CLICKHOUSE %}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vision-clickhouse
+spec:
+  type: NodePort
+  ports:
+    - port: 8123
+      protocol: TCP
+      name: "native"
+    - port: 9000
+      protocol: TCP
+      name: "http"
+  selector:
+    app.kubernetes.io/name: vision-clickhouse
+{% endif %}
+{% if VISION_RUN_POSTGRESQL %}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vision-postgresql
+spec:
+  type: NodePort
+  ports:
+    - port: 5432
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: vision-postgresql
+{% endif %}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vision-redis
+spec:
+  type: NodePort
+  ports:
+    - port: 6379
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: vision-redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vision-superset
+spec:
+  type: NodePort
+  ports:
+    - port: 8000
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: vision-superset

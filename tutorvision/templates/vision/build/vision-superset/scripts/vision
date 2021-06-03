@@ -88,6 +88,7 @@ def main():
 def bootstrap_user(args):
     # Bootstrap database
     database_name = args.db or args.username
+    bootstrap_database(args.username, database_name)
 
     # Get or create user
     user = security_manager.find_user(args.username)
@@ -144,10 +145,13 @@ def bootstrap_user(args):
     print("Done.")
 
 
-def bootstrap_database(database_name):
-    host = os.environ["VISION_CLICKHOUSE_HOST"]
-    port = os.environ["VISION_CLICKHOUSE_PORT"]
-    database = os.environ["VISION_CLICKHOUSE_DATABASE"]
+def bootstrap_database(username, database_name):
+    with open(os.path.join(os.path.dirname(__file__), "clickhouse-auth.json")) as f:
+        CLICKHOUSE_AUTH = json.load(f)
+
+    host = CLICKHOUSE_AUTH["host"]
+    port = CLICKHOUSE_AUTH["port"]
+    database = CLICKHOUSE_AUTH["database"]
     uri = f"clickhouse+native://{username}:@{host}:{port}/{database}"
     get_or_create_db(database_name, uri, always_create=True)
 

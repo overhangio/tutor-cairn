@@ -1,7 +1,13 @@
 #! /usr/bin/env python3
 import argparse
+from glob import glob
+import json
 import os
 import subprocess
+
+
+with open(os.path.join(os.path.dirname(__file__), "clickhouse-auth.json")) as f:
+    CLICKHOUSE_AUTH = json.load(f)
 
 
 def main():
@@ -29,12 +35,31 @@ def main():
     parser_createuser.add_argument("username")
     parser_createuser.set_defaults(func=command_create_user)
 
+    # Apply migrations
+    parser_migrate = subparsers.add_parser("migrate")
+    parser_migrate.add_argument(
+        "-p",
+        "--path",
+        default="/etc/clickhouse-server/migrations.d/",
+        help="Run migrations from this directory.",
+    )
+    parser_migrate.add_argument(
+        "-d",
+        "--dry-run",
+        action="store_true",
+        help="Don't actually apply migrations",
+    )
+    parser_migrate.set_defaults(func=command_migrate)
+
     args = parser.parse_args()
-    args.func(args)
+    if hasattr(args, "func"):
+        args.func(args)
+    else:
+        parser.print_help()
 
 
 def command_client(args):
-    run_query()
+    subprocess.check_call(get_client_command())
 
 
 def command_create_user(args):
@@ -48,8 +73,10 @@ def command_create_user(args):
     condition = " OR ".join(conditions) if conditions else "1"
     username = args.username
     # Note that the "CREATE TEMPORARY TABLE" grant is required to make use of "numbers()" functions.
-    run_query(f"""CREATE USER IF NOT EXISTS {username};
-GRANT CREATE TEMPORARY TABLE ON *.* TO {username};""")
+    run_query(
+        f"""CREATE USER IF NOT EXISTS {username};
+GRANT CREATE TEMPORARY TABLE ON *.* TO {username};"""
+    )
     # Find the list of tables to which the user should have access: all tables that do not start with "_"
     tables = run_query("SHOW TABLES").strip().split("\n")
     for table in tables:
@@ -60,31 +87,66 @@ CREATE ROW POLICY OR REPLACE {username} ON {table} AS RESTRICTIVE FOR SELECT USI
             run_query(query)
 
 
-def run_query(query=None):
-    args = []
-    if os.environ.get("VISION_CLICKHOUSE_SCHEME") == "https":
-        args.append("--secure")
-    if query:
-        args += ["--query", query]
+def command_migrate(args):
+    # Create database
+    query = f"""CREATE DATABASE IF NOT EXISTS {CLICKHOUSE_AUTH["database"]}"""
+    subprocess.check_call(get_client_command_no_db("--query", query))
+    # Create migrations table
+    run_query(
+        "CREATE TABLE IF NOT EXISTS _migrations (name String) ENGINE = MergeTree PRIMARY KEY(name) ORDER BY name"
+    )
+
+    # Apply migrations
+    migrations = sorted(glob(os.path.join(args.path, "*")))
+    for path in migrations:
+        migration_name = os.path.basename(path)
+        print(
+            f"Applying migration {migration_name}... ", end=" "
+        )
+        query = f"SELECT 'applied' FROM _migrations WHERE name='{migration_name}'"
+        is_applied = run_query(query)
+        print_suffix = " (fake)" if args.dry_run else ""
+        if is_applied == "applied":
+            print(f"SKIP{print_suffix}")
+        else:
+            if not args.dry_run:
+                run_command("--queries-file", path)
+                run_query("INSERT INTO _migrations (name) VALUES ('{migration_name}')")
+            print(f"OK{print_suffix}")
+
+
+def run_query(query):
+    return run_command("--query", query)
+
+
+def run_command(*args):
+    result = subprocess.check_output(get_client_command(*args))
+    return result.decode().strip()
+
+
+def get_client_command(*args):
+    return get_client_command_no_db("--database", CLICKHOUSE_AUTH["database"], *args)
+
+
+def get_client_command_no_db(*args):
     command = [
         "clickhouse",
         "client",
         "--host",
-        os.environ["VISION_CLICKHOUSE_HOST"],
+        CLICKHOUSE_AUTH["host"],
         "--port",
-        os.environ["VISION_CLICKHOUSE_PORT"],
+        str(CLICKHOUSE_AUTH["port"]),
         "--user",
-        os.environ["VISION_CLICKHOUSE_USERNAME"],
+        CLICKHOUSE_AUTH["username"],
         "--password",
-        os.environ["VISION_CLICKHOUSE_PASSWORD"],
-        "--database",
-        os.environ["VISION_CLICKHOUSE_DATABASE"],
+        CLICKHOUSE_AUTH["password"],
         "--multiline",
         "--multiquery",
-        *args,
     ]
-    print(" ".join(command))
-    return subprocess.check_output(command).decode()
+    if CLICKHOUSE_AUTH["http_scheme"] == "https":
+        command.append("--secure")
+    command += args
+    return command
 
 
 if __name__ == "__main__":

@@ -1,15 +1,14 @@
-####### vision plugin
+####### Vision plugin
 
 # log collection
 vision-vector:
     image: docker.io/timberio/vector:0.13.X-alpine
     volumes:
         - ../plugins/vision/apps/vector/vector.toml:/etc/vector/vector.toml:ro
-        {% if VISION_DOCKER_HOST %}- {{ VISION_DOCKER_HOST }}:/var/run/docker.sock:ro{% endif %}
+        {% if VISION_DOCKER_HOST_SOCK_PATH %}- {{ VISION_DOCKER_HOST_SOCK_PATH }}:/var/run/docker.sock:ro{% endif %}
     environment:
         - DOCKER_HOST=/var/run/docker.sock
     restart: unless-stopped
-
 {% if VISION_RUN_CLICKHOUSE %}
 # log storage
 vision-clickhouse:
@@ -17,20 +16,19 @@ vision-clickhouse:
     volumes:
         - ../../data/vision/clickhouse:/var/lib/clickhouse
         - ../plugins/vision/apps/clickhouse/users.d/vision.xml:/etc/clickhouse-server/users.d/vision.xml:ro
-    env_file: ../plugins/vision/apps/env
+        - ../plugins/vision/apps/clickhouse/auth.json:/scripts/clickhouse-auth.json:ro
     ulimits:
         nofile:
             soft: 262144
             hard: 262144
     restart: unless-stopped
 {% endif %}
-
 vision-superset:
     image: {{ VISION_SUPERSET_DOCKER_IMAGE }}
     volumes:
         - ../plugins/vision/apps/superset/superset_config.py:/app/superset_config.py:ro
-        - ../plugins/vision/apps/superset/bootstrap:/app/bootstrap
-    env_file: ../plugins/vision/apps/env
+        - ../plugins/vision/apps/clickhouse/auth.json:/scripts/clickhouse-auth.json:ro
+        - ../plugins/vision/apps/superset/bootstrap:/app/bootstrap:ro
     restart: unless-stopped
     depends_on:
         - vision-redis
