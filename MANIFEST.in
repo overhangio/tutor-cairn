@@ -1,2 +1,2 @@
-recursive-include tutorvision/patches *
-recursive-include tutorvision/templates *
+recursive-include tutorcairn/patches *
+recursive-include tutorcairn/templates *

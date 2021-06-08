@@ -1,0 +1,1 @@
+cairn migrate --path=/etc/clickhouse-server/migrations.d

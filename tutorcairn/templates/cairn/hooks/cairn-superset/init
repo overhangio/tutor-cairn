@@ -1,0 +1,8 @@
+# Apply migrations
+superset db upgrade
+
+# Create default roles and permissions
+superset init
+
+# Create/Update database with full access
+superset set-database-uri --database-name={{ CAIRN_CLICKHOUSE_DATABASE }} --uri='clickhouse+native://{{ CAIRN_CLICKHOUSE_USERNAME }}:{{ CAIRN_CLICKHOUSE_PASSWORD }}@{{ CAIRN_CLICKHOUSE_HOST }}:{{ CAIRN_CLICKHOUSE_PORT }}/{{ CAIRN_CLICKHOUSE_DATABASE }}'

@@ -1,8 +1,0 @@
-# Apply migrations
-superset db upgrade
-
-# Create default roles and permissions
-superset init
-
-# Create/Update database with full access
-superset set-database-uri --database-name={{ VISION_SUPERSET_DATABASE }} --uri='clickhouse+native://{{ VISION_CLICKHOUSE_USERNAME }}:{{ VISION_CLICKHOUSE_PASSWORD }}@{{ VISION_CLICKHOUSE_HOST }}:{{ VISION_CLICKHOUSE_PORT }}/{{ VISION_CLICKHOUSE_DATABASE }}'

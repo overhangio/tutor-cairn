@@ -13,7 +13,7 @@ def load_readme():
 def load_about():
     about = {}
     with io.open(
-        os.path.join(HERE, "tutorvision", "__about__.py"),
+        os.path.join(HERE, "tutorcairn", "__about__.py"),
         "rt",
         encoding="utf-8",
     ) as f:
@@ -25,22 +25,22 @@ ABOUT = load_about()
 
 
 setup(
-    name="tutor-vision",
+    name="tutor-cairn",
     version=ABOUT["__version__"],
-    url="https://github.com/overhangio/tutor-vision",
+    url="https://github.com/overhangio/tutor-cairn",
     project_urls={
-        "Code": "https://github.com/overhangio/tutor-vision",
-        "Issue tracker": "https://github.com/overhangio/tutor-vision/issues",
+        "Code": "https://github.com/overhangio/tutor-cairn",
+        "Issue tracker": "https://github.com/overhangio/tutor-cairn/issues",
     },
     license="AGPLv3",
     author="Overhang.IO",
-    description="vision plugin for Tutor",
+    description="cairn plugin for Tutor",
     long_description=load_readme(),
     packages=find_packages(exclude=["tests*"]),
     include_package_data=True,
     python_requires=">=3.5",
     install_requires=["tutor-openedx"],
-    entry_points={"tutor.plugin.v0": ["vision = tutorvision.plugin"]},
+    entry_points={"tutor.plugin.v0": ["cairn = tutorcairn.plugin"]},
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",

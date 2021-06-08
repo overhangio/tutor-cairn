@@ -1,0 +1,57 @@
+#### Cairn services
+{% if CAIRN_RUN_CLICKHOUSE %}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cairn-clickhouse
+spec:
+  type: NodePort
+  ports:
+    - port: 8123
+      protocol: TCP
+      name: "native"
+    - port: 9000
+      protocol: TCP
+      name: "http"
+  selector:
+    app.kubernetes.io/name: cairn-clickhouse
+{% endif %}
+{% if CAIRN_RUN_POSTGRESQL %}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cairn-postgresql
+spec:
+  type: NodePort
+  ports:
+    - port: 5432
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: cairn-postgresql
+{% endif %}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cairn-redis
+spec:
+  type: NodePort
+  ports:
+    - port: 6379
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: cairn-redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cairn-superset
+spec:
+  type: NodePort
+  ports:
+    - port: 8000
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: cairn-superset

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<yandex>
+    <users>
+        <{{ CAIRN_CLICKHOUSE_USERNAME }}>
+            <password>{{ CAIRN_CLICKHOUSE_PASSWORD }}</password>
+            <access_management>1</access_management>
+        </{{ CAIRN_CLICKHOUSE_USERNAME }}>
+    </users>
+</yandex>

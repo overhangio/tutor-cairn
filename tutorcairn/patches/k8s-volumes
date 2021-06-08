@@ -1,0 +1,32 @@
+{% if CAIRN_RUN_CLICKHOUSE %}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cairn-clickhouse
+  labels:
+    app.kubernetes.io/component: volume
+    app.kubernetes.io/name: cairn-clickhouse
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+{% endif %}
+{% if CAIRN_RUN_POSTGRESQL %}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cairn-postgresql
+  labels:
+    app.kubernetes.io/component: volume
+    app.kubernetes.io/name: cairn-postgresql
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+{% endif %}

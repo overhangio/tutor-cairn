@@ -1,0 +1,306 @@
+---
+####### Cairn plugin
+# log collection
+# https://vector.dev/docs/setup/installation/platforms/kubernetes/
+# https://github.com/timberio/vector/blob/master/distribution/kubernetes/vector-agent/resources.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cairn-vector
+  labels:
+    app.kubernetes.io/name: cairn-vector
+automountServiceAccountToken: true
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cairn-vector
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+    verbs:
+      - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cairn-vector
+  labels:
+    app.kubernetes.io/name: cairn-vector
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cairn-vector
+subjects:
+  - kind: ServiceAccount
+    name: cairn-vector
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: cairn-vector
+  labels:
+    app.kubernetes.io/name: cairn-vector
+spec:
+  selector:
+    matchLabels:
+      name: cairn-vector
+  template:
+    metadata:
+      labels:
+        name: cairn-vector
+    spec:
+      serviceAccountName: cairn-vector
+      # Run vector next to LMS
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - lms
+              topologyKey: kubernetes.io/hostname
+      containers:
+        - name: cairn-vector
+          image: docker.io/timberio/vector:0.13.X-alpine
+          env:
+            - name: VECTOR_SELF_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: VECTOR_SELF_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: VECTOR_SELF_POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: PROCFS_ROOT
+              value: /host/proc
+            - name: SYSFS_ROOT
+              value: /host/sys
+          volumeMounts:
+            - name: var-log
+              mountPath: /var/log/
+              readOnly: true
+            - mountPath: /etc/vector/vector.toml
+              name: config
+              subPath: vector.toml
+              readOnly: true
+      volumes:
+        - name: var-log
+          hostPath:
+            path: /var/log/
+        - name: config
+          configMap:
+            name: cairn-vector-config
+{% if CAIRN_RUN_CLICKHOUSE %}
+---
+# data storage
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cairn-clickhouse
+  labels:
+    app.kubernetes.io/name: cairn-clickhouse
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cairn-clickhouse
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: cairn-clickhouse
+    spec:
+      containers:
+        - name: cairn-clickhouse
+          image: {{ CAIRN_CLICKHOUSE_DOCKER_IMAGE }}
+          volumeMounts:
+            - mountPath: /var/lib/clickhouse
+              name: data
+            - mountPath: /etc/clickhouse-server/users.d/cairn.xml
+              name: user-config
+              subPath: cairn.xml
+            - mountPath: /scripts/clickhouse-auth.json
+              name: clickhouse-auth
+              subPath: auth.json
+          ports:
+            - containerPort: 8123
+            - containerPort: 9000
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: cairn-clickhouse
+        - name: user-config
+          configMap:
+            name: cairn-clickhouse-user-config
+        - name: clickhouse-auth
+          configMap:
+            name: cairn-clickhouse-auth
+{% endif %}
+---
+# cairn frontend
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cairn-superset
+  labels:
+    app.kubernetes.io/name: cairn-superset
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cairn-superset
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: cairn-superset
+    spec:
+      containers:
+        - name: cairn-superset
+          image: {{ CAIRN_SUPERSET_DOCKER_IMAGE }}
+          volumeMounts:
+            - mountPath: /app/superset_config.py
+              name: config
+              subPath: superset_config.py
+            - mountPath: /app/bootstrap/
+              name: bootstrap
+            - mountPath: /scripts/clickhouse-auth.json
+              name: clickhouse-auth
+              subPath: auth.json
+      volumes:
+        - name: config
+          configMap:
+            name: cairn-superset-config
+        - name: bootstrap
+          configMap:
+            name: cairn-superset-bootstrap
+        - name: clickhouse-auth
+          configMap:
+            name: cairn-clickhouse-auth
+---
+# frontend worker
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cairn-superset-worker
+  labels:
+    app.kubernetes.io/name: cairn-superset-worker
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cairn-superset-worker
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: cairn-superset-worker
+    spec:
+      containers:
+        - name: cairn-superset-worker
+          image: {{ CAIRN_SUPERSET_DOCKER_IMAGE }}
+          args: ["celery", "worker", "--app=superset.tasks.celery_app:app", "-Ofair", "-l", "INFO"]
+          volumeMounts:
+            - mountPath: /app/superset_config.py
+              name: config
+              subPath: superset_config.py
+      volumes:
+        - name: config
+          configMap:
+            name: cairn-superset-config
+---
+# frontend celery beat
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cairn-superset-worker-beat
+  labels:
+    app.kubernetes.io/name: cairn-superset-worker-beat
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cairn-superset-worker-beat
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: cairn-superset-worker-beat
+    spec:
+      containers:
+        - name: cairn-superset-worker-beat
+          image: {{ CAIRN_SUPERSET_DOCKER_IMAGE }}
+          args: ["celery", "beat", "--app=superset.tasks.celery_app:app", "--pidfile", "/tmp/celerybeat.pid", "-l", "INFO", "--schedule=/tmp/celerybeat-schedule"]
+          volumeMounts:
+            - mountPath: /app/superset_config.py
+              name: config
+              subPath: superset_config.py
+      volumes:
+        - name: config
+          configMap:
+            name: cairn-superset-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cairn-redis
+  labels:
+    app.kubernetes.io/name: cairn-redis
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cairn-redis
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: cairn-redis
+    spec:
+      containers:
+        - name: cairn-superset-worker
+          image: docker.io/redis:5.0-alpine
+          ports:
+            - containerPort: 6379
+{% if CAIRN_RUN_POSTGRESQL %}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cairn-postgresql
+  labels:
+    app.kubernetes.io/name: cairn-postgresql
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cairn-postgresql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: cairn-postgresql
+    spec:
+      containers:
+        - name: cairn-postgresql
+          image: docker.io/postgres:9.6-alpine
+          env:
+            - name: POSTGRES_USER
+              value: "{{ CAIRN_POSTGRESQL_USER }}"
+            - name: POSTGRES_PASSWORD
+              value: "{{ CAIRN_POSTGRESQL_PASSWORD }}"
+            - name: POSTGRES_DB
+              value: "{{ CAIRN_POSTGRESQL_DB }}"
+            # The following is required, otherwise postgresql refuses to
+            # write to the non-empty directory which contains "lost+found".
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: cairn-postgresql
+{% endif %}

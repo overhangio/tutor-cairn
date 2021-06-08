@@ -1,0 +1,21 @@
+- name: cairn-vector-config
+  files:
+    - plugins/cairn/apps/vector/vector.toml
+- name: cairn-clickhouse-user-config
+  files:
+    - plugins/cairn/apps/clickhouse/users.d/cairn.xml
+- name: cairn-clickhouse-migrations
+  files:{% for file in "cairn/apps/clickhouse/migrations.d"|walk_templates %}
+    - plugins/{{ file }}{% endfor %}
+- name: cairn-clickhouse-auth
+  files:
+    - plugins/cairn/apps/clickhouse/auth.json
+- name: cairn-superset-config
+  files:
+    - plugins/cairn/apps/superset/superset_config.py
+- name: cairn-superset-bootstrap
+  files:{% for file in "cairn/apps/superset/bootstrap"|walk_templates %}
+    - plugins/{{ file }}{% endfor %}
+- name: cairn-openedx-scripts
+  files:{% for file in "cairn/apps/openedx/scripts"|walk_templates %}
+    - plugins/{{ file }}{% endfor %}

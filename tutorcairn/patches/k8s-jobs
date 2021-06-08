@@ -1,0 +1,91 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cairn-clickhouse-job
+  labels:
+    app.kubernetes.io/component: job
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: cairn-clickhouse
+          image: {{ CAIRN_CLICKHOUSE_DOCKER_IMAGE }}
+          volumeMounts:
+            - mountPath: /scripts/clickhouse-auth.json
+              name: clickhouse-auth
+              subPath: auth.json
+            - mountPath: /etc/clickhouse-server/migrations.d
+              name: migrations
+      volumes:
+        - name: clickhouse-auth
+          configMap:
+            name: cairn-clickhouse-auth
+        - name: migrations
+          configMap:
+            name: cairn-clickhouse-migrations
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cairn-superset-job
+  labels:
+    app.kubernetes.io/component: job
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: cairn-superset
+          image: {{ CAIRN_SUPERSET_DOCKER_IMAGE }}
+          volumeMounts:
+            - mountPath: /app/superset_config.py
+              name: config
+              subPath: superset_config.py
+      volumes:
+        - name: config
+          configMap:
+            name: cairn-superset-config
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cairn-openedx-job
+  labels:
+    app.kubernetes.io/component: job
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: cairn-openedx
+          image: {{ DOCKER_IMAGE_OPENEDX }}
+          volumeMounts:
+            - mountPath: /openedx/edx-platform/lms/envs/tutor/
+              name: settings-lms
+            - mountPath: /openedx/edx-platform/cms/envs/tutor/
+              name: settings-cms
+            - mountPath: /openedx/config
+              name: config
+            - mountPath: /openedx/scripts
+              name: scripts
+            - mountPath: /openedx/clickhouse-auth.json
+              name: clickhouse-auth
+              subPath: auth.json
+      volumes:
+      - name: settings-lms
+        configMap:
+          name: openedx-settings-lms
+      - name: settings-cms
+        configMap:
+          name: openedx-settings-cms
+      - name: config
+        configMap:
+          name: openedx-config
+      - name: scripts
+        configMap:
+          name: cairn-openedx-scripts
+      - name: clickhouse-auth
+        configMap:
+          name: cairn-clickhouse-auth

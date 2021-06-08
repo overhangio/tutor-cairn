@@ -1,7 +1,7 @@
 variables:
-    TUTOR_PLUGIN: vision
-    TUTOR_IMAGES: vision-clickhouse vision-superset
-    TUTOR_PYPI_PRIVATE_PACKAGE: tutor-vision
+    TUTOR_PLUGIN: cairn
+    TUTOR_IMAGES: cairn-clickhouse cairn-superset
+    TUTOR_PYPI_PRIVATE_PACKAGE: tutor-cairn
     OPENEDX_RELEASE: koa
 
 include:
