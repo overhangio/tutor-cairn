@@ -109,12 +109,13 @@ def bootstrap_user(args):
         password = args.password
         while not password:
             password = getpass()
+        base_role_name = "Admin" if args.admin else "Gamma"
         security_manager.add_user(
             args.username,
             args.firstname,
             args.lastname,
             args.email,
-            security_manager.find_role("Gamma"),
+            security_manager.find_role(base_role_name),
             password=password,
         )
         user = security_manager.find_user(args.username)
@@ -205,7 +206,6 @@ def import_dashboard(data, user, database):
         # Make current user the new owner
         new_dataset.owners.append(user)
         db.session.add(new_dataset)
-        # db.session.commit()
 
     for dashboard in data["dashboards"]:
         # Load slices
@@ -229,7 +229,6 @@ def import_dashboard(data, user, database):
             new_slice.owners.append(user)
             new_slices.append(new_slice)
             db.session.add(new_slice)
-            # db.session.commit()
 
         # Add slices to dashboard
         dashboard.slices = new_slices
@@ -247,6 +246,24 @@ def import_dashboard(data, user, database):
                     chart["meta"]["chartId"]
                 ]
         dashboard.position_json = json.dumps(position)
+
+        # Update filter mapping
+        # import pdb; pdb.set_trace()
+        metadata = json.loads(dashboard.json_metadata)
+        new_filter_scopes = {}
+        for old_slice_id, filter_scope in metadata["filter_scopes"].items():
+            new_filter_scope = {}
+            for filter_name, properties in filter_scope.items():
+                properties["immune"] = [
+                    old_to_new_slice_id_map[old_immune_id]
+                    for old_immune_id in properties["immune"]
+                ]
+                new_filter_scope[filter_name] = properties
+            # Note that filter scope keys are str, not int
+            new_filter_scopes[str(old_to_new_slice_id_map[int(old_slice_id)])] = new_filter_scope
+        metadata["filter_scopes"] = new_filter_scopes
+        dashboard.json_metadata = json.dumps(metadata)
+
         # Load dashboard
         db.session.add(dashboard)
 
