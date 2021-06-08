@@ -85,14 +85,19 @@ spec:
             - name: SYSFS_ROOT
               value: /host/sys
           volumeMounts:
+            - name: data
+              mountPath: /var/lib/vector
             - name: var-log
               mountPath: /var/log/
               readOnly: true
             - mountPath: /etc/vector/vector.toml
               name: config
-              subPath: vector.toml
+              subPath: k8s.toml
               readOnly: true
       volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: cairn-vector
         - name: var-log
           hostPath:
             path: /var/log/

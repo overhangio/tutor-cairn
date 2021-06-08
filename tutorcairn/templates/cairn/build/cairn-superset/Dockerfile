@@ -1,7 +1,7 @@
 # Superset image with additional database drivers
 # https://hub.docker.com/r/apache/superset
 # https://superset.apache.org/docs/databases/installing-database-drivers
-FROM docker.io/apache/superset:a9d888ad402ebb35da45df446997c426d6abee9d
+FROM docker.io/apache/superset:0e07a5ca03cb2a6f560b77847c13413b9a8c7d97
 
 USER root
 # https://pypi.org/project/clickhouse-driver/

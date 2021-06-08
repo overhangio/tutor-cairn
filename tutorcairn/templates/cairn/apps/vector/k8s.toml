@@ -1,0 +1,12 @@
+{% include "cairn/apps/vector/partials/common-pre.toml" %}
+
+### Sources
+# Capture logs from kubernetes
+[sources.kubernetes_logs]
+type = "kubernetes_logs"
+[transforms.openedx_containers]
+type = "filter"
+inputs = ["kubernetes_logs"]
+condition = '.kubernetes.pod_namespace == "{{ K8S_NAMESPACE }}" && includes(["lms", "cms"], .kubernetes.container_name)'
+
+{% include "cairn/apps/vector/partials/common-post.toml" %}

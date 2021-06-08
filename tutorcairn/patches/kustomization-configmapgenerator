@@ -1,6 +1,6 @@
 - name: cairn-vector-config
   files:
-    - plugins/cairn/apps/vector/vector.toml
+    - plugins/cairn/apps/vector/k8s.toml
 - name: cairn-clickhouse-user-config
   files:
     - plugins/cairn/apps/clickhouse/users.d/cairn.xml

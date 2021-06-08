@@ -41,6 +41,11 @@ def main():
         ),
     )
     parser_user.add_argument(
+        "--admin",
+        action="store_true",
+        help=("Make the user an administrator."),
+    )
+    parser_user.add_argument(
         "-r",
         "--role",
         help=(

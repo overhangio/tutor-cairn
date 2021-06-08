@@ -1,0 +1,12 @@
+{% include "cairn/apps/vector/partials/common-pre.toml" %}
+
+### Sources
+# Capture logs from all docker containers
+[sources.docker_logs]
+type = "docker_logs"
+[transforms.openedx_containers]
+type = "filter"
+inputs = ["docker_logs"]
+condition = 'includes(["lms", "cms"], .label."com.docker.compose.service")'
+
+{% include "cairn/apps/vector/partials/common-post.toml" %}

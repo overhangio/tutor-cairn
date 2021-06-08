@@ -38,7 +38,7 @@ def import_course(course_key):
     course = get_course(course_key, depth=None)
     print("======================", course_id, course.display_name)
     values = [
-        sql_query(
+        sql_format(
             "('{}', '{}', '{}', '{}', '{}', '{}')",
             course_id,
             str(child.location),
@@ -54,12 +54,12 @@ def import_course(course_key):
             f"Inserting {len(values)} items in course_blocks for course '{course_id}'..."
         )
         make_query(
-            sql_query(
+            sql_format(
                 "ALTER TABLE course_blocks DELETE WHERE course_id = '{}';",
                 course_id,
             ),
         )
-        insert_query = sql_query(
+        insert_query = sql_format(
             "INSERT INTO course_blocks (course_id, block_key, block_id, position, display_name, full_name) VALUES "
         )
         insert_query += ", ".join(values)
@@ -74,7 +74,7 @@ def iter_course_blocks(item, prefix=""):
         yield from iter_course_blocks(child, prefix=prefix)
 
 
-def sql_query(template, *args, **kwargs):
+def sql_format(template, *args, **kwargs):
     args = [sql_escape_string(arg).decode() for arg in args]
     kwargs = {key: sql_escape_string(value).decode() for key, value in kwargs.items()}
     return template.format(*args, **kwargs)

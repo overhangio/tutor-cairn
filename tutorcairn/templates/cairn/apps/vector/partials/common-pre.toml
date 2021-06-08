@@ -1,0 +1,6 @@
+data_dir = "/var/lib/vector/"
+
+# Vector's API for introspection
+[api]
+enabled = true
+address = "127.0.0.1:8686"

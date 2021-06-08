@@ -4,7 +4,8 @@
 cairn-vector:
     image: docker.io/timberio/vector:0.13.X-alpine
     volumes:
-        - ../plugins/cairn/apps/vector/vector.toml:/etc/vector/vector.toml:ro
+        - ../../data/cairn/vector:/var/lib/vector
+        - ../plugins/cairn/apps/vector/local.toml:/etc/vector/vector.toml:ro
         {% if CAIRN_DOCKER_HOST_SOCK_PATH %}- {{ CAIRN_DOCKER_HOST_SOCK_PATH }}:/var/run/docker.sock:ro{% endif %}
     environment:
         - DOCKER_HOST=/var/run/docker.sock
@@ -52,7 +53,7 @@ cairn-superset-worker-beat:
         - cairn-redis
         - cairn-postgresql
 cairn-redis:
-    image: docker.io/redis:5.0-alpine
+    image: docker.io/redis:6.2.4-alpine
     restart: unless-stopped
 {% if CAIRN_RUN_POSTGRESQL %}
 cairn-postgresql:

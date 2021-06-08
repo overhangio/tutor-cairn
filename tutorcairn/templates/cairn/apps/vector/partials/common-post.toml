@@ -1,32 +1,9 @@
-# Vector's API for introspection
-[api]
-enabled = true
-address = "127.0.0.1:8686"
-
-### Sources
-
-# Capture logs from all containers
-[sources.docker_logs]
-type = "docker_logs"
-[sources.kubernetes_logs]
-type = "kubernetes_logs"
-
 ### Transforms
-
-# Select lms & cms containers
-[transforms.openedx_docker_containers]
-type = "filter"
-inputs = ["docker_logs"]
-condition = 'includes(["lms", "cms"], .label."com.docker.compose.service")'
-[transforms.openedx_kubernetes_containers]
-type = "filter"
-inputs = ["docker_logs", "kubernetes_logs"]
-condition = '.kubernetes.pod_namespace == "{{ K8S_NAMESPACE }}" && includes(["lms", "cms"], .kubernetes.container_name)'
 
 # Parse tracking logs: extract time
 [transforms.tracking]
 type = "remap"
-inputs = ["openedx_docker_containers", "openedx_kubernetes_containers"]
+inputs = ["openedx_containers"]
 # Time formats: https://docs.rs/chrono/0.4.19/chrono/format/strftime/index.html#specifiers
 source = '''
 parsed, err_regex = parse_regex(.message, r'^.* \[tracking\] [^{}]* (?P<tracking_message>\{.*\})$')
@@ -62,10 +39,9 @@ source = '''
 # Log all events to stdout, for debugging
 [sinks.out]
 type = "console"
-inputs = ["openedx_kubernetes_containers"]
-# inputs = ["tracking_debug"]
+inputs = ["tracking_debug"]
 encoding.codec = "json"
-# encoding.only_fields = ["time", "message.context.course_id", "message.context.user_id", "message.name"]
+encoding.only_fields = ["time", "message.context.course_id", "message.context.user_id", "message.name"]
 
 # # Send logs to clickhouse
 [sinks.clickhouse]
@@ -78,4 +54,4 @@ database = "{{ CAIRN_CLICKHOUSE_DATABASE }}"
 table = "_tracking"
 healthcheck = true
 
-{{ patch("cairn-vector-toml") }}
+{{ patch("cairn-vector-common-toml") }}
