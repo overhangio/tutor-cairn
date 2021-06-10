@@ -18,6 +18,7 @@ cairn-clickhouse:
         - ../../data/cairn/clickhouse:/var/lib/clickhouse
         - ../plugins/cairn/apps/clickhouse/users.d/cairn.xml:/etc/clickhouse-server/users.d/cairn.xml:ro
         - ../plugins/cairn/apps/clickhouse/auth.json:/scripts/clickhouse-auth.json:ro
+        - ../plugins/cairn/apps/clickhouse/migrations.d/:/etc/clickhouse-server/migrations.d/:ro
     ulimits:
         nofile:
             soft: 262144

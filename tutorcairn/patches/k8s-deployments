@@ -134,6 +134,8 @@ spec:
             - mountPath: /scripts/clickhouse-auth.json
               name: clickhouse-auth
               subPath: auth.json
+            - mountPath: /etc/clickhouse-server/migrations.d
+              name: migrations
           ports:
             - containerPort: 8123
             - containerPort: 9000
@@ -147,6 +149,9 @@ spec:
         - name: clickhouse-auth
           configMap:
             name: cairn-clickhouse-auth
+        - name: migrations
+          configMap:
+            name: cairn-clickhouse-migrations
 {% endif %}
 ---
 # cairn frontend
