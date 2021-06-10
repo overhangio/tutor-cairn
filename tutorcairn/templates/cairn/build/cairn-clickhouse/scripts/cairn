@@ -111,7 +111,7 @@ def command_migrate(args):
         else:
             if not args.dry_run:
                 run_command("--queries-file", path)
-                run_query("INSERT INTO _migrations (name) VALUES ('{migration_name}')")
+                run_query(f"INSERT INTO _migrations (name) VALUES ('{migration_name}')")
             print(f"OK{print_suffix}")
 
 
