@@ -78,8 +78,12 @@ To import the "Course overview" dashboard that comes with Cairn, run::
 
 Some event data will be missing from your dashboards: just start using your LMS and refresh your dashboard. The new events should appear immediately.
 
-.. image:: https://overhang.io/static/catalog/screenshots/cairn.png
-    :alt: Alpine cairn
+.. image:: https://overhang.io/static/catalog/img/cairn/courseoverview-01.png
+    :alt: Course overview dashboard part 1
+.. image:: https://overhang.io/static/catalog/img/cairn/courseoverview-02.png
+    :alt: Course overview dashboard part 2
+.. image:: https://overhang.io/static/catalog/img/cairn/courseoverview-03.png
+    :alt: Course overview dashboard part 3
 
 Data-based access control
 ~~~~~~~~~~~~~~~~~~~~~~~~~
