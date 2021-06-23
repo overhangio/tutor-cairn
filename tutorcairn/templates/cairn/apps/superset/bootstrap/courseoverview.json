@@ -5,8 +5,8 @@
                 "css": "",
                 "dashboard_title": "Course overview",
                 "description": null,
-                "json_metadata": "{\"timed_refresh_immune_slices\": [], \"filter_scopes\": {\"2\": {\"video_id\": {\"scope\": [\"ROOT_ID\"], \"immune\": [17, 111, 5, 6, 8, 110, 10, 9, 113, 112]}}, \"17\": {\"course_id\": {\"scope\": [\"ROOT_ID\"], \"immune\": []}, \"__time_range\": {\"scope\": [\"ROOT_ID\"], \"immune\": [111, 110, 10, 9, 113, 112]}}}, \"expanded_slices\": {}, \"refresh_frequency\": 0, \"default_filters\": \"{\\\"2\\\": {\\\"video_id\\\": \\\"7e9b434e6de3435ab99bd3fb25bde807\\\"}, \\\"17\\\": {\\\"course_id\\\": [\\\"course-v1:edX+DemoX+Demo_Course\\\"], \\\"__time_range\\\": \\\"Last month\\\"}}\", \"color_scheme\": null, \"show_native_filters\": true, \"native_filter_configuration\": [], \"remote_id\": 2}",
-                "position_json": "{\"CHART-7tiQ9gDD9Q\":{\"children\":[],\"id\":\"CHART-7tiQ9gDD9Q\",\"meta\":{\"chartId\":4,\"height\":47,\"sliceName\":\"Video X-Ray\",\"uuid\":\"34e9ed3f-c83a-46d2-8e24-e05170104376\",\"width\":12},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-FJE2P5KfpA\"],\"type\":\"CHART\"},\"CHART-JP2ofFRp0O\":{\"children\":[],\"id\":\"CHART-JP2ofFRp0O\",\"meta\":{\"chartId\":2,\"height\":23,\"sliceName\":\"Select video ID\",\"uuid\":\"270b8fd9-561b-4b9c-8e4e-9688b43ef283\",\"width\":4},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-xwP_iqbDk\"],\"type\":\"CHART\"},\"CHART-PGXKExBtbG\":{\"children\":[],\"id\":\"CHART-PGXKExBtbG\",\"meta\":{\"chartId\":9,\"height\":50,\"sliceName\":\"Enrolled learners level of education\",\"uuid\":\"7ecc94c7-576e-48ca-bbd8-0e2831117b35\",\"width\":4},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-0hFN_y-NgF\"],\"type\":\"CHART\"},\"CHART-PkrfaIrMNP\":{\"children\":[],\"id\":\"CHART-PkrfaIrMNP\",\"meta\":{\"chartId\":112,\"height\":51,\"sliceName\":\"Course grades\",\"uuid\":\"e979dfe0-a017-443f-9c40-453da4ff6839\",\"width\":6},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-1VpL9_y3C\"],\"type\":\"CHART\"},\"CHART-RIMipwKzGj\":{\"children\":[],\"id\":\"CHART-RIMipwKzGj\",\"meta\":{\"chartId\":110,\"height\":81,\"sliceName\":\"Course completion\",\"uuid\":\"c411f818-a0cf-4569-976b-33d16617603c\",\"width\":12},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-Ifn6tvGvdj\"],\"type\":\"CHART\"},\"CHART-RUE08HAwEd\":{\"children\":[],\"id\":\"CHART-RUE08HAwEd\",\"meta\":{\"chartId\":113,\"height\":51,\"sliceName\":\"Enrollment history\",\"uuid\":\"1fe1f8e6-11c1-4d1e-b287-8a175a269ed2\",\"width\":6},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-1VpL9_y3C\"],\"type\":\"CHART\"},\"CHART-_XdNUl5YJ9\":{\"children\":[],\"id\":\"CHART-_XdNUl5YJ9\",\"meta\":{\"chartId\":17,\"height\":35,\"sliceName\":\"Select course ID and time range\",\"uuid\":\"80ca2797-395e-45cb-a14f-c6a98cf0d9d1\",\"width\":4},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-yPuXNZUCnv\"],\"type\":\"CHART\"},\"CHART-ksac8VVbnJ\":{\"children\":[],\"id\":\"CHART-ksac8VVbnJ\",\"meta\":{\"chartId\":13,\"height\":23,\"sliceName\":\"Total watch time\",\"uuid\":\"9688f829-fa3d-4b0d-a715-cb2beedffe2d\",\"width\":2},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-xwP_iqbDk\"],\"type\":\"CHART\"},\"CHART-npBiWH7kMl\":{\"children\":[],\"id\":\"CHART-npBiWH7kMl\",\"meta\":{\"chartId\":111,\"height\":35,\"sliceName\":\"Enrolled students\",\"uuid\":\"33b8bf43-e777-4942-85fc-d042ddd71459\",\"width\":2},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-yPuXNZUCnv\"],\"type\":\"CHART\"},\"CHART-p4ta63zmN2\":{\"children\":[],\"id\":\"CHART-p4ta63zmN2\",\"meta\":{\"chartId\":6,\"height\":35,\"sliceName\":\"Watched a video\",\"uuid\":\"fdc5ce1f-412f-434f-8a7c-d4ef3d2ede7c\",\"width\":2},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-yPuXNZUCnv\"],\"type\":\"CHART\"},\"CHART-pjjDL63lIM\":{\"children\":[],\"id\":\"CHART-pjjDL63lIM\",\"meta\":{\"chartId\":10,\"height\":50,\"sliceName\":\"Enrolled learners gender\",\"uuid\":\"74763712-0193-4c3b-84ef-1a34b2aa17d8\",\"width\":4},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-0hFN_y-NgF\"],\"type\":\"CHART\"},\"CHART-t7KLpPYQxw\":{\"children\":[],\"id\":\"CHART-t7KLpPYQxw\",\"meta\":{\"chartId\":8,\"height\":35,\"sliceName\":\"Tried a problem\",\"uuid\":\"dfd0088c-74dd-4dfb-a221-4c1633d17072\",\"width\":2},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-yPuXNZUCnv\"],\"type\":\"CHART\"},\"CHART-v7UYbl-ap6\":{\"children\":[],\"id\":\"CHART-v7UYbl-ap6\",\"meta\":{\"chartId\":14,\"height\":23,\"sliceName\":\"Unique viewers\",\"uuid\":\"e2bc6e71-eefa-457b-b7d8-8bee1ae8bae9\",\"width\":2},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-xwP_iqbDk\"],\"type\":\"CHART\"},\"CHART-xXCRFE4mZa\":{\"children\":[],\"id\":\"CHART-xXCRFE4mZa\",\"meta\":{\"chartId\":5,\"height\":35,\"sliceName\":\"Active students\",\"uuid\":\"b46a1e93-2bf6-4330-b9b4-67ae57d45a4e\",\"width\":2},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-yPuXNZUCnv\"],\"type\":\"CHART\"},\"CHART-y-ZSuLjhv7\":{\"children\":[],\"id\":\"CHART-y-ZSuLjhv7\",\"meta\":{\"chartId\":16,\"height\":23,\"sliceName\":\"Average learner watch time\",\"uuid\":\"bfbf6b44-928c-4141-a9c8-ae99cc5a87c4\",\"width\":2},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-xwP_iqbDk\",\"COLUMN-gumZdo_-5R\"],\"type\":\"CHART\"},\"COLUMN-gumZdo_-5R\":{\"children\":[\"CHART-y-ZSuLjhv7\"],\"id\":\"COLUMN-gumZdo_-5R\",\"meta\":{\"background\":\"BACKGROUND_TRANSPARENT\",\"width\":2},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-xwP_iqbDk\"],\"type\":\"COLUMN\"},\"DASHBOARD_VERSION_KEY\":\"v2\",\"GRID_ID\":{\"children\":[\"ROW-yPuXNZUCnv\",\"ROW-Ifn6tvGvdj\",\"ROW-0hFN_y-NgF\",\"ROW-1VpL9_y3C\",\"ROW-xwP_iqbDk\",\"ROW-FJE2P5KfpA\"],\"id\":\"GRID_ID\",\"parents\":[\"ROOT_ID\"],\"type\":\"GRID\"},\"HEADER_ID\":{\"id\":\"HEADER_ID\",\"meta\":{\"text\":\"Course overview\"},\"type\":\"HEADER\"},\"ROOT_ID\":{\"children\":[\"GRID_ID\"],\"id\":\"ROOT_ID\",\"type\":\"ROOT\"},\"ROW-0hFN_y-NgF\":{\"children\":[\"CHART-pjjDL63lIM\",\"CHART-PGXKExBtbG\"],\"id\":\"ROW-0hFN_y-NgF\",\"meta\":{\"background\":\"BACKGROUND_TRANSPARENT\"},\"parents\":[\"ROOT_ID\",\"GRID_ID\"],\"type\":\"ROW\"},\"ROW-1VpL9_y3C\":{\"children\":[\"CHART-RUE08HAwEd\",\"CHART-PkrfaIrMNP\"],\"id\":\"ROW-1VpL9_y3C\",\"meta\":{\"background\":\"BACKGROUND_TRANSPARENT\"},\"parents\":[\"ROOT_ID\",\"GRID_ID\"],\"type\":\"ROW\"},\"ROW-FJE2P5KfpA\":{\"children\":[\"CHART-7tiQ9gDD9Q\"],\"id\":\"ROW-FJE2P5KfpA\",\"meta\":{\"background\":\"BACKGROUND_TRANSPARENT\"},\"parents\":[\"ROOT_ID\",\"GRID_ID\"],\"type\":\"ROW\"},\"ROW-Ifn6tvGvdj\":{\"children\":[\"CHART-RIMipwKzGj\"],\"id\":\"ROW-Ifn6tvGvdj\",\"meta\":{\"0\":\"ROOT_ID\",\"background\":\"BACKGROUND_TRANSPARENT\"},\"parents\":[\"ROOT_ID\",\"GRID_ID\"],\"type\":\"ROW\"},\"ROW-xwP_iqbDk\":{\"children\":[\"CHART-JP2ofFRp0O\",\"CHART-v7UYbl-ap6\",\"COLUMN-gumZdo_-5R\",\"CHART-ksac8VVbnJ\"],\"id\":\"ROW-xwP_iqbDk\",\"meta\":{\"background\":\"BACKGROUND_TRANSPARENT\"},\"parents\":[\"ROOT_ID\",\"GRID_ID\"],\"type\":\"ROW\"},\"ROW-yPuXNZUCnv\":{\"children\":[\"CHART-_XdNUl5YJ9\",\"CHART-npBiWH7kMl\",\"CHART-xXCRFE4mZa\",\"CHART-p4ta63zmN2\",\"CHART-t7KLpPYQxw\"],\"id\":\"ROW-yPuXNZUCnv\",\"meta\":{\"0\":\"ROOT_ID\",\"background\":\"BACKGROUND_TRANSPARENT\"},\"parents\":[\"ROOT_ID\",\"GRID_ID\"],\"type\":\"ROW\"}}",
+                "json_metadata": "{\"timed_refresh_immune_slices\": [], \"filter_scopes\": {\"2\": {\"video_id\": {\"scope\": [\"ROOT_ID\"], \"immune\": [17, 111, 5, 6, 8, 110, 10, 9, 113, 112, 114]}}, \"17\": {\"course_id\": {\"scope\": [\"ROOT_ID\"], \"immune\": []}, \"__time_range\": {\"scope\": [\"ROOT_ID\"], \"immune\": [111, 110, 10, 9, 113, 112]}}}, \"expanded_slices\": {}, \"refresh_frequency\": 0, \"default_filters\": \"{\\\"2\\\": {\\\"video_id\\\": \\\"7e9b434e6de3435ab99bd3fb25bde807\\\"}, \\\"17\\\": {\\\"course_id\\\": [\\\"course-v1:edX+DemoX+Demo_Course\\\"], \\\"__time_range\\\": \\\"Last month\\\"}}\", \"color_scheme\": null, \"show_native_filters\": true, \"native_filter_configuration\": [], \"remote_id\": 2}",
+                "position_json": "{\"CHART-7tiQ9gDD9Q\":{\"children\":[],\"id\":\"CHART-7tiQ9gDD9Q\",\"meta\":{\"chartId\":4,\"height\":47,\"sliceName\":\"Video X-Ray\",\"uuid\":\"34e9ed3f-c83a-46d2-8e24-e05170104376\",\"width\":12},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-FJE2P5KfpA\"],\"type\":\"CHART\"},\"CHART-JP2ofFRp0O\":{\"children\":[],\"id\":\"CHART-JP2ofFRp0O\",\"meta\":{\"chartId\":2,\"height\":23,\"sliceName\":\"Select video ID\",\"uuid\":\"270b8fd9-561b-4b9c-8e4e-9688b43ef283\",\"width\":4},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-xwP_iqbDk\"],\"type\":\"CHART\"},\"CHART-PGXKExBtbG\":{\"children\":[],\"id\":\"CHART-PGXKExBtbG\",\"meta\":{\"chartId\":9,\"height\":50,\"sliceName\":\"Enrolled learners level of education\",\"uuid\":\"7ecc94c7-576e-48ca-bbd8-0e2831117b35\",\"width\":4},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-0hFN_y-NgF\"],\"type\":\"CHART\"},\"CHART-PkrfaIrMNP\":{\"children\":[],\"id\":\"CHART-PkrfaIrMNP\",\"meta\":{\"chartId\":112,\"height\":51,\"sliceName\":\"Course grades\",\"uuid\":\"e979dfe0-a017-443f-9c40-453da4ff6839\",\"width\":6},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-1VpL9_y3C\"],\"type\":\"CHART\"},\"CHART-RIMipwKzGj\":{\"children\":[],\"id\":\"CHART-RIMipwKzGj\",\"meta\":{\"chartId\":110,\"height\":79,\"sliceName\":\"Course completion\",\"uuid\":\"c411f818-a0cf-4569-976b-33d16617603c\",\"width\":10},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-Ifn6tvGvdj\"],\"type\":\"CHART\"},\"CHART-RUE08HAwEd\":{\"children\":[],\"id\":\"CHART-RUE08HAwEd\",\"meta\":{\"chartId\":113,\"height\":51,\"sliceName\":\"Enrollment history\",\"uuid\":\"1fe1f8e6-11c1-4d1e-b287-8a175a269ed2\",\"width\":6},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-1VpL9_y3C\"],\"type\":\"CHART\"},\"CHART-_XdNUl5YJ9\":{\"children\":[],\"id\":\"CHART-_XdNUl5YJ9\",\"meta\":{\"chartId\":17,\"height\":35,\"sliceName\":\"Select course ID and time range\",\"uuid\":\"80ca2797-395e-45cb-a14f-c6a98cf0d9d1\",\"width\":4},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-yPuXNZUCnv\"],\"type\":\"CHART\"},\"CHART-ksac8VVbnJ\":{\"children\":[],\"id\":\"CHART-ksac8VVbnJ\",\"meta\":{\"chartId\":13,\"height\":23,\"sliceName\":\"Total watch time\",\"uuid\":\"9688f829-fa3d-4b0d-a715-cb2beedffe2d\",\"width\":2},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-xwP_iqbDk\"],\"type\":\"CHART\"},\"CHART-npBiWH7kMl\":{\"children\":[],\"id\":\"CHART-npBiWH7kMl\",\"meta\":{\"chartId\":111,\"height\":35,\"sliceName\":\"Enrolled students\",\"uuid\":\"33b8bf43-e777-4942-85fc-d042ddd71459\",\"width\":2},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-yPuXNZUCnv\"],\"type\":\"CHART\"},\"CHART-oTa9DVjYEB\":{\"children\":[],\"id\":\"CHART-oTa9DVjYEB\",\"meta\":{\"chartId\":114,\"height\":35,\"sliceName\":\"Average time on platform\",\"sliceNameOverride\":\"Average time in course\",\"uuid\":\"6fa4ad3e-af69-4b3f-964d-44fcb72e6dc7\",\"width\":2},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-yPuXNZUCnv\"],\"type\":\"CHART\"},\"CHART-p4ta63zmN2\":{\"children\":[],\"id\":\"CHART-p4ta63zmN2\",\"meta\":{\"chartId\":6,\"height\":35,\"sliceName\":\"Watched a video\",\"uuid\":\"fdc5ce1f-412f-434f-8a7c-d4ef3d2ede7c\",\"width\":2},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-1KC1JBGpc\"],\"type\":\"CHART\"},\"CHART-pjjDL63lIM\":{\"children\":[],\"id\":\"CHART-pjjDL63lIM\",\"meta\":{\"chartId\":10,\"height\":50,\"sliceName\":\"Enrolled learners gender\",\"uuid\":\"74763712-0193-4c3b-84ef-1a34b2aa17d8\",\"width\":4},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-0hFN_y-NgF\"],\"type\":\"CHART\"},\"CHART-t7KLpPYQxw\":{\"children\":[],\"id\":\"CHART-t7KLpPYQxw\",\"meta\":{\"chartId\":8,\"height\":35,\"sliceName\":\"Tried a problem\",\"uuid\":\"dfd0088c-74dd-4dfb-a221-4c1633d17072\",\"width\":2},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-1KC1JBGpc\"],\"type\":\"CHART\"},\"CHART-v7UYbl-ap6\":{\"children\":[],\"id\":\"CHART-v7UYbl-ap6\",\"meta\":{\"chartId\":14,\"height\":23,\"sliceName\":\"Unique viewers\",\"uuid\":\"e2bc6e71-eefa-457b-b7d8-8bee1ae8bae9\",\"width\":2},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-xwP_iqbDk\"],\"type\":\"CHART\"},\"CHART-xXCRFE4mZa\":{\"children\":[],\"id\":\"CHART-xXCRFE4mZa\",\"meta\":{\"chartId\":5,\"height\":35,\"sliceName\":\"Active students\",\"uuid\":\"b46a1e93-2bf6-4330-b9b4-67ae57d45a4e\",\"width\":2},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-yPuXNZUCnv\"],\"type\":\"CHART\"},\"CHART-y-ZSuLjhv7\":{\"children\":[],\"id\":\"CHART-y-ZSuLjhv7\",\"meta\":{\"chartId\":16,\"height\":23,\"sliceName\":\"Average learner watch time\",\"uuid\":\"bfbf6b44-928c-4141-a9c8-ae99cc5a87c4\",\"width\":2},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-xwP_iqbDk\",\"COLUMN-gumZdo_-5R\"],\"type\":\"CHART\"},\"COLUMN-gumZdo_-5R\":{\"children\":[\"CHART-y-ZSuLjhv7\"],\"id\":\"COLUMN-gumZdo_-5R\",\"meta\":{\"background\":\"BACKGROUND_TRANSPARENT\",\"width\":2},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-xwP_iqbDk\"],\"type\":\"COLUMN\"},\"DASHBOARD_VERSION_KEY\":\"v2\",\"GRID_ID\":{\"children\":[\"ROW-yPuXNZUCnv\",\"ROW-1KC1JBGpc\",\"ROW-Ifn6tvGvdj\",\"ROW-0hFN_y-NgF\",\"ROW-1VpL9_y3C\",\"ROW-xwP_iqbDk\",\"ROW-FJE2P5KfpA\"],\"id\":\"GRID_ID\",\"parents\":[\"ROOT_ID\"],\"type\":\"GRID\"},\"HEADER_ID\":{\"id\":\"HEADER_ID\",\"meta\":{\"text\":\"Course overview\"},\"type\":\"HEADER\"},\"ROOT_ID\":{\"children\":[\"GRID_ID\"],\"id\":\"ROOT_ID\",\"type\":\"ROOT\"},\"ROW-0hFN_y-NgF\":{\"children\":[\"CHART-pjjDL63lIM\",\"CHART-PGXKExBtbG\"],\"id\":\"ROW-0hFN_y-NgF\",\"meta\":{\"background\":\"BACKGROUND_TRANSPARENT\"},\"parents\":[\"ROOT_ID\",\"GRID_ID\"],\"type\":\"ROW\"},\"ROW-1KC1JBGpc\":{\"children\":[\"CHART-p4ta63zmN2\",\"CHART-t7KLpPYQxw\"],\"id\":\"ROW-1KC1JBGpc\",\"meta\":{\"background\":\"BACKGROUND_TRANSPARENT\"},\"parents\":[\"ROOT_ID\",\"GRID_ID\"],\"type\":\"ROW\"},\"ROW-1VpL9_y3C\":{\"children\":[\"CHART-RUE08HAwEd\",\"CHART-PkrfaIrMNP\"],\"id\":\"ROW-1VpL9_y3C\",\"meta\":{\"background\":\"BACKGROUND_TRANSPARENT\"},\"parents\":[\"ROOT_ID\",\"GRID_ID\"],\"type\":\"ROW\"},\"ROW-FJE2P5KfpA\":{\"children\":[\"CHART-7tiQ9gDD9Q\"],\"id\":\"ROW-FJE2P5KfpA\",\"meta\":{\"background\":\"BACKGROUND_TRANSPARENT\"},\"parents\":[\"ROOT_ID\",\"GRID_ID\"],\"type\":\"ROW\"},\"ROW-Ifn6tvGvdj\":{\"children\":[\"CHART-RIMipwKzGj\"],\"id\":\"ROW-Ifn6tvGvdj\",\"meta\":{\"0\":\"ROOT_ID\",\"background\":\"BACKGROUND_TRANSPARENT\"},\"parents\":[\"ROOT_ID\",\"GRID_ID\"],\"type\":\"ROW\"},\"ROW-xwP_iqbDk\":{\"children\":[\"CHART-JP2ofFRp0O\",\"CHART-v7UYbl-ap6\",\"COLUMN-gumZdo_-5R\",\"CHART-ksac8VVbnJ\"],\"id\":\"ROW-xwP_iqbDk\",\"meta\":{\"background\":\"BACKGROUND_TRANSPARENT\"},\"parents\":[\"ROOT_ID\",\"GRID_ID\"],\"type\":\"ROW\"},\"ROW-yPuXNZUCnv\":{\"children\":[\"CHART-_XdNUl5YJ9\",\"CHART-npBiWH7kMl\",\"CHART-xXCRFE4mZa\",\"CHART-oTa9DVjYEB\"],\"id\":\"ROW-yPuXNZUCnv\",\"meta\":{\"0\":\"ROOT_ID\",\"background\":\"BACKGROUND_TRANSPARENT\"},\"parents\":[\"ROOT_ID\",\"GRID_ID\"],\"type\":\"ROW\"}}",
                 "slices": [
                     {
                         "__Slice__": {
@@ -17,6 +17,17 @@
                             "params": "{\"adhoc_filters\": [], \"bar_stacked\": false, \"bottom_margin\": \"auto\", \"color_scheme\": \"supersetColors\", \"columns\": [\"course_id\"], \"datasource\": \"38__table\", \"extra_form_data\": {}, \"groupby\": [\"display_name\"], \"label_colors\": {}, \"metrics\": [{\"aggregate\": \"COUNT\", \"column\": {\"column_name\": \"user_id\", \"description\": null, \"expression\": \"\", \"filterable\": true, \"groupby\": true, \"id\": 321, \"is_dttm\": false, \"python_date_format\": null, \"type\": \"UINT64\", \"type_generic\": null, \"verbose_name\": null}, \"expressionType\": \"SIMPLE\", \"hasCustomLabel\": false, \"isNew\": false, \"label\": \"COUNT(user_id)\", \"optionName\": \"metric_g9cvvlpke9h_z8bnkxr8axa\", \"sqlExpression\": null}], \"order_desc\": false, \"row_limit\": 10000, \"show_bar_value\": false, \"show_legend\": false, \"time_range\": \"No filter\", \"time_range_endpoints\": [\"inclusive\", \"exclusive\"], \"viz_type\": \"dist_bar\", \"x_axis_label\": \"Course block\", \"x_ticks_layout\": \"auto\", \"y_axis_bounds\": [null, null], \"y_axis_format\": \"SMART_NUMBER\", \"y_axis_label\": \"Number of students\", \"remote_id\": 110, \"datasource_name\": \"Course block completions\", \"schema\": \"openedx\", \"database_name\": \"admin\"}",
                             "slice_name": "Course completion",
                             "viz_type": "dist_bar"
+                        }
+                    },
+                    {
+                        "__Slice__": {
+                            "cache_timeout": null,
+                            "datasource_name": "openedx.User activity",
+                            "datasource_type": "table",
+                            "id": 114,
+                            "params": "{\"adhoc_filters\": [], \"datasource\": \"49__table\", \"extra_form_data\": {}, \"granularity_sqla\": \"time\", \"header_font_size\": 0.4, \"metric\": \"mean time active (ms)\", \"subheader\": \"\", \"subheader_font_size\": 0.15, \"time_range\": \"No filter\", \"time_range_endpoints\": [\"inclusive\", \"exclusive\"], \"url_params\": {}, \"viz_type\": \"big_number_total\", \"y_axis_format\": \"DURATION\", \"remote_id\": 114, \"datasource_name\": \"User activity\", \"schema\": \"openedx\", \"database_name\": \"admin\"}",
+                            "slice_name": "Average time on platform",
+                            "viz_type": "big_number_total"
                         }
                     },
                     {
@@ -187,6 +198,512 @@
                         "__TableColumn__": {
                             "changed_by_fk": 1,
                             "changed_on": {
+                                "__datetime__": "2021-05-20T16:15:53"
+                            },
+                            "column_name": "time",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T16:15:53"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 47,
+                            "is_active": true,
+                            "is_dttm": true,
+                            "python_date_format": null,
+                            "table_id": 9,
+                            "type": "DATETIME",
+                            "uuid": "33179b70-8d58-4f4e-b4b8-be67177ad571",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T16:15:53"
+                            },
+                            "column_name": "course_id",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T16:15:53"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 48,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 9,
+                            "type": "STRING",
+                            "uuid": "c6e20ed6-d503-44db-8d2c-276759bd3b55",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T16:15:53"
+                            },
+                            "column_name": "name",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T16:15:53"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 49,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 9,
+                            "type": "STRING",
+                            "uuid": "c5b4ef75-3c49-44a2-b266-ce8be95d8db1",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T16:15:53"
+                            },
+                            "column_name": "user_id",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T16:15:53"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 50,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 9,
+                            "type": "INT64",
+                            "uuid": "e7eb1920-3a1f-4807-a8f6-9009e59ffa74",
+                            "verbose_name": null
+                        }
+                    }
+                ],
+                "database_id": 1,
+                "default_endpoint": null,
+                "description": null,
+                "extra": null,
+                "fetch_values_predicate": null,
+                "filter_select_enabled": false,
+                "main_dttm_col": null,
+                "metrics": [
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T16:18:54"
+                            },
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T16:18:54"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "COUNT(DISTINCT(user_id))",
+                            "extra": "{}",
+                            "id": 15,
+                            "metric_name": "Distinct user IDs",
+                            "metric_type": null,
+                            "table_id": 9,
+                            "uuid": "69932270-ec14-4c56-abf9-8d117ffcd056",
+                            "verbose_name": "",
+                            "warning_text": null
+                        }
+                    }
+                ],
+                "offset": 0,
+                "params": "{\"remote_id\": 9, \"database_name\": \"admin\", \"import_time\": 1621942851}",
+                "schema": "openedx",
+                "sql": "SELECT time,\r\n  course_id, name, user_id\r\nFROM openedx.events\r\nWHERE event_source = 'browser'",
+                "table_name": "User events",
+                "template_params": null
+            }
+        },
+        {
+            "__SqlaTable__": {
+                "cache_timeout": null,
+                "columns": [
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-06-01T16:45:11"
+                            },
+                            "column_name": "percent_grade",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-06-01T16:41:19"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 322,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 39,
+                            "type": "FLOAT64",
+                            "uuid": "8f6c237d-a8a1-466e-971a-cc6989b80e0c",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-06-01T16:45:11"
+                            },
+                            "column_name": "passed_timestamp",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-06-01T16:41:19"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 323,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 39,
+                            "type": "NULLABLE(DATETIME)",
+                            "uuid": "902c7bd8-e99f-456e-9c1c-040888513166",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-06-01T16:45:11"
+                            },
+                            "column_name": "user_id",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-06-01T16:41:19"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 324,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 39,
+                            "type": "UINT64",
+                            "uuid": "1eee4876-7354-4c46-b9bd-53281513ec9c",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-06-01T16:45:11"
+                            },
+                            "column_name": "course_id",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-06-01T16:41:19"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 325,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 39,
+                            "type": "STRING",
+                            "uuid": "2c0cdbdc-69f7-4ae1-8be3-1e2a91fff3e6",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-06-01T16:45:11"
+                            },
+                            "column_name": "<new column>",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-06-01T16:45:11"
+                            },
+                            "description": "Grade as a percentage",
+                            "expression": "percent_grade * 100",
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 326,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 39,
+                            "type": "NUMERIC",
+                            "uuid": "6bb0f3e8-18fc-4628-a709-2cbf9e3e2e52",
+                            "verbose_name": "Grade"
+                        }
+                    }
+                ],
+                "database_id": 1,
+                "default_endpoint": null,
+                "description": null,
+                "extra": null,
+                "fetch_values_predicate": null,
+                "filter_select_enabled": false,
+                "main_dttm_col": null,
+                "metrics": [
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-06-01T16:45:11"
+                            },
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-06-01T16:41:19"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "count(*)",
+                            "extra": "{\"warning_markdown\":null}",
+                            "id": 69,
+                            "metric_name": "count",
+                            "metric_type": null,
+                            "table_id": 39,
+                            "uuid": "e005a72e-352e-4268-9355-64b10be49f38",
+                            "verbose_name": null,
+                            "warning_text": null
+                        }
+                    }
+                ],
+                "offset": 0,
+                "params": "{\"remote_id\": 39, \"database_name\": \"admin\"}",
+                "schema": "openedx",
+                "sql": "-- Note: Unless you save your query, these tabs will NOT persist if you clear your cookies or change browsers.\n\nSELECT * from course_grades",
+                "table_name": "Course grades",
+                "template_params": null
+            }
+        },
+        {
+            "__SqlaTable__": {
+                "cache_timeout": null,
+                "columns": [
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-06-23T09:26:33"
+                            },
+                            "column_name": "user_id",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-06-23T09:23:48"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 370,
+                            "is_active": null,
+                            "is_dttm": null,
+                            "python_date_format": null,
+                            "table_id": 49,
+                            "type": "INT64",
+                            "uuid": "4093f6c8-52f3-4097-9b98-3aa35affae95",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-06-23T09:26:33"
+                            },
+                            "column_name": "course_id",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-06-23T09:23:48"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 371,
+                            "is_active": null,
+                            "is_dttm": null,
+                            "python_date_format": null,
+                            "table_id": 49,
+                            "type": "STRING",
+                            "uuid": "966f807b-d45b-418e-a52c-8d33f171b16a",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-06-23T09:26:33"
+                            },
+                            "column_name": "timestamp",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-06-23T09:23:48"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 372,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 49,
+                            "type": "UINT64",
+                            "uuid": "b3611f1e-a98b-4f22-a602-c0435538e685",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-06-23T09:28:29"
+                            },
+                            "column_name": "time",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-06-23T09:26:33"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 373,
+                            "is_active": null,
+                            "is_dttm": true,
+                            "python_date_format": null,
+                            "table_id": 49,
+                            "type": "DATETIME",
+                            "uuid": "3179e980-b1b8-45fc-bd32-884d2baba94e",
+                            "verbose_name": null
+                        }
+                    }
+                ],
+                "database_id": 1,
+                "default_endpoint": null,
+                "description": null,
+                "extra": null,
+                "fetch_values_predicate": null,
+                "filter_select_enabled": false,
+                "main_dttm_col": null,
+                "metrics": [
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-06-23T09:25:05"
+                            },
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-06-23T09:23:48"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "count(*)",
+                            "extra": "{\"warning_markdown\":\"\"}",
+                            "id": 79,
+                            "metric_name": "count",
+                            "metric_type": null,
+                            "table_id": 49,
+                            "uuid": "9ebe2168-a089-4c57-ad12-3d35a40369eb",
+                            "verbose_name": null,
+                            "warning_text": null
+                        }
+                    },
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-06-23T09:28:29"
+                            },
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-06-23T09:28:29"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "COUNT(DISTINCT(timestamp)) * 1000",
+                            "extra": "{\"warning_markdown\":\"\"}",
+                            "id": 81,
+                            "metric_name": "time active (ms)",
+                            "metric_type": null,
+                            "table_id": 49,
+                            "uuid": "abbf2cb3-29b2-43bc-b655-44753d7a2677",
+                            "verbose_name": "",
+                            "warning_text": null
+                        }
+                    },
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-06-23T09:31:01"
+                            },
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-06-23T09:31:01"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "COUNT(DISTINCT(timestamp)) * 1000 / COUNT(DISTINCT(user_id))",
+                            "extra": "{\"warning_markdown\":\"\"}",
+                            "id": 82,
+                            "metric_name": "mean time active (ms)",
+                            "metric_type": null,
+                            "table_id": 49,
+                            "uuid": "32ac7ace-1278-44ad-acbd-d99bc553ba6d",
+                            "verbose_name": "",
+                            "warning_text": null
+                        }
+                    }
+                ],
+                "offset": 0,
+                "params": "{\"remote_id\": 49, \"database_name\": \"admin\"}",
+                "schema": "openedx",
+                "sql": "SELECT user_id,\n  course_id,\n  time,\n  arrayJoin(range(floor(toUInt64(toUnixTimestamp(time) - 5)), ceil(toUInt64(toUnixTimestamp(time) + 5)))) AS timestamp\nFROM events\nWHERE event_source = 'browser'",
+                "table_name": "User activity",
+                "template_params": null
+            }
+        },
+        {
+            "__SqlaTable__": {
+                "cache_timeout": null,
+                "columns": [
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
                                 "__datetime__": "2021-06-01T16:07:09"
                             },
                             "column_name": "course_id",
@@ -297,6 +814,222 @@
                 "sql": "SELECT course_id,\n  display_name,\n  user_id\nFROM course_block_completion\nWHERE completion = 1\nORDER BY course_id, position\n",
                 "table_name": "Course block completions",
                 "template_params": null
+            }
+        },
+        {
+            "__SqlaTable__": {
+                "cache_timeout": null,
+                "columns": [
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T11:20:55"
+                            },
+                            "column_name": "bin",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T10:59:59"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 24,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 5,
+                            "type": "UINT64",
+                            "uuid": "c05a60c8-f85a-42e6-92a4-d7c7743fe517",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T11:33:27"
+                            },
+                            "column_name": "video_id",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T11:23:48"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 34,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 5,
+                            "type": "STRING",
+                            "uuid": "482c34a7-ab7b-431f-96e2-a85a4e11ca7c",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T11:35:16"
+                            },
+                            "column_name": "start_time",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T11:33:38"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 36,
+                            "is_active": null,
+                            "is_dttm": true,
+                            "python_date_format": null,
+                            "table_id": 5,
+                            "type": "DATETIME",
+                            "uuid": "25d3ef61-62d2-429c-9601-b2644e3b7b40",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T15:52:44"
+                            },
+                            "column_name": "user_id",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T14:43:16"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 37,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 5,
+                            "type": "INT64",
+                            "uuid": "883b1869-5061-416b-a87a-5d4f58e65935",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T15:52:44"
+                            },
+                            "column_name": "course_id",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T14:43:16"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 38,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 5,
+                            "type": "STRING",
+                            "uuid": "73186ac4-bef3-418d-a87e-d12d0797dc77",
+                            "verbose_name": null
+                        }
+                    }
+                ],
+                "database_id": 1,
+                "default_endpoint": null,
+                "description": null,
+                "extra": null,
+                "fetch_values_predicate": null,
+                "filter_select_enabled": false,
+                "main_dttm_col": null,
+                "metrics": [
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T11:33:27"
+                            },
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T11:25:39"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "count(*)",
+                            "extra": "{\"warning_markdown\":null}",
+                            "id": 9,
+                            "metric_name": "Total views",
+                            "metric_type": null,
+                            "table_id": 5,
+                            "uuid": "b72919ce-a9df-4b3d-b827-a1a6a1c8a7d2",
+                            "verbose_name": "",
+                            "warning_text": null
+                        }
+                    },
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T11:33:27"
+                            },
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T11:29:01"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "count(distinct(user_id))",
+                            "extra": "{\"warning_markdown\":null}",
+                            "id": 10,
+                            "metric_name": "Unique viewers",
+                            "metric_type": null,
+                            "table_id": 5,
+                            "uuid": "1a29c35b-1dbf-4145-9ef0-403b9b0562e5",
+                            "verbose_name": "",
+                            "warning_text": null
+                        }
+                    },
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-20T11:33:27"
+                            },
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-20T11:29:01"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "count(*) - count(distinct(user_id))",
+                            "extra": "{\"warning_markdown\":null}",
+                            "id": 11,
+                            "metric_name": "Replay views",
+                            "metric_type": null,
+                            "table_id": 5,
+                            "uuid": "2d9e87a5-1cc4-44ec-8b6a-4d8c48e6d2d0",
+                            "verbose_name": "",
+                            "warning_text": null
+                        }
+                    }
+                ],
+                "offset": 0,
+                "params": "{\"remote_id\": 5, \"database_name\": \"admin\", \"import_time\": 1621942851}",
+                "schema": "openedx",
+                "sql": "SELECT arrayJoin(range(toUInt64(floor(start_position)), toUInt64(ceil(end_position)))) AS bin,\r\n      start_time,\r\n      user_id,\r\n      video_id,\r\n      course_id\r\nFROM video_view_segments\r\nORDER BY bin",
+                "table_name": "Video views",
+                "template_params": ""
             }
         },
         {
@@ -514,515 +1247,6 @@
                 "schema": "openedx",
                 "sql": "",
                 "table_name": "video_events",
-                "template_params": null
-            }
-        },
-        {
-            "__SqlaTable__": {
-                "cache_timeout": null,
-                "columns": [
-                    {
-                        "__TableColumn__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-05-20T16:15:53"
-                            },
-                            "column_name": "time",
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-05-20T16:15:53"
-                            },
-                            "description": null,
-                            "expression": null,
-                            "filterable": true,
-                            "groupby": true,
-                            "id": 47,
-                            "is_active": true,
-                            "is_dttm": true,
-                            "python_date_format": null,
-                            "table_id": 9,
-                            "type": "DATETIME",
-                            "uuid": "33179b70-8d58-4f4e-b4b8-be67177ad571",
-                            "verbose_name": null
-                        }
-                    },
-                    {
-                        "__TableColumn__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-05-20T16:15:53"
-                            },
-                            "column_name": "course_id",
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-05-20T16:15:53"
-                            },
-                            "description": null,
-                            "expression": null,
-                            "filterable": true,
-                            "groupby": true,
-                            "id": 48,
-                            "is_active": true,
-                            "is_dttm": false,
-                            "python_date_format": null,
-                            "table_id": 9,
-                            "type": "STRING",
-                            "uuid": "c6e20ed6-d503-44db-8d2c-276759bd3b55",
-                            "verbose_name": null
-                        }
-                    },
-                    {
-                        "__TableColumn__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-05-20T16:15:53"
-                            },
-                            "column_name": "name",
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-05-20T16:15:53"
-                            },
-                            "description": null,
-                            "expression": null,
-                            "filterable": true,
-                            "groupby": true,
-                            "id": 49,
-                            "is_active": true,
-                            "is_dttm": false,
-                            "python_date_format": null,
-                            "table_id": 9,
-                            "type": "STRING",
-                            "uuid": "c5b4ef75-3c49-44a2-b266-ce8be95d8db1",
-                            "verbose_name": null
-                        }
-                    },
-                    {
-                        "__TableColumn__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-05-20T16:15:53"
-                            },
-                            "column_name": "user_id",
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-05-20T16:15:53"
-                            },
-                            "description": null,
-                            "expression": null,
-                            "filterable": true,
-                            "groupby": true,
-                            "id": 50,
-                            "is_active": true,
-                            "is_dttm": false,
-                            "python_date_format": null,
-                            "table_id": 9,
-                            "type": "INT64",
-                            "uuid": "e7eb1920-3a1f-4807-a8f6-9009e59ffa74",
-                            "verbose_name": null
-                        }
-                    }
-                ],
-                "database_id": 1,
-                "default_endpoint": null,
-                "description": null,
-                "extra": null,
-                "fetch_values_predicate": null,
-                "filter_select_enabled": false,
-                "main_dttm_col": null,
-                "metrics": [
-                    {
-                        "__SqlMetric__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-05-20T16:18:54"
-                            },
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-05-20T16:18:54"
-                            },
-                            "d3format": null,
-                            "description": null,
-                            "expression": "COUNT(DISTINCT(user_id))",
-                            "extra": "{}",
-                            "id": 15,
-                            "metric_name": "Distinct user IDs",
-                            "metric_type": null,
-                            "table_id": 9,
-                            "uuid": "69932270-ec14-4c56-abf9-8d117ffcd056",
-                            "verbose_name": "",
-                            "warning_text": null
-                        }
-                    }
-                ],
-                "offset": 0,
-                "params": "{\"remote_id\": 9, \"database_name\": \"admin\", \"import_time\": 1621942851}",
-                "schema": "openedx",
-                "sql": "SELECT time,\r\n  course_id, name, user_id\r\nFROM openedx.events\r\nWHERE event_source = 'browser'",
-                "table_name": "User events",
-                "template_params": null
-            }
-        },
-        {
-            "__SqlaTable__": {
-                "cache_timeout": null,
-                "columns": [
-                    {
-                        "__TableColumn__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-05-24T10:12:39"
-                            },
-                            "column_name": "course_id",
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-05-24T10:12:00"
-                            },
-                            "description": null,
-                            "expression": null,
-                            "filterable": true,
-                            "groupby": true,
-                            "id": 69,
-                            "is_active": null,
-                            "is_dttm": false,
-                            "python_date_format": null,
-                            "table_id": 12,
-                            "type": "STRING",
-                            "uuid": "c0f70f90-5f3d-4aca-b69f-56512daff155",
-                            "verbose_name": null
-                        }
-                    },
-                    {
-                        "__TableColumn__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-05-24T10:12:39"
-                            },
-                            "column_name": "video_id",
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-05-24T10:12:00"
-                            },
-                            "description": null,
-                            "expression": null,
-                            "filterable": true,
-                            "groupby": true,
-                            "id": 70,
-                            "is_active": null,
-                            "is_dttm": false,
-                            "python_date_format": null,
-                            "table_id": 12,
-                            "type": "STRING",
-                            "uuid": "83683155-54ab-4921-b16b-9e5d9abe541b",
-                            "verbose_name": null
-                        }
-                    },
-                    {
-                        "__TableColumn__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-05-24T10:12:39"
-                            },
-                            "column_name": "user_id",
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-05-24T10:12:00"
-                            },
-                            "description": null,
-                            "expression": null,
-                            "filterable": true,
-                            "groupby": true,
-                            "id": 71,
-                            "is_active": null,
-                            "is_dttm": false,
-                            "python_date_format": null,
-                            "table_id": 12,
-                            "type": "INT64",
-                            "uuid": "5ef88039-a246-4df0-a255-8a895005f740",
-                            "verbose_name": null
-                        }
-                    },
-                    {
-                        "__TableColumn__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-05-24T10:12:39"
-                            },
-                            "column_name": "start_time",
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-05-24T10:12:00"
-                            },
-                            "description": null,
-                            "expression": null,
-                            "filterable": true,
-                            "groupby": true,
-                            "id": 72,
-                            "is_active": null,
-                            "is_dttm": true,
-                            "python_date_format": null,
-                            "table_id": 12,
-                            "type": "DATETIME",
-                            "uuid": "a844854f-59d6-4811-8b8b-573b06a91006",
-                            "verbose_name": null
-                        }
-                    },
-                    {
-                        "__TableColumn__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-05-24T10:12:39"
-                            },
-                            "column_name": "start_position",
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-05-24T10:12:00"
-                            },
-                            "description": null,
-                            "expression": null,
-                            "filterable": true,
-                            "groupby": true,
-                            "id": 73,
-                            "is_active": null,
-                            "is_dttm": false,
-                            "python_date_format": null,
-                            "table_id": 12,
-                            "type": "FLOAT",
-                            "uuid": "124ccd6b-6dd6-46c5-b268-b7bf66fc7595",
-                            "verbose_name": null
-                        }
-                    },
-                    {
-                        "__TableColumn__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-05-24T10:12:39"
-                            },
-                            "column_name": "start_event",
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-05-24T10:12:00"
-                            },
-                            "description": null,
-                            "expression": null,
-                            "filterable": true,
-                            "groupby": true,
-                            "id": 74,
-                            "is_active": null,
-                            "is_dttm": false,
-                            "python_date_format": null,
-                            "table_id": 12,
-                            "type": "STRING",
-                            "uuid": "dec56e1c-cf31-4566-804d-4d8efd741037",
-                            "verbose_name": null
-                        }
-                    },
-                    {
-                        "__TableColumn__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-05-24T10:12:39"
-                            },
-                            "column_name": "end_time",
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-05-24T10:12:00"
-                            },
-                            "description": null,
-                            "expression": null,
-                            "filterable": true,
-                            "groupby": true,
-                            "id": 75,
-                            "is_active": null,
-                            "is_dttm": true,
-                            "python_date_format": null,
-                            "table_id": 12,
-                            "type": "DATETIME",
-                            "uuid": "65c2d28c-50dd-4862-951f-baa527c4fa67",
-                            "verbose_name": null
-                        }
-                    },
-                    {
-                        "__TableColumn__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-05-24T10:12:39"
-                            },
-                            "column_name": "end_position",
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-05-24T10:12:00"
-                            },
-                            "description": null,
-                            "expression": null,
-                            "filterable": true,
-                            "groupby": true,
-                            "id": 76,
-                            "is_active": null,
-                            "is_dttm": false,
-                            "python_date_format": null,
-                            "table_id": 12,
-                            "type": "FLOAT",
-                            "uuid": "9881998d-ecfb-4cac-a74e-b6b457059aa8",
-                            "verbose_name": null
-                        }
-                    },
-                    {
-                        "__TableColumn__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-05-24T10:12:39"
-                            },
-                            "column_name": "end_event",
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-05-24T10:12:00"
-                            },
-                            "description": null,
-                            "expression": null,
-                            "filterable": true,
-                            "groupby": true,
-                            "id": 77,
-                            "is_active": null,
-                            "is_dttm": false,
-                            "python_date_format": null,
-                            "table_id": 12,
-                            "type": "STRING",
-                            "uuid": "ae4b8ee8-7f9d-4682-8da3-a61d685d90fe",
-                            "verbose_name": null
-                        }
-                    },
-                    {
-                        "__TableColumn__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-05-24T10:12:39"
-                            },
-                            "column_name": "duration",
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-05-24T10:12:00"
-                            },
-                            "description": null,
-                            "expression": null,
-                            "filterable": true,
-                            "groupby": true,
-                            "id": 78,
-                            "is_active": null,
-                            "is_dttm": false,
-                            "python_date_format": null,
-                            "table_id": 12,
-                            "type": "FLOAT",
-                            "uuid": "bf49c6fe-26ad-476d-ab49-234a053ceb74",
-                            "verbose_name": null
-                        }
-                    }
-                ],
-                "database_id": 1,
-                "default_endpoint": null,
-                "description": null,
-                "extra": null,
-                "fetch_values_predicate": null,
-                "filter_select_enabled": false,
-                "main_dttm_col": "start_time",
-                "metrics": [
-                    {
-                        "__SqlMetric__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-05-24T10:12:39"
-                            },
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-05-24T10:12:00"
-                            },
-                            "d3format": null,
-                            "description": null,
-                            "expression": "COUNT(*)",
-                            "extra": "{\"warning_markdown\":null}",
-                            "id": 20,
-                            "metric_name": "count",
-                            "metric_type": null,
-                            "table_id": 12,
-                            "uuid": "79c9721e-ac8d-41a0-b36e-06ff33f16a6a",
-                            "verbose_name": "COUNT(*)",
-                            "warning_text": null
-                        }
-                    },
-                    {
-                        "__SqlMetric__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-05-24T15:43:59"
-                            },
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-05-24T10:19:14"
-                            },
-                            "d3format": null,
-                            "description": null,
-                            "expression": "SUM(end_position - start_position) * 1000",
-                            "extra": "{\"warning_markdown\":null}",
-                            "id": 22,
-                            "metric_name": "Watch time (ms)",
-                            "metric_type": null,
-                            "table_id": 12,
-                            "uuid": "70ceb0e6-7397-43bb-8565-e5b97ab9f536",
-                            "verbose_name": "",
-                            "warning_text": null
-                        }
-                    },
-                    {
-                        "__SqlMetric__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-05-24T16:04:29"
-                            },
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-05-24T15:43:59"
-                            },
-                            "d3format": null,
-                            "description": null,
-                            "expression": "MAX(end_position) - MIN(start_position)",
-                            "extra": "{\"warning_markdown\":null}",
-                            "id": 23,
-                            "metric_name": "Portion viewed per user",
-                            "metric_type": null,
-                            "table_id": 12,
-                            "uuid": "bb800160-8987-4f93-8715-7d50e7a060d9",
-                            "verbose_name": "",
-                            "warning_text": null
-                        }
-                    },
-                    {
-                        "__SqlMetric__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-05-24T16:05:52"
-                            },
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-05-24T16:04:29"
-                            },
-                            "d3format": null,
-                            "description": null,
-                            "expression": "SUM(end_position - start_position) * 1000 / COUNT(DISTINCT(user_id))",
-                            "extra": "{\"warning_markdown\":null}",
-                            "id": 24,
-                            "metric_name": "Average watch time (ms)",
-                            "metric_type": null,
-                            "table_id": 12,
-                            "uuid": "42b1b78b-275c-4181-88ff-99d6cf158c8e",
-                            "verbose_name": "",
-                            "warning_text": null
-                        }
-                    }
-                ],
-                "offset": 0,
-                "params": "{\"remote_id\": 12, \"database_name\": \"admin\", \"import_time\": 1621942851}",
-                "schema": "openedx",
-                "sql": "",
-                "table_name": "video_view_segments",
                 "template_params": null
             }
         },
@@ -1479,194 +1703,24 @@
                         "__TableColumn__": {
                             "changed_by_fk": 1,
                             "changed_on": {
-                                "__datetime__": "2021-06-01T16:45:11"
-                            },
-                            "column_name": "percent_grade",
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-06-01T16:41:19"
-                            },
-                            "description": null,
-                            "expression": null,
-                            "filterable": true,
-                            "groupby": true,
-                            "id": 322,
-                            "is_active": null,
-                            "is_dttm": false,
-                            "python_date_format": null,
-                            "table_id": 39,
-                            "type": "FLOAT64",
-                            "uuid": "8f6c237d-a8a1-466e-971a-cc6989b80e0c",
-                            "verbose_name": null
-                        }
-                    },
-                    {
-                        "__TableColumn__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-06-01T16:45:11"
-                            },
-                            "column_name": "passed_timestamp",
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-06-01T16:41:19"
-                            },
-                            "description": null,
-                            "expression": null,
-                            "filterable": true,
-                            "groupby": true,
-                            "id": 323,
-                            "is_active": null,
-                            "is_dttm": false,
-                            "python_date_format": null,
-                            "table_id": 39,
-                            "type": "NULLABLE(DATETIME)",
-                            "uuid": "902c7bd8-e99f-456e-9c1c-040888513166",
-                            "verbose_name": null
-                        }
-                    },
-                    {
-                        "__TableColumn__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-06-01T16:45:11"
-                            },
-                            "column_name": "user_id",
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-06-01T16:41:19"
-                            },
-                            "description": null,
-                            "expression": null,
-                            "filterable": true,
-                            "groupby": true,
-                            "id": 324,
-                            "is_active": null,
-                            "is_dttm": false,
-                            "python_date_format": null,
-                            "table_id": 39,
-                            "type": "UINT64",
-                            "uuid": "1eee4876-7354-4c46-b9bd-53281513ec9c",
-                            "verbose_name": null
-                        }
-                    },
-                    {
-                        "__TableColumn__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-06-01T16:45:11"
+                                "__datetime__": "2021-05-24T10:12:39"
                             },
                             "column_name": "course_id",
                             "created_by_fk": 1,
                             "created_on": {
-                                "__datetime__": "2021-06-01T16:41:19"
+                                "__datetime__": "2021-05-24T10:12:00"
                             },
                             "description": null,
                             "expression": null,
                             "filterable": true,
                             "groupby": true,
-                            "id": 325,
-                            "is_active": null,
-                            "is_dttm": false,
-                            "python_date_format": null,
-                            "table_id": 39,
-                            "type": "STRING",
-                            "uuid": "2c0cdbdc-69f7-4ae1-8be3-1e2a91fff3e6",
-                            "verbose_name": null
-                        }
-                    },
-                    {
-                        "__TableColumn__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-06-01T16:45:11"
-                            },
-                            "column_name": "<new column>",
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-06-01T16:45:11"
-                            },
-                            "description": "Grade as a percentage",
-                            "expression": "percent_grade * 100",
-                            "filterable": true,
-                            "groupby": true,
-                            "id": 326,
-                            "is_active": true,
-                            "is_dttm": false,
-                            "python_date_format": null,
-                            "table_id": 39,
-                            "type": "NUMERIC",
-                            "uuid": "6bb0f3e8-18fc-4628-a709-2cbf9e3e2e52",
-                            "verbose_name": "Grade"
-                        }
-                    }
-                ],
-                "database_id": 1,
-                "default_endpoint": null,
-                "description": null,
-                "extra": null,
-                "fetch_values_predicate": null,
-                "filter_select_enabled": false,
-                "main_dttm_col": null,
-                "metrics": [
-                    {
-                        "__SqlMetric__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-06-01T16:45:11"
-                            },
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-06-01T16:41:19"
-                            },
-                            "d3format": null,
-                            "description": null,
-                            "expression": "count(*)",
-                            "extra": "{\"warning_markdown\":null}",
                             "id": 69,
-                            "metric_name": "count",
-                            "metric_type": null,
-                            "table_id": 39,
-                            "uuid": "e005a72e-352e-4268-9355-64b10be49f38",
-                            "verbose_name": null,
-                            "warning_text": null
-                        }
-                    }
-                ],
-                "offset": 0,
-                "params": "{\"remote_id\": 39, \"database_name\": \"admin\"}",
-                "schema": "openedx",
-                "sql": "-- Note: Unless you save your query, these tabs will NOT persist if you clear your cookies or change browsers.\n\nSELECT * from course_grades",
-                "table_name": "Course grades",
-                "template_params": null
-            }
-        },
-        {
-            "__SqlaTable__": {
-                "cache_timeout": null,
-                "columns": [
-                    {
-                        "__TableColumn__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-05-20T11:20:55"
-                            },
-                            "column_name": "bin",
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-05-20T10:59:59"
-                            },
-                            "description": null,
-                            "expression": null,
-                            "filterable": true,
-                            "groupby": true,
-                            "id": 24,
                             "is_active": null,
                             "is_dttm": false,
                             "python_date_format": null,
-                            "table_id": 5,
-                            "type": "UINT64",
-                            "uuid": "c05a60c8-f85a-42e6-92a4-d7c7743fe517",
+                            "table_id": 12,
+                            "type": "STRING",
+                            "uuid": "c0f70f90-5f3d-4aca-b69f-56512daff155",
                             "verbose_name": null
                         }
                     },
@@ -1674,24 +1728,24 @@
                         "__TableColumn__": {
                             "changed_by_fk": 1,
                             "changed_on": {
-                                "__datetime__": "2021-05-20T11:33:27"
+                                "__datetime__": "2021-05-24T10:12:39"
                             },
                             "column_name": "video_id",
                             "created_by_fk": 1,
                             "created_on": {
-                                "__datetime__": "2021-05-20T11:23:48"
+                                "__datetime__": "2021-05-24T10:12:00"
                             },
                             "description": null,
                             "expression": null,
                             "filterable": true,
                             "groupby": true,
-                            "id": 34,
+                            "id": 70,
                             "is_active": null,
                             "is_dttm": false,
                             "python_date_format": null,
-                            "table_id": 5,
+                            "table_id": 12,
                             "type": "STRING",
-                            "uuid": "482c34a7-ab7b-431f-96e2-a85a4e11ca7c",
+                            "uuid": "83683155-54ab-4921-b16b-9e5d9abe541b",
                             "verbose_name": null
                         }
                     },
@@ -1699,49 +1753,24 @@
                         "__TableColumn__": {
                             "changed_by_fk": 1,
                             "changed_on": {
-                                "__datetime__": "2021-05-20T11:35:16"
-                            },
-                            "column_name": "start_time",
-                            "created_by_fk": 1,
-                            "created_on": {
-                                "__datetime__": "2021-05-20T11:33:38"
-                            },
-                            "description": null,
-                            "expression": null,
-                            "filterable": true,
-                            "groupby": true,
-                            "id": 36,
-                            "is_active": null,
-                            "is_dttm": true,
-                            "python_date_format": null,
-                            "table_id": 5,
-                            "type": "DATETIME",
-                            "uuid": "25d3ef61-62d2-429c-9601-b2644e3b7b40",
-                            "verbose_name": null
-                        }
-                    },
-                    {
-                        "__TableColumn__": {
-                            "changed_by_fk": 1,
-                            "changed_on": {
-                                "__datetime__": "2021-05-20T15:52:44"
+                                "__datetime__": "2021-05-24T10:12:39"
                             },
                             "column_name": "user_id",
                             "created_by_fk": 1,
                             "created_on": {
-                                "__datetime__": "2021-05-20T14:43:16"
+                                "__datetime__": "2021-05-24T10:12:00"
                             },
                             "description": null,
                             "expression": null,
                             "filterable": true,
                             "groupby": true,
-                            "id": 37,
+                            "id": 71,
                             "is_active": null,
                             "is_dttm": false,
                             "python_date_format": null,
-                            "table_id": 5,
+                            "table_id": 12,
                             "type": "INT64",
-                            "uuid": "883b1869-5061-416b-a87a-5d4f58e65935",
+                            "uuid": "5ef88039-a246-4df0-a255-8a895005f740",
                             "verbose_name": null
                         }
                     },
@@ -1749,24 +1778,174 @@
                         "__TableColumn__": {
                             "changed_by_fk": 1,
                             "changed_on": {
-                                "__datetime__": "2021-05-20T15:52:44"
+                                "__datetime__": "2021-05-24T10:12:39"
                             },
-                            "column_name": "course_id",
+                            "column_name": "start_time",
                             "created_by_fk": 1,
                             "created_on": {
-                                "__datetime__": "2021-05-20T14:43:16"
+                                "__datetime__": "2021-05-24T10:12:00"
                             },
                             "description": null,
                             "expression": null,
                             "filterable": true,
                             "groupby": true,
-                            "id": 38,
+                            "id": 72,
+                            "is_active": null,
+                            "is_dttm": true,
+                            "python_date_format": null,
+                            "table_id": 12,
+                            "type": "DATETIME",
+                            "uuid": "a844854f-59d6-4811-8b8b-573b06a91006",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:12:39"
+                            },
+                            "column_name": "start_position",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-24T10:12:00"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 73,
                             "is_active": null,
                             "is_dttm": false,
                             "python_date_format": null,
-                            "table_id": 5,
+                            "table_id": 12,
+                            "type": "FLOAT",
+                            "uuid": "124ccd6b-6dd6-46c5-b268-b7bf66fc7595",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:12:39"
+                            },
+                            "column_name": "start_event",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-24T10:12:00"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 74,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 12,
                             "type": "STRING",
-                            "uuid": "73186ac4-bef3-418d-a87e-d12d0797dc77",
+                            "uuid": "dec56e1c-cf31-4566-804d-4d8efd741037",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:12:39"
+                            },
+                            "column_name": "end_time",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-24T10:12:00"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 75,
+                            "is_active": null,
+                            "is_dttm": true,
+                            "python_date_format": null,
+                            "table_id": 12,
+                            "type": "DATETIME",
+                            "uuid": "65c2d28c-50dd-4862-951f-baa527c4fa67",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:12:39"
+                            },
+                            "column_name": "end_position",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-24T10:12:00"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 76,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 12,
+                            "type": "FLOAT",
+                            "uuid": "9881998d-ecfb-4cac-a74e-b6b457059aa8",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:12:39"
+                            },
+                            "column_name": "end_event",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-24T10:12:00"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 77,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 12,
+                            "type": "STRING",
+                            "uuid": "ae4b8ee8-7f9d-4682-8da3-a61d685d90fe",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T10:12:39"
+                            },
+                            "column_name": "duration",
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-24T10:12:00"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 78,
+                            "is_active": null,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 12,
+                            "type": "FLOAT",
+                            "uuid": "bf49c6fe-26ad-476d-ab49-234a053ceb74",
                             "verbose_name": null
                         }
                     }
@@ -1777,27 +1956,50 @@
                 "extra": null,
                 "fetch_values_predicate": null,
                 "filter_select_enabled": false,
-                "main_dttm_col": null,
+                "main_dttm_col": "start_time",
                 "metrics": [
                     {
                         "__SqlMetric__": {
                             "changed_by_fk": 1,
                             "changed_on": {
-                                "__datetime__": "2021-05-20T11:33:27"
+                                "__datetime__": "2021-05-24T10:12:39"
                             },
                             "created_by_fk": 1,
                             "created_on": {
-                                "__datetime__": "2021-05-20T11:25:39"
+                                "__datetime__": "2021-05-24T10:12:00"
                             },
                             "d3format": null,
                             "description": null,
-                            "expression": "count(*)",
+                            "expression": "COUNT(*)",
                             "extra": "{\"warning_markdown\":null}",
-                            "id": 9,
-                            "metric_name": "Total views",
+                            "id": 20,
+                            "metric_name": "count",
                             "metric_type": null,
-                            "table_id": 5,
-                            "uuid": "b72919ce-a9df-4b3d-b827-a1a6a1c8a7d2",
+                            "table_id": 12,
+                            "uuid": "79c9721e-ac8d-41a0-b36e-06ff33f16a6a",
+                            "verbose_name": "COUNT(*)",
+                            "warning_text": null
+                        }
+                    },
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 1,
+                            "changed_on": {
+                                "__datetime__": "2021-05-24T15:43:59"
+                            },
+                            "created_by_fk": 1,
+                            "created_on": {
+                                "__datetime__": "2021-05-24T10:19:14"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "SUM(end_position - start_position) * 1000",
+                            "extra": "{\"warning_markdown\":null}",
+                            "id": 22,
+                            "metric_name": "Watch time (ms)",
+                            "metric_type": null,
+                            "table_id": 12,
+                            "uuid": "70ceb0e6-7397-43bb-8565-e5b97ab9f536",
                             "verbose_name": "",
                             "warning_text": null
                         }
@@ -1806,21 +2008,21 @@
                         "__SqlMetric__": {
                             "changed_by_fk": 1,
                             "changed_on": {
-                                "__datetime__": "2021-05-20T11:33:27"
+                                "__datetime__": "2021-05-24T16:04:29"
                             },
                             "created_by_fk": 1,
                             "created_on": {
-                                "__datetime__": "2021-05-20T11:29:01"
+                                "__datetime__": "2021-05-24T15:43:59"
                             },
                             "d3format": null,
                             "description": null,
-                            "expression": "count(distinct(user_id))",
+                            "expression": "MAX(end_position) - MIN(start_position)",
                             "extra": "{\"warning_markdown\":null}",
-                            "id": 10,
-                            "metric_name": "Unique viewers",
+                            "id": 23,
+                            "metric_name": "Portion viewed per user",
                             "metric_type": null,
-                            "table_id": 5,
-                            "uuid": "1a29c35b-1dbf-4145-9ef0-403b9b0562e5",
+                            "table_id": 12,
+                            "uuid": "bb800160-8987-4f93-8715-7d50e7a060d9",
                             "verbose_name": "",
                             "warning_text": null
                         }
@@ -1829,32 +2031,32 @@
                         "__SqlMetric__": {
                             "changed_by_fk": 1,
                             "changed_on": {
-                                "__datetime__": "2021-05-20T11:33:27"
+                                "__datetime__": "2021-05-24T16:05:52"
                             },
                             "created_by_fk": 1,
                             "created_on": {
-                                "__datetime__": "2021-05-20T11:29:01"
+                                "__datetime__": "2021-05-24T16:04:29"
                             },
                             "d3format": null,
                             "description": null,
-                            "expression": "count(*) - count(distinct(user_id))",
+                            "expression": "SUM(end_position - start_position) * 1000 / COUNT(DISTINCT(user_id))",
                             "extra": "{\"warning_markdown\":null}",
-                            "id": 11,
-                            "metric_name": "Replay views",
+                            "id": 24,
+                            "metric_name": "Average watch time (ms)",
                             "metric_type": null,
-                            "table_id": 5,
-                            "uuid": "2d9e87a5-1cc4-44ec-8b6a-4d8c48e6d2d0",
+                            "table_id": 12,
+                            "uuid": "42b1b78b-275c-4181-88ff-99d6cf158c8e",
                             "verbose_name": "",
                             "warning_text": null
                         }
                     }
                 ],
                 "offset": 0,
-                "params": "{\"remote_id\": 5, \"database_name\": \"admin\", \"import_time\": 1621942851}",
+                "params": "{\"remote_id\": 12, \"database_name\": \"admin\", \"import_time\": 1621942851}",
                 "schema": "openedx",
-                "sql": "SELECT arrayJoin(range(toUInt64(floor(start_position)), toUInt64(ceil(end_position)))) AS bin,\r\n      start_time,\r\n      user_id,\r\n      video_id,\r\n      course_id\r\nFROM video_view_segments\r\nORDER BY bin",
-                "table_name": "Video views",
-                "template_params": ""
+                "sql": "",
+                "table_name": "video_view_segments",
+                "template_params": null
             }
         }
     ]
