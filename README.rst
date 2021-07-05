@@ -123,6 +123,19 @@ When running on Kubernetes instead of locally, most commands above can be re-wri
     tutor k8s exec cairn-clickhouse "cairn createuser --course-id='course-v1:edX+DemoX+Demo_Course' --org-id='edX' YOURUSERNAME"
     tutor k8s exec cairn-superset "cairn createuser YOURUSERNAME YOURUSERNAME@YOUREMAIL.COM"
 
+Collecting past events
+~~~~~~~~~~~~~~~~~~~~~~
+
+When Cairn is launched for the first time, past events that were triggered prior to the plugin installation will not be loaded in the data lake. If you are interested in loading past events, you should load them manually by running::
+
+    tutor local start -d cairn-clickhouse
+    tutor local run \
+      --volume="$(tutor config printroot)/data/lms/logs/:/var/log/openedx/:ro" \
+      --volume="$(tutor config printroot)/env/plugins/cairn/apps/vector/file.toml:/etc/vector/file.toml:ro" \
+      -e VECTOR_CONFIG=/etc/vector/file.toml cairn-vector
+
+The latter command will parse tracking log events from the ``$(tutor config printroot)/data/lms/logs/tracking.log`` file that contains all the tracking logs since the creation of your platform. The command will take a while to run if you have a large platform that has been running for a long time. It can be interrupted at any time and started again, as the log collector keeps track of its position within the tracking log file.
+
 Development
 -----------
 

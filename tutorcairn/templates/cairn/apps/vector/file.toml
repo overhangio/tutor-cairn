@@ -1,0 +1,14 @@
+{% include "cairn/apps/vector/partials/common-pre.toml" %}
+
+### Sources
+# Capture logs from tracking.log
+[sources.tracking_log_file]
+type = "file"
+include = ["/var/log/openedx/tracking.log"]
+[transforms.openedx_containers]
+type = "filter"
+# no-op filter: created for future-proof compatibility
+condition = "true"
+inputs = ["tracking_log_file"]
+
+{% include "cairn/apps/vector/partials/common-post.toml" %}
