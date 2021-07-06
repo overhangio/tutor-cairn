@@ -85,7 +85,7 @@ def make_query(query):
         f"{CLICKHOUSE_AUTH['http_scheme']}://{CLICKHOUSE_AUTH['username']}:{CLICKHOUSE_AUTH['password']}@"
         f"{CLICKHOUSE_AUTH['host']}:{CLICKHOUSE_AUTH['http_port']}/?database={CLICKHOUSE_AUTH['database']}"
     )
-    response = requests.post(clickhouse_uri, data=query)
+    response = requests.post(clickhouse_uri, data=query.encode("utf8"))
     if response.status_code != 200:
         print(response.content.decode())
         raise ValueError("An error occurred while attempting to post a query")
