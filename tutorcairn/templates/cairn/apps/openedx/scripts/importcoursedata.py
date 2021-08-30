@@ -44,7 +44,7 @@ def import_course(course_key):
             str(child.location),
             child.location.block_id,
             str(position),
-            child.display_name,
+            child.display_name or "N/A",
             full_name,
         )
         for position, (child, full_name) in enumerate(iter_course_blocks(course))
