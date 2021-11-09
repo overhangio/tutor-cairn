@@ -2,7 +2,7 @@
 
 # log collection
 cairn-vector:
-    image: docker.io/timberio/vector:0.13.X-alpine
+    image: docker.io/timberio/vector:0.17.3-alpine
     volumes:
         - ../../data/cairn/vector:/var/lib/vector
         - ../plugins/cairn/apps/vector/local.toml:/etc/vector/vector.toml:ro

@@ -66,7 +66,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
         - name: cairn-vector
-          image: docker.io/timberio/vector:0.13.X-alpine
+          image: docker.io/timberio/vector:0.17.3-alpine
           env:
             - name: VECTOR_SELF_NODE_NAME
               valueFrom:

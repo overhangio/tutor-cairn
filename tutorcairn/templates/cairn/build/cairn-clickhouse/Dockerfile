@@ -1,4 +1,4 @@
-FROM docker.io/yandex/clickhouse-server:21.2.7.11
+FROM docker.io/yandex/clickhouse-server:21.11.3.6
 
 RUN apt update && apt install -y python3
 COPY ./scripts /scripts
