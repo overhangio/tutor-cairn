@@ -117,7 +117,7 @@ Running on Kubernetes
 
 When running on Kubernetes instead of locally, most commands above can be re-written with `tutor k8s exec service "command"` instead of `tutor local run service command`. For instance::
 
-    # Privileved user creation
+    # Privileged user creation
     tutor k8s exec cairn-superset "superset fab create-admin --username YOURUSERNAME --email user@example.com"
     # Unprivileged user creation
     tutor k8s exec cairn-clickhouse "cairn createuser --course-id='course-v1:edX+DemoX+Demo_Course' --org-id='edX' YOURUSERNAME"
