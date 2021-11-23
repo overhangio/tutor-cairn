@@ -5,6 +5,7 @@ RENAME TABLE openedx_users TO _openedx_users;
 -- enable live views
 set allow_experimental_live_view = 1;
 
+DROP TABLE course_enrollments;
 CREATE LIVE VIEW course_enrollments WITH PERIODIC REFRESH 30 AS
 SELECT
     _openedx_course_enrollments.course_id AS course_id,
