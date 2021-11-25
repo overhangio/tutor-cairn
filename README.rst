@@ -136,6 +136,21 @@ When Cairn is launched for the first time, past events that were triggered prior
 
 The latter command will parse tracking log events from the ``$(tutor config printroot)/data/lms/logs/tracking.log`` file that contains all the tracking logs since the creation of your platform. The command will take a while to run if you have a large platform that has been running for a long time. It can be interrupted at any time and started again, as the log collector keeps track of its position within the tracking log file.
 
+Adding data to your data lake
+-----------------------------
+
+Tables created in Clickhouse are managed by a lightweight migration system. You can view existing migrations that ship by default with Cairn in the following folder: `` $VIRTUAL_ENV/lib/python3.8/site-packages/tutorcairn/templates/cairn/apps/clickhouse/migrations.d/``.
+
+You are free to create your own migrations that will automatically be created in Clickhouse every time the ``tutor local quickstart`` or ``tutor local init`` commands are run. To do so, as usual in Tutor, you should create a `Tutor plugin <https://docs.tutor.overhang.io/plugins.html>`__. This plugin should include the ``CAIRN_MIGRATIONS_FOLDER`` configuration. This setting should point to a template folder, inside the plugin, where migration templates are defined. For instance, assuming you created the "customcairn" plugin::
+
+    config = {
+        "defaults": {
+            "CAIRN_MIGRATIONS_FOLDER": "customcairn/apps/migrations.d"
+        }
+    }
+
+In this example, the following folder should be created in the plugin:: ``tutorcustomcairn/templates/customcairn/apps/migrations.d/``. Then, you should add your migration files there. Migrations will be applied in alphabetical order whenever you run ``tutor local quickstart`` or ``tutor local init``.
+
 Development
 -----------
 

@@ -5,8 +5,15 @@
   files:
     - plugins/cairn/apps/clickhouse/users.d/cairn.xml
 - name: cairn-clickhouse-migrations
-  files:{% for file in "cairn/apps/clickhouse/migrations.d"|walk_templates %}
-    - plugins/{{ file }}{% endfor %}
+  files:
+    {%- for file in "cairn/apps/clickhouse/migrations.d"|walk_templates %}
+    - plugins/{{ file }}
+    {%- endfor %}
+    {%- for folder in iter_values_named(suffix="CAIRN_MIGRATIONS_FOLDER") %}
+    {%- for file in folder|walk_templates %}
+    - plugins/{{ file }}
+    {%- endfor %}
+    {%- endfor %}
 - name: cairn-clickhouse-auth
   files:
     - plugins/cairn/apps/clickhouse/auth.json

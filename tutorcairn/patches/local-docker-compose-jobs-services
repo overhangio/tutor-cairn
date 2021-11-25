@@ -3,7 +3,12 @@ cairn-clickhouse-job:
     depends_on: {{ [("cairn-clickhouse", CAIRN_RUN_CLICKHOUSE)]|list_if }}
     volumes:
         - ../plugins/cairn/apps/clickhouse/auth.json:/scripts/clickhouse-auth.json:ro
-        - ../plugins/cairn/apps/clickhouse/migrations.d/:/etc/clickhouse-server/migrations.d/:ro
+        - ../plugins/cairn/apps/clickhouse/migrations.d:/etc/clickhouse-server/migrations.d:ro
+        {%- for folder in iter_values_named(suffix="CAIRN_MIGRATIONS_FOLDER") %}
+        {%- for file in folder|walk_templates %}
+        - ../plugins/{{ file }}:/etc/clickhouse-server/migrations.d/{{ file.split("/")[-1] }}:ro
+        {%- endfor %}
+        {%- endfor %}
 cairn-superset-job:
     image: {{ CAIRN_SUPERSET_DOCKER_IMAGE }}
     volumes:
@@ -17,9 +22,9 @@ cairn-openedx-job:
       SERVICE_VARIANT: lms
       SETTINGS: ${TUTOR_EDX_PLATFORM_SETTINGS:-tutor.production}
     volumes:
-      - ../apps/openedx/settings/lms/:/openedx/edx-platform/lms/envs/tutor/:ro
-      - ../apps/openedx/settings/cms/:/openedx/edx-platform/cms/envs/tutor/:ro
-      - ../apps/openedx/config/:/openedx/config/:ro
-      - ../plugins/cairn/apps/openedx/scripts/:/openedx/scripts/:ro
+      - ../apps/openedx/settings/lms:/openedx/edx-platform/lms/envs/tutor:ro
+      - ../apps/openedx/settings/cms:/openedx/edx-platform/cms/envs/tutor:ro
+      - ../apps/openedx/config:/openedx/config:ro
+      - ../plugins/cairn/apps/openedx/scripts:/openedx/scripts:ro
       - ../plugins/cairn/apps/clickhouse/auth.json:/openedx/clickhouse-auth.json:ro
     depends_on: {{ [("mysql", RUN_MYSQL), ("mongodb", RUN_MONGODB)]|list_if }}
