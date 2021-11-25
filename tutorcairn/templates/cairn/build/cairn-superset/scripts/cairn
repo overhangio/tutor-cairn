@@ -159,7 +159,18 @@ def bootstrap_database(username, database_name):
     port = CLICKHOUSE_AUTH["port"]
     database = CLICKHOUSE_AUTH["database"]
     uri = f"clickhouse+native://{username}:@{host}:{port}/{database}"
-    get_or_create_db(database_name, uri, always_create=True)
+    database = get_or_create_db(database_name, uri, always_create=True)
+
+    # TODO get rid of the following once we upgrade clickhouse-sqlalchemy and we
+    # can disable reflection from the DSN
+    # https://github.com/xzkostyan/clickhouse-sqlalchemy/issues/151
+    # https://github.com/xzkostyan/clickhouse-sqlalchemy/issues/140
+    # This is preventing us from creating datasets from physical tables.
+    database_extra = json.loads(database.extra)
+    database_extra["engine_params"] = {"connect_args": {"server_version": "18.12.14"}}
+    database.extra = json.dumps(database_extra)
+    db.session.add(database)
+    db.session.commit()
 
 
 def bootstrap_dashboards(args):
