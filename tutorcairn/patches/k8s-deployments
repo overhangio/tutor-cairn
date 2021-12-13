@@ -52,6 +52,11 @@ spec:
       labels:
         name: cairn-vector
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
       serviceAccountName: cairn-vector
       # Run vector next to LMS
       affinity:
@@ -66,7 +71,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
         - name: cairn-vector
-          image: docker.io/timberio/vector:0.17.3-alpine
+          image: docker.io/timberio/vector:0.18.1-alpine
           env:
             - name: VECTOR_SELF_NODE_NAME
               valueFrom:
@@ -94,6 +99,8 @@ spec:
               name: config
               subPath: k8s.toml
               readOnly: true
+          securityContext:
+            allowPrivilegeEscalation: false
       volumes:
         - name: data
           persistentVolumeClaim:
@@ -117,6 +124,11 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: cairn-clickhouse
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    fsGroup: 1000
+    fsGroupChangePolicy: "OnRootMismatch"
   template:
     metadata:
       labels:
@@ -139,6 +151,8 @@ spec:
           ports:
             - containerPort: 8123
             - containerPort: 9000
+          securityContext:
+            allowPrivilegeEscalation: false
       volumes:
         - name: data
           persistentVolumeClaim:
@@ -165,6 +179,9 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: cairn-superset
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
   template:
     metadata:
       labels:
@@ -182,6 +199,8 @@ spec:
             - mountPath: /scripts/clickhouse-auth.json
               name: clickhouse-auth
               subPath: auth.json
+          securityContext:
+            allowPrivilegeEscalation: false
       volumes:
         - name: config
           configMap:
@@ -204,6 +223,9 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: cairn-superset-worker
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
   template:
     metadata:
       labels:
@@ -217,6 +239,8 @@ spec:
             - mountPath: /app/superset_config.py
               name: config
               subPath: superset_config.py
+          securityContext:
+            allowPrivilegeEscalation: false
       volumes:
         - name: config
           configMap:
@@ -233,6 +257,9 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: cairn-superset-worker-beat
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
   template:
     metadata:
       labels:
@@ -246,6 +273,8 @@ spec:
             - mountPath: /app/superset_config.py
               name: config
               subPath: superset_config.py
+          securityContext:
+            allowPrivilegeEscalation: false
       volumes:
         - name: config
           configMap:
@@ -261,6 +290,9 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: cairn-redis
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
   template:
     metadata:
       labels:
@@ -268,9 +300,11 @@ spec:
     spec:
       containers:
         - name: cairn-superset-worker
-          image: docker.io/redis:5.0-alpine
+          image: docker.io/redis:6.2.4-alpine
           ports:
             - containerPort: 6379
+          securityContext:
+            allowPrivilegeEscalation: false
 {% if CAIRN_RUN_POSTGRESQL %}
 ---
 apiVersion: apps/v1
@@ -285,6 +319,11 @@ spec:
       app.kubernetes.io/name: cairn-postgresql
   strategy:
     type: Recreate
+  securityContext:
+    runAsUser: 70
+    runAsGroup: 70
+    fsGroup: 70
+    fsGroupChangePolicy: "OnRootMismatch"
   template:
     metadata:
       labels:
@@ -309,6 +348,8 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: data
+          securityContext:
+            allowPrivilegeEscalation: false
       volumes:
         - name: data
           persistentVolumeClaim:
