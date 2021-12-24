@@ -1,5 +1,6 @@
 cairn-clickhouse-job:
     image: {{ CAIRN_CLICKHOUSE_DOCKER_IMAGE }}
+    user: "1000:1000"
     depends_on: {{ [("cairn-clickhouse", CAIRN_RUN_CLICKHOUSE)]|list_if }}
     volumes:
         - ../plugins/cairn/apps/clickhouse/auth.json:/scripts/clickhouse-auth.json:ro

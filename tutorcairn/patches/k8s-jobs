@@ -9,6 +9,9 @@ spec:
   template:
     spec:
       restartPolicy: Never
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
       containers:
         - name: cairn-clickhouse
           image: {{ CAIRN_CLICKHOUSE_DOCKER_IMAGE }}
@@ -18,6 +21,8 @@ spec:
               subPath: auth.json
             - mountPath: /etc/clickhouse-server/migrations.d
               name: migrations
+          securityContext:
+            allowPrivilegeEscalation: false
       volumes:
         - name: clickhouse-auth
           configMap:
