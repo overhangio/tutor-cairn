@@ -85,6 +85,32 @@ Some event data will be missing from your dashboards: just start using your LMS 
 .. image:: https://overhang.io/static/catalog/img/cairn/courseoverview-03.png
     :alt: Course overview dashboard part 3
 
+Available metrics
+~~~~~~~~~~~~~~~~~
+
+Cairn allows you to collect and view just any metric from your Open edX platform, as long as the data is available from the tracking logs or the MySQL database. Out of the box, the default Cairn dashboard comes with visualizations for the following metrics:
+
+- Weekly course engagement:
+    - Number of enrolled learners
+    - Number of active learners
+    - Number of learners who watched a video
+    - Number of learners who tried a problem
+    - Average time spent in course
+- Course progress:
+    - Number of students who completed each unit
+    - Grade distribution histogram
+- Course demographics:
+    - Gender distribution
+    - Level of education distribution
+- Video engagement:
+    - Number of unique viewers
+    - Average watch time
+    - Total watch time
+    - Second-per-second statistics:
+        - Number of unique viewers
+        - Total number of views
+
+
 Data-based access control
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
