@@ -72,7 +72,7 @@ Create an admin user to access the frontend::
 
 You can then access the frontend with the user credentials you just created. Open http(s)://data.<YOUR_LMS_HOST> in your browser. When running locally, this will be http://data.local.overhang.io. The admin user will automatically be granted access to the "openedx" database in Superset and will be able to query all tables.
 
-To import the "Course overview" dashboard that comes with Cairn, run::
+At this point, your user should have access to Cairn but its account will not include any dashboard. To import the "Course overview" dashboard that comes with Cairn, run::
 
     tutor local run cairn-superset cairn bootstrap-dashboards YOURUSERNAME /app/bootstrap/courseoverview.json
 
