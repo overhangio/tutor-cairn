@@ -15,6 +15,9 @@ spec:
       containers:
         - name: cairn-clickhouse
           image: {{ CAIRN_CLICKHOUSE_DOCKER_IMAGE }}
+          env:
+            - name: CLICKHOUSE_DO_NOT_CHOWN
+              value: "1"
           volumeMounts:
             - mountPath: /scripts/clickhouse-auth.json
               name: clickhouse-auth

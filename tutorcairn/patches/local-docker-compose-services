@@ -20,6 +20,8 @@ cairn-clickhouse:
         - ../plugins/cairn/apps/clickhouse/auth.json:/scripts/clickhouse-auth.json:ro
         - ../plugins/cairn/apps/clickhouse/migrations.d/:/etc/clickhouse-server/migrations.d/:ro
     user: "1000:1000"
+    environment:
+        CLICKHOUSE_DO_NOT_CHOWN: "1"
     ulimits:
         nofile:
             soft: 262144

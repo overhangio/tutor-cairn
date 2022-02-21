@@ -10,6 +10,8 @@ cairn-clickhouse-job:
         - ../plugins/{{ file }}:/etc/clickhouse-server/migrations.d/{{ file.split("/")[-1] }}:ro
         {%- endfor %}
         {%- endfor %}
+    environment:
+        CLICKHOUSE_DO_NOT_CHOWN: "1"
 cairn-superset-job:
     image: {{ CAIRN_SUPERSET_DOCKER_IMAGE }}
     volumes:
