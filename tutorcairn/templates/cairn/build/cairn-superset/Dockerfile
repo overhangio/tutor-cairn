@@ -2,7 +2,8 @@
 # https://hub.docker.com/r/apache/superset
 # https://superset.apache.org/docs/databases/installing-database-drivers
 FROM docker.io/apache/superset:1.3.2
-USER superset
+
+USER root
 
 # https://pypi.org/project/clickhouse-driver/
 # https://pypi.org/project/clickhouse-sqlalchemy/
@@ -13,6 +14,10 @@ RUN pip install clickhouse-sqlalchemy==0.1.7
 COPY --chown=superset:superset ./scripts /scripts
 RUN chmod a+x /scripts/*
 ENV PATH /scripts:${PATH}
+
+USER superset
+
+HEALTHCHECK CMD curl -f "http://localhost:8000"
 
 ENTRYPOINT []
 CMD gunicorn \

@@ -16,6 +16,8 @@ cairn-superset-job:
     image: {{ CAIRN_SUPERSET_DOCKER_IMAGE }}
     volumes:
         - ../plugins/cairn/apps/superset/superset_config.py:/app/superset_config.py:ro
+    healthcheck:
+        disable: true
     depends_on:
         - cairn-postgresql
         - cairn-redis

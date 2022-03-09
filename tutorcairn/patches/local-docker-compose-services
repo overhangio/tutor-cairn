@@ -52,6 +52,8 @@ cairn-superset-worker:
         - ../plugins/cairn/apps/superset/superset_config.py:/app/superset_config.py:ro
     command: celery worker --app=superset.tasks.celery_app:app -Ofair -l INFO
     restart: unless-stopped
+    healthcheck:
+        disable: true
     depends_on:
         - cairn-redis
         - cairn-postgresql
@@ -61,6 +63,8 @@ cairn-superset-worker-beat:
         - ../plugins/cairn/apps/superset/superset_config.py:/app/superset_config.py:ro
     command: celery beat --app=superset.tasks.celery_app:app --pidfile /tmp/celerybeat.pid -l INFO --schedule=/tmp/celerybeat-schedule
     restart: unless-stopped
+    healthcheck:
+        disable: true
     depends_on:
         - cairn-redis
         - cairn-postgresql
