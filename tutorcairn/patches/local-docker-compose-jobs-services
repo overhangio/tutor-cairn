@@ -4,7 +4,8 @@ cairn-clickhouse-job:
     depends_on: {{ [("cairn-clickhouse", CAIRN_RUN_CLICKHOUSE)]|list_if }}
     volumes:
         - ../plugins/cairn/apps/clickhouse/auth.json:/scripts/clickhouse-auth.json:ro
-        - ../plugins/cairn/apps/clickhouse/migrations.d:/etc/clickhouse-server/migrations.d:ro
+        {# Note that the migrations folder is not read-only because we need to bind-mount custom migrations in it #}
+        - ../plugins/cairn/apps/clickhouse/migrations.d:/etc/clickhouse-server/migrations.d
         {%- for folder in iter_values_named(suffix="CAIRN_MIGRATIONS_FOLDER") %}
         {%- for file in folder|walk_templates %}
         - ../plugins/{{ file }}:/etc/clickhouse-server/migrations.d/{{ file.split("/")[-1] }}:ro
