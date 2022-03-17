@@ -28,8 +28,8 @@ config = {
         "CLICKHOUSE_USERNAME": "openedx",
         # Superset/Postgresql
         "RUN_POSTGRESQL": True,
-        "POSTGRESQL_USER": "superset",
-        "POSTGRESQL_DB": "superset",
+        "POSTGRESQL_DATABASE": "superset",
+        "POSTGRESQL_USERNAME": "superset",
         "SUPERSET_DOCKER_IMAGE": "{{ DOCKER_REGISTRY }}overhangio/cairn-superset:{{ CAIRN_VERSION }}",
     },
 }

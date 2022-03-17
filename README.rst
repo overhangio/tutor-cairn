@@ -227,8 +227,8 @@ Postgresql/Superset settings
 
 - ``CAIRN_RUN_POSTGRESQL`` (default: ``true``): set to ``false`` to run your own Postgresql cluster separately from Cairn. Postgresql is the database that stores all data related to Superset, which is the Cairn frontend.
 - ``CAIRN_SUPERSET_DOCKER_IMAGE`` (default: ``"{{ DOCKER_REGISTRY }}overhangio/cairn-superset:{{ CAIRN_VERSION }}"``): name of the Docker image that runs Postgresql.
-- ``CAIRN_POSTGRESQL_DB`` (default: ``"superset"``): name of the Postgresql database.
-- ``CAIRN_POSTGRESQL_USER`` (default: ``"superset"``): Postgresql username.
+- ``CAIRN_POSTGRESQL_DATABASE`` (default: ``"superset"``): name of the Postgresql database.
+- ``CAIRN_POSTGRESQL_USERNAME`` (default: ``"superset"``): Postgresql username.
 - ``CAIRN_POSTGRESQL_PASSWORD`` (default: ``"{{ 20|random_string }}"``): Postgresql password.
 - ``CAIRN_SUPERSET_SECRET_KEY`` (default: ``"{{ 20|random_string }}"``): randomly-generated secret key for the Superset frontend.
 

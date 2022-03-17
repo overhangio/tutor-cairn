@@ -5,7 +5,7 @@ from celery.schedules import crontab
 
 # https://superset.apache.org/docs/installation/configuring-superset
 SECRET_KEY = "{{ CAIRN_SUPERSET_SECRET_KEY }}"
-SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://{{ CAIRN_POSTGRESQL_USER }}:{{ CAIRN_POSTGRESQL_PASSWORD }}@cairn-postgresql/{{ CAIRN_POSTGRESQL_DB }}"
+SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://{{ CAIRN_POSTGRESQL_USERNAME }}:{{ CAIRN_POSTGRESQL_PASSWORD }}@cairn-postgresql/{{ CAIRN_POSTGRESQL_DATABASE }}"
 
 DATA_CACHE_CONFIG = {
     "CACHE_TYPE": "redis",

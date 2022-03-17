@@ -75,9 +75,9 @@ cairn-redis:
 cairn-postgresql:
     image: docker.io/postgres:9.6-alpine
     environment:
-        POSTGRES_USER: "{{ CAIRN_POSTGRESQL_USER }}"
+        POSTGRES_USER: "{{ CAIRN_POSTGRESQL_USERNAME }}"
         POSTGRES_PASSWORD: "{{ CAIRN_POSTGRESQL_PASSWORD }}"
-        POSTGRES_DB: "{{ CAIRN_POSTGRESQL_DB }}"
+        POSTGRES_DB: "{{ CAIRN_POSTGRESQL_DATABASE }}"
     volumes:
         - ../../data/cairn/postgresql:/var/lib/postgresql/data
     restart: unless-stopped
