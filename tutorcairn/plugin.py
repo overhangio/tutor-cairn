@@ -31,6 +31,7 @@ config = {
         "POSTGRESQL_DATABASE": "superset",
         "POSTGRESQL_USERNAME": "superset",
         "SUPERSET_DOCKER_IMAGE": "{{ DOCKER_REGISTRY }}overhangio/cairn-superset:{{ CAIRN_VERSION }}",
+        "SUPERSET_LANGUAGE_CODE": "{{ LANGUAGE_CODE[:2] }}",
     },
 }
 

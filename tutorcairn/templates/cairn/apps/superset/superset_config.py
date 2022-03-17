@@ -15,6 +15,32 @@ DATA_CACHE_CONFIG = {
 }
 CACHE_CONFIG = DATA_CACHE_CONFIG
 
+# Languages
+# https://github.com/apache/superset/blob/dc575080d7e43d40b1734bb8f44fdc291cb95b11/superset/config.py#L324
+available_languages = {
+    "en": {"flag": "us", "name": "English"},
+    "es": {"flag": "es", "name": "Spanish"},
+    "it": {"flag": "it", "name": "Italian"},
+    "fr": {"flag": "fr", "name": "French"},
+    "zh": {"flag": "cn", "name": "Chinese"},
+    "ja": {"flag": "jp", "name": "Japanese"},
+    "de": {"flag": "de", "name": "German"},
+    "pt": {"flag": "pt", "name": "Portuguese"},
+    "pt_BR": {"flag": "br", "name": "Brazilian Portuguese"},
+    "ru": {"flag": "ru", "name": "Russian"},
+    "ko": {"flag": "kr", "name": "Korean"},
+    "sl": {"flag": "si", "name": "Slovenian"},
+}
+{#- https://github.com/apache/superset/blob/master/docs/docs/contributing/translations.mdx#enabling-language-selection #}
+enabled_language_codes = ["en"]
+LANGUAGES = {}
+if "{{ CAIRN_SUPERSET_LANGUAGE_CODE }}" in available_languages:
+    enabled_language_codes.append("{{ CAIRN_SUPERSET_LANGUAGE_CODE }}")
+    # Set the platform default language/locale
+    BABEL_DEFAULT_LOCALE = "{{ CAIRN_SUPERSET_LANGUAGE_CODE }}"
+for code in enabled_language_codes:
+    LANGUAGES[code] = available_languages[code]
+
 # Borrowed from superset/docker/pythonpath_dev/superset_config.py
 REDIS_HOST = "redis"
 REDIS_PORT = "6379"

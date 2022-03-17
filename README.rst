@@ -106,9 +106,7 @@ Cairn allows you to collect and view just any metric from your Open edX platform
     - Number of unique viewers
     - Average watch time
     - Total watch time
-    - Second-per-second statistics:
-        - Number of unique viewers
-        - Total number of views
+    - Second-per-second statistics: Number of unique viewers, Total number of views
 
 
 Data-based access control
@@ -226,6 +224,7 @@ Postgresql/Superset settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - ``CAIRN_RUN_POSTGRESQL`` (default: ``true``): set to ``false`` to run your own Postgresql cluster separately from Cairn. Postgresql is the database that stores all data related to Superset, which is the Cairn frontend.
+- ``CAIRN_SUPERSET_LANGUAGE_CODE`` (default: ``"{{ LANGUAGE_CODE[:2] }}"``): 2-letter code of the default language for the Superset frontend. View the list of all supported languages `here <https://github.com/apache/superset/blob/dc575080d7e43d40b1734bb8f44fdc291cb95b11/superset/config.py#L324>`__. When different than "en", users will have the opportunity to switch from English to this language via a flag icon in the top-right corner.
 - ``CAIRN_SUPERSET_DOCKER_IMAGE`` (default: ``"{{ DOCKER_REGISTRY }}overhangio/cairn-superset:{{ CAIRN_VERSION }}"``): name of the Docker image that runs Postgresql.
 - ``CAIRN_POSTGRESQL_DATABASE`` (default: ``"superset"``): name of the Postgresql database.
 - ``CAIRN_POSTGRESQL_USERNAME`` (default: ``"superset"``): Postgresql username.
