@@ -192,8 +192,46 @@ To launch a Python shell in Superset, run::
 
     tutor local run cairn-superset superset shell
 
-.. image:: https://overhang.io/static/catalog/img/cairn.png
-    :alt: Alpine cairn
+Configuration
+-------------
+
+Cairn is configured by several Tutor settings. Each one of these settings may be modified individually by running::
+
+    tutor config save --set SETTING_NAME=settingvalue
+
+Then apply changes with::
+
+    tutor local quickstart
+
+General settings
+~~~~~~~~~~~~~~~~
+
+- ``CAIRN_HOST`` (default: ``"data.{{ LMS_HOST }}"``): hostname at which the Cairn frontend (i.e: Superset) will be accessible. By default, this is the "data" subdomain of the LMS. Thus, if your students access the LMS at https://learn.mydomain.com then Cairn will be accessible at https://data.learn.mydomain.com.
+- ``CAIRN_DOCKER_HOST_SOCK_PATH`` (default: ``"/var/run/docker.sock"``): path to the Docker host socket on the host. This is required to collect logs from Docker when running locally, but it is not used when running on Kubernetes.
+
+Clickhouse settings
+~~~~~~~~~~~~~~~~~~~
+
+- ``CAIRN_RUN_CLICKHOUSE`` (default: ``true``): set to ``false`` to run your own Clickhouse cluster separately from Cairn. In that case, you should also configure the Clickhouse credentials below.
+- ``CAIRN_CLICKHOUSE_DOCKER_IMAGE`` (default: ``"{{ DOCKER_REGISTRY }}overhangio/cairn-clickhouse:{{ CAIRN_VERSION }}"``): name of the Docker image that runs Clickhouse. Override this setting to build your own image of Clickhouse.
+- ``CAIRN_CLICKHOUSE_HOST`` (default: ``"cairn-clickhouse"``): hostname where Clickhouse will be accessible from Superset. By default, this is the internal docker-compose/Kubernetes service name.
+- ``CAIRN_CLICKHOUSE_HTTP_PORT`` (default: ``8123``): port at which Clickhouse exposes its HTTP API, which is necessary to bulk import unit names.
+- ``CAIRN_CLICKHOUSE_HTTP_SCHEME`` (default: ``"http"``): HTTP scheme to access the Clickhouse HTTP API. If you self-host a Clickhouse cluster (``RUN_CLICKHOUSE=false``) then it is strongly recommended to set this to "https".
+- ``CAIRN_CLICKHOUSE_PORT`` (default: ``9000``): native Clickhouse API port.
+- ``CAIRN_CLICKHOUSE_DATABASE`` (default: ``"openedx"``): name of the Clickhouse database which will store all analytics from your Open edX platform.
+- ``CAIRN_CLICKHOUSE_USERNAME`` (default: ``"openedx"``): username to access the ``CAIRN_CLICKHOUSE_DATABASE``.
+- ``CAIRN_CLICKHOUSE_PASSWORD`` (default: ``"{{ 20|random_string }}"``): randomly-generated password for ``CAIRN_CLICKHOUSE_USERNAME``.
+
+Postgresql/Superset settings
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- ``CAIRN_RUN_POSTGRESQL`` (default: ``true``): set to ``false`` to run your own Postgresql cluster separately from Cairn. Postgresql is the database that stores all data related to Superset, which is the Cairn frontend.
+- ``CAIRN_SUPERSET_DOCKER_IMAGE`` (default: ``"{{ DOCKER_REGISTRY }}overhangio/cairn-superset:{{ CAIRN_VERSION }}"``): name of the Docker image that runs Postgresql.
+- ``CAIRN_POSTGRESQL_DB`` (default: ``"superset"``): name of the Postgresql database.
+- ``CAIRN_POSTGRESQL_USER`` (default: ``"superset"``): Postgresql username.
+- ``CAIRN_POSTGRESQL_PASSWORD`` (default: ``"{{ 20|random_string }}"``): Postgresql password.
+- ``CAIRN_SUPERSET_SECRET_KEY`` (default: ``"{{ 20|random_string }}"``): randomly-generated secret key for the Superset frontend.
+
 
 Support
 -------
@@ -204,3 +242,6 @@ License
 -------
 
 This software is licensed under the terms of the AGPLv3.
+
+.. image:: https://overhang.io/static/catalog/img/cairn.png
+    :alt: Alpine cairn
