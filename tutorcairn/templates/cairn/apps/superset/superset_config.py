@@ -91,3 +91,5 @@ logging.getLogger("superset").propagate = False
 #     flags["DASHBOARD_NATIVE_FILTERS"] = True
 #     return flags
 # GET_FEATURE_FLAGS_FUNC = get_cairn_feature_flags
+
+{{ patch("cairn-superset-settings") }}
