@@ -2,7 +2,7 @@ variables:
     TUTOR_PLUGIN: cairn
     TUTOR_IMAGES: cairn-clickhouse cairn-superset
     TUTOR_PYPI_PRIVATE_PACKAGE: tutor-cairn
-    OPENEDX_RELEASE: maple
+    OPENEDX_RELEASE: nutmeg
 
 include:
   - project: 'community/tutor-ci'
