@@ -3,7 +3,10 @@ import json
 import os
 
 import requests
-from MySQLdb import escape_string as sql_escape_string
+# The escape_string was moved to a submodule. It is suggested to use
+# `connection.escape_string` instead, but here we don't have a connection object.
+# https://mysqlclient.readthedocs.io/user_guide.html#mysql-c-api-function-mapping
+from MySQLdb._mysql import escape_string as sql_escape_string
 
 import lms.startup
 
