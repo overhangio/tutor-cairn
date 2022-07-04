@@ -18,8 +18,12 @@ if err_json != null {
 }
 time, err_timestamp = parse_timestamp(parsed_json.time, "%+")
 if err_timestamp != null {
-  log("Unable to parse timestamp from tracking log message: " + err_timestamp, level: "error")
-  abort
+  log("Unable to parse timestamp from tracking log 'time' field: " + err_timestamp, level: "warn")
+  time, err_timestamp = parse_timestamp(parsed_json.timestamp, "%+")
+  if err_timestamp != null {
+    log("Unable to parse timestamp from tracking log 'timestamp' field: " + err_timestamp, level: "error")
+    abort
+  }
 }
 . = {"time": time, "message": message}
 '''
