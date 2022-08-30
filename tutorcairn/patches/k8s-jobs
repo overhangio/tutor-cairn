@@ -51,10 +51,21 @@ spec:
             - mountPath: /app/superset_config.py
               name: config
               subPath: superset_config.py
+            - mountPath: /app/bootstrap/
+              name: bootstrap
+            - mountPath: /scripts/clickhouse-auth.json
+              name: clickhouse-auth
+              subPath: auth.json
       volumes:
         - name: config
           configMap:
             name: cairn-superset-config
+        - name: bootstrap
+          configMap:
+            name: cairn-superset-bootstrap
+        - name: clickhouse-auth
+          configMap:
+            name: cairn-clickhouse-auth
 ---
 apiVersion: batch/v1
 kind: Job

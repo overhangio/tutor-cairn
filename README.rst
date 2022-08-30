@@ -61,22 +61,23 @@ Then, restart your platform and run the initialization scripts::
 
     tutor local quickstart
 
-Create credentials to access the Clickhouse database::
+Create a user to access both in the Clickhouse database and the Superset frontend::
 
-    tutor local run cairn-clickhouse cairn createuser YOURUSERNAME
+    tutor local do cairn-createuser YOURUSERNAME YOURUSERNAME@YOUREMAIL.COM
 
-Create an admin user to access the frontend::
+You can use the ``--password=<PASSWORD>`` option to provide a password on the command line.
 
-    # You will be prompted for a new password
-    tutor local run cairn-superset cairn createuser --admin YOURUSERNAME YOURUSERNAME@YOUREMAIL.COM
+To make this user an administrator, add the ``--admin`` option::
+
+    tutor local do cairn-createuser --admin YOURUSERNAME YOURUSERNAME@YOUREMAIL.COM
+
+To add the default dashboards to the new user, add the ``--bootstrap-dashboards`` option::
+
+    tutor local do cairn-createuser --bootstrap-dashboards YOURUSERNAME YOURUSERNAME@YOUREMAIL.COM
 
 You can then access the frontend with the user credentials you just created. Open http(s)://data.<YOUR_LMS_HOST> in your browser. When running locally, this will be http://data.local.overhang.io. The admin user will automatically be granted access to the "openedx" database in Superset and will be able to query all tables.
 
-At this point, your user should have access to Cairn but its account will not include any dashboard. To import the "Course overview" dashboard that comes with Cairn, run::
-
-    tutor local run cairn-superset cairn bootstrap-dashboards YOURUSERNAME /app/bootstrap/courseoverview.json
-
-Some event data will be missing from your dashboards: just start using your LMS and refresh your dashboard. The new events should appear immediately.
+Some event data might be missing from your dashboards: just start using your LMS and refresh your dashboard. The new events should appear immediately.
 
 .. image:: https://overhang.io/static/catalog/img/cairn/courseoverview-01.png
     :alt: Course overview dashboard part 1

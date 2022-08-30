@@ -1,15 +1,20 @@
 # Superset image with additional database drivers
 # https://hub.docker.com/r/apache/superset
+# https://github.com/apache/superset/releases
+# https://github.com/apache/superset/blob/master/Dockerfile
 # https://superset.apache.org/docs/databases/installing-database-drivers
-FROM docker.io/apache/superset:1.3.2
+FROM docker.io/apache/superset:2.0.0
 
 USER root
 
 # https://pypi.org/project/clickhouse-driver/
-# https://pypi.org/project/clickhouse-sqlalchemy/
 # https://pypi.org/project/mysqlclient/
-RUN pip install clickhouse-driver==0.2.2 mysqlclient==2.1.0
-RUN pip install clickhouse-sqlalchemy==0.1.7
+# https://pypi.org/project/clickhouse-sqlalchemy/
+RUN pip install clickhouse-driver==0.2.4 mysqlclient==2.1.1
+# Later versions of clickhouse-sqlalchemy will not work.
+# Note that this connector be replaced by clickhouse-connect in v2.0.1:
+# https://github.com/apache/superset/pull/22039
+RUN pip install clickhouse-sqlalchemy==0.1.10
 
 COPY --chown=superset:superset ./scripts /scripts
 RUN chmod a+x /scripts/*
@@ -17,7 +22,8 @@ ENV PATH /scripts:${PATH}
 
 USER superset
 
-HEALTHCHECK CMD curl -f "http://localhost:8000"
+# This is required to have a proper healthcheck
+ENV SUPERSET_PORT=8000
 
 ENTRYPOINT []
 CMD gunicorn \

@@ -16,7 +16,7 @@ from superset.models.core import Database
 from superset.models.slice import Slice
 from superset.extensions import db, security_manager
 import superset.dashboards.commands.importers.v0 as importers
-from superset.utils.core import get_or_create_db
+from superset.utils.database import get_or_create_db
 from werkzeug.security import generate_password_hash
 
 
@@ -90,6 +90,8 @@ def main():
     args.func(args)
 
 
+# Note: we'd like to get rid of this command by relying on `superset fab create-user`
+# but the "create-user" command fails if the user already exists.
 def bootstrap_user(args):
     # Bootstrap database
     database_name = args.db or args.username
@@ -121,7 +123,9 @@ def bootstrap_user(args):
         if user is None or user is False:
             # This may happen for instance when the email address is already associated
             # to a different username
-            raise RuntimeError(f"Failed to create user '{args.username}' email='{args.email}'")
+            raise RuntimeError(
+                f"Failed to create user '{args.username}' email='{args.email}'"
+            )
 
     # Associate role with the same name to user, if it exists
     role_name = args.role or args.username
@@ -155,7 +159,10 @@ def bootstrap_user(args):
 
 
 def bootstrap_database(username, database_name):
-    with open(os.path.join(os.path.dirname(__file__), "clickhouse-auth.json")) as f:
+    with open(
+        os.path.join(os.path.dirname(__file__), "clickhouse-auth.json"),
+        encoding="utf-8",
+    ) as f:
         CLICKHOUSE_AUTH = json.load(f)
 
     host = CLICKHOUSE_AUTH["host"]
@@ -164,18 +171,12 @@ def bootstrap_database(username, database_name):
     uri = f"clickhouse+native://{username}:@{host}:{port}/{database}"
     database = get_or_create_db(database_name, uri, always_create=True)
 
-    # TODO get rid of the following once we upgrade clickhouse-sqlalchemy and we
-    # can disable reflection from the DSN
-    # https://github.com/xzkostyan/clickhouse-sqlalchemy/issues/151
-    # https://github.com/xzkostyan/clickhouse-sqlalchemy/issues/140
-    # This is preventing us from creating datasets from physical tables.
-    database_extra = json.loads(database.extra)
-    database_extra["engine_params"] = {"connect_args": {"server_version": "18.12.14"}}
-    database.extra = json.dumps(database_extra)
     db.session.add(database)
     db.session.commit()
 
 
+# Note: we would like to start using superset's native export/import-dashboards command
+# but we failed to get it to work.
 def bootstrap_dashboards(args):
     database_name = args.db or args.username
     database = load_database(database_name)
@@ -183,9 +184,7 @@ def bootstrap_dashboards(args):
 
     for path in args.path:
         print(
-            "importing dashboard {} for user='{}' db='{}'... ".format(
-                path, user.username, database.database_name
-            )
+            f"importing dashboard {path} for user='{user.username}' db='{database.database_name}'... "
         )
         dashboard = load_dashboard_file(path)
         import_dashboard(dashboard, user, database)
@@ -206,7 +205,7 @@ def load_user(username):
 
 
 def load_dashboard_file(path):
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         return json.load(f, object_hook=importers.decode_dashboards)
 
 
@@ -227,16 +226,16 @@ def import_dashboard(data, user, database):
         slices = dashboard.slices[:]
         old_to_new_slice_id_map = {}
 
-        for slice in slices:
+        for dashboard_slice in slices:
             # Make sure the new slice does not point to the old slice
-            params_dict = slice.params_dict
+            params_dict = dashboard_slice.params_dict
             params_dict["database_name"] = database.name
             params_dict.pop("remote_id")
-            slice.params = json.dumps(params_dict)
-            old_slice_id = slice.id
-            slice.id = None
+            dashboard_slice.params = json.dumps(params_dict)
+            old_slice_id = dashboard_slice.id
+            dashboard_slice.id = None
             # Create new slice
-            new_slice_id = importers.import_chart(slice, None, now)
+            new_slice_id = importers.import_chart(dashboard_slice, None, now)
             new_slice = db.session.query(Slice).get(new_slice_id)
             old_to_new_slice_id_map[old_slice_id] = new_slice_id
             # Make current user the new owner
@@ -262,7 +261,6 @@ def import_dashboard(data, user, database):
         dashboard.position_json = json.dumps(position)
 
         # Update filter mapping
-        # import pdb; pdb.set_trace()
         metadata = json.loads(dashboard.json_metadata)
         new_filter_scopes = {}
         for old_slice_id, filter_scope in metadata["filter_scopes"].items():
@@ -274,7 +272,9 @@ def import_dashboard(data, user, database):
                 ]
                 new_filter_scope[filter_name] = properties
             # Note that filter scope keys are str, not int
-            new_filter_scopes[str(old_to_new_slice_id_map[int(old_slice_id)])] = new_filter_scope
+            new_filter_scopes[
+                str(old_to_new_slice_id_map[int(old_slice_id)])
+            ] = new_filter_scope
         metadata["filter_scopes"] = new_filter_scopes
         dashboard.json_metadata = json.dumps(metadata)
 
