@@ -110,7 +110,7 @@ def bootstrap_user(args):
         while not password:
             password = getpass()
         base_role_name = "Admin" if args.admin else "Gamma"
-        security_manager.add_user(
+        user = security_manager.add_user(
             args.username,
             args.firstname,
             args.lastname,
@@ -118,7 +118,10 @@ def bootstrap_user(args):
             security_manager.find_role(base_role_name),
             password=password,
         )
-        user = security_manager.find_user(args.username)
+        if user is None or user is False:
+            # This may happen for instance when the email address is already associated
+            # to a different username
+            raise RuntimeError(f"Failed to create user '{args.username}' email='{args.email}'")
 
     # Associate role with the same name to user, if it exists
     role_name = args.role or args.username
