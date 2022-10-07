@@ -2,13 +2,14 @@
 
 # log collection
 cairn-vector:
-    image: docker.io/timberio/vector:0.18.1-alpine
+    image: {{ CAIRN_VECTOR_DOCKER_IMAGE }}
     volumes:
         - ../../data/cairn/vector:/var/lib/vector
         - ../plugins/cairn/apps/vector/local.toml:/etc/vector/vector.toml:ro
         {% if CAIRN_DOCKER_HOST_SOCK_PATH %}- {{ CAIRN_DOCKER_HOST_SOCK_PATH }}:/var/run/docker.sock:ro{% endif %}
     environment:
         - DOCKER_HOST=/var/run/docker.sock
+        - VECTOR_LOG=warn
     restart: unless-stopped
 {% if CAIRN_RUN_CLICKHOUSE %}
 # log storage
