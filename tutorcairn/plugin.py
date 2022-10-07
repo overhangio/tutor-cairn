@@ -32,6 +32,8 @@ config = {
         "POSTGRESQL_USERNAME": "superset",
         "SUPERSET_DOCKER_IMAGE": "{{ DOCKER_REGISTRY }}overhangio/cairn-superset:{{ CAIRN_VERSION }}",
         "SUPERSET_LANGUAGE_CODE": "{{ LANGUAGE_CODE[:2] }}",
+        # Vector
+        "VECTOR_DOCKER_IMAGE": "docker.io/timberio/vector:0.24.1-alpine",
     },
 }
 

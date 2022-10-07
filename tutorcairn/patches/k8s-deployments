@@ -71,7 +71,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
         - name: cairn-vector
-          image: docker.io/timberio/vector:0.18.1-alpine
+          image: {{ CAIRN_VECTOR_DOCKER_IMAGE }}
           env:
             - name: VECTOR_SELF_NODE_NAME
               valueFrom:
@@ -89,6 +89,8 @@ spec:
               value: /host/proc
             - name: SYSFS_ROOT
               value: /host/sys
+            - name: VECTOR_LOG
+              value: warn
           volumeMounts:
             - name: data
               mountPath: /var/lib/vector
