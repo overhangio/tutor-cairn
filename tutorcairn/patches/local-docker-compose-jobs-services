@@ -20,8 +20,8 @@ cairn-superset-job:
     healthcheck:
         disable: true
     depends_on:
+        {% if RUN_REDIS %}- redis{% endif %}
         - cairn-postgresql
-        - cairn-redis
 cairn-openedx-job:
     image: {{ DOCKER_IMAGE_OPENEDX }}
     environment:

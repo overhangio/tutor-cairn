@@ -35,18 +35,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: cairn-redis
-spec:
-  type: NodePort
-  ports:
-    - port: 6379
-      protocol: TCP
-  selector:
-    app.kubernetes.io/name: cairn-redis
----
-apiVersion: v1
-kind: Service
-metadata:
   name: cairn-superset
 spec:
   type: NodePort

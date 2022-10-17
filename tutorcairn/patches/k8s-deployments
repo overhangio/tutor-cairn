@@ -279,32 +279,6 @@ spec:
         - name: config
           configMap:
             name: cairn-superset-config
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: cairn-redis
-  labels:
-    app.kubernetes.io/name: cairn-redis
-spec:
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: cairn-redis
-  template:
-    metadata:
-      labels:
-        app.kubernetes.io/name: cairn-redis
-    spec:
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-      containers:
-        - name: cairn-superset-worker
-          image: docker.io/redis:6.2.4-alpine
-          ports:
-            - containerPort: 6379
-          securityContext:
-            allowPrivilegeEscalation: false
 {% if CAIRN_RUN_POSTGRESQL %}
 ---
 apiVersion: apps/v1

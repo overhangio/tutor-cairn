@@ -7,14 +7,6 @@ from celery.schedules import crontab
 SECRET_KEY = "{{ CAIRN_SUPERSET_SECRET_KEY }}"
 SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://{{ CAIRN_POSTGRESQL_USERNAME }}:{{ CAIRN_POSTGRESQL_PASSWORD }}@cairn-postgresql/{{ CAIRN_POSTGRESQL_DATABASE }}"
 
-DATA_CACHE_CONFIG = {
-    "CACHE_TYPE": "redis",
-    "CACHE_DEFAULT_TIMEOUT": 60 * 60 * 24,  # 1 day default (in secs)
-    "CACHE_KEY_PREFIX": "superset_results",
-    "CACHE_REDIS_URL": "redis://redis:6379/0",
-}
-CACHE_CONFIG = DATA_CACHE_CONFIG
-
 # Languages
 # https://github.com/apache/superset/blob/dc575080d7e43d40b1734bb8f44fdc291cb95b11/superset/config.py#L324
 available_languages = {
@@ -42,16 +34,32 @@ for code in enabled_language_codes:
     LANGUAGES[code] = available_languages[code]
 
 # Borrowed from superset/docker/pythonpath_dev/superset_config.py
-REDIS_HOST = "redis"
-REDIS_PORT = "6379"
-REDIS_CELERY_DB = 0
-REDIS_RESULTS_DB = 1
-RESULTS_BACKEND = RedisCache(host="redis", port=6379, key_prefix="superset_results")
+REDIS_HOST = "{{ REDIS_HOST }}"
+REDIS_PORT = "{{ REDIS_PORT }}"
+# Be careful not to conflict with Open edX here
+REDIS_CELERY_DB = {{ OPENEDX_CELERY_REDIS_DB + 2 }}
+REDIS_CACHE_DB = {{ OPENEDX_CACHE_REDIS_DB + 2 }}
+
+# Charting data queried from datasets cache (optional)
+DATA_CACHE_CONFIG = {
+    "CACHE_TYPE": "redis",
+    "CACHE_DEFAULT_TIMEOUT": 60 * 60 * 24,  # 1 day default (in secs)
+    "CACHE_KEY_PREFIX": "superset_data_cache",
+    "CACHE_REDIS_URL": f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_CACHE_DB}",
+}
+# Metadata cache (optional)
+CACHE_CONFIG = DATA_CACHE_CONFIG
+# SQL Lab query results cache (optional)
+RESULTS_BACKEND = RedisCache(
+    host=REDIS_HOST,
+    port=REDIS_PORT,
+    db=REDIS_CACHE_DB,
+    key_prefix="superset_results",
+)
 
 class CeleryConfig:  # pylint: disable=too-few-public-methods
     BROKER_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_CELERY_DB}"
     CELERY_IMPORTS = ("superset.sql_lab", "superset.tasks")
-    CELERY_RESULT_BACKEND = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_RESULTS_DB}"
     CELERYD_LOG_LEVEL = "DEBUG"
     CELERYD_PREFETCH_MULTIPLIER = 1
     CELERY_ACKS_LATE = False

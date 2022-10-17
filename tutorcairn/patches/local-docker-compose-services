@@ -44,7 +44,7 @@ cairn-superset:
         - ../plugins/cairn/apps/superset/bootstrap:/app/bootstrap:ro
     restart: unless-stopped
     depends_on:
-        - cairn-redis
+        {% if RUN_REDIS %}- redis{% endif %}
         - cairn-postgresql
 cairn-superset-worker:
     image: {{ CAIRN_SUPERSET_DOCKER_IMAGE }}
@@ -55,7 +55,7 @@ cairn-superset-worker:
     healthcheck:
         disable: true
     depends_on:
-        - cairn-redis
+        {% if RUN_REDIS %}- redis{% endif %}
         - cairn-postgresql
 cairn-superset-worker-beat:
     image: {{ CAIRN_SUPERSET_DOCKER_IMAGE }}
@@ -66,12 +66,8 @@ cairn-superset-worker-beat:
     healthcheck:
         disable: true
     depends_on:
-        - cairn-redis
+        {% if RUN_REDIS %}- redis{% endif %}
         - cairn-postgresql
-cairn-redis:
-    image: docker.io/redis:6.2.4-alpine
-    restart: unless-stopped
-    user: "1000:1000"
 {% if CAIRN_RUN_POSTGRESQL %}
 cairn-postgresql:
     image: docker.io/postgres:9.6-alpine
