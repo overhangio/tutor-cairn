@@ -57,6 +57,8 @@ RESULTS_BACKEND = RedisCache(
     key_prefix="superset_results",
 )
 
+# TODO implement FILTER_STATE_CACHE_CONFIG and EXPLORE_FORM_DATA_CACHE_CONFIG such that we get rid of the warning messages
+
 class CeleryConfig:  # pylint: disable=too-few-public-methods
     BROKER_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_CELERY_DB}"
     CELERY_IMPORTS = ("superset.sql_lab", "superset.tasks")
