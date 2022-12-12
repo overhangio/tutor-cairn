@@ -86,8 +86,8 @@ hooks.Filters.IMAGES_PULL.add_items(
             "{{ CAIRN_CLICKHOUSE_DOCKER_IMAGE }}",
         ),
         (
-            "cairn-clickhouse",
-            "{{ CAIRN_CLICKHOUSE_DOCKER_IMAGE }}",
+            "cairn-superset",
+            "{{ CAIRN_SUPERSET_DOCKER_IMAGE }}",
         ),
     ]
 )
@@ -98,8 +98,8 @@ hooks.Filters.IMAGES_PUSH.add_items(
             "{{ CAIRN_SUPERSET_DOCKER_IMAGE }}",
         ),
         (
-            "cairn-superset",
-            "{{ CAIRN_SUPERSET_DOCKER_IMAGE }}",
+            "cairn-clickhouse",
+            "{{ CAIRN_CLICKHOUSE_DOCKER_IMAGE }}",
         ),
     ]
 )
