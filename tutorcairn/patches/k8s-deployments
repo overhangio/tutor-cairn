@@ -268,7 +268,7 @@ spec:
       containers:
         - name: cairn-superset-worker-beat
           image: {{ CAIRN_SUPERSET_DOCKER_IMAGE }}
-          args: ["celery", "beat", "--app=superset.tasks.celery_app:app", "--pidfile", "/tmp/celerybeat.pid", "-l", "INFO", "--schedule=/tmp/celerybeat-schedule"]
+          args: ["celery", "--app=superset.tasks.celery_app:app", "beat", "--pidfile", "/tmp/celerybeat.pid", "-l", "INFO", "--schedule=/tmp/celerybeat-schedule"]
           volumeMounts:
             - mountPath: /app/superset_config.py
               name: config
