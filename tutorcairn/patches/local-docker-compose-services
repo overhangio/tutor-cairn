@@ -50,7 +50,7 @@ cairn-superset-worker:
     image: {{ CAIRN_SUPERSET_DOCKER_IMAGE }}
     volumes:
         - ../plugins/cairn/apps/superset/superset_config.py:/app/superset_config.py:ro
-    command: celery worker --app=superset.tasks.celery_app:app -Ofair -l INFO
+    command: celery --app=superset.tasks.celery_app:app worker -Ofair -l INFO
     restart: unless-stopped
     healthcheck:
         disable: true
