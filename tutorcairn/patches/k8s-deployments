@@ -234,7 +234,7 @@ spec:
       containers:
         - name: cairn-superset-worker
           image: {{ CAIRN_SUPERSET_DOCKER_IMAGE }}
-          args: ["celery", "worker", "--app=superset.tasks.celery_app:app", "-Ofair", "-l", "INFO"]
+          args: ["celery", "--app=superset.tasks.celery_app:app", "worker", "-Ofair", "-l", "INFO"]
           volumeMounts:
             - mountPath: /app/superset_config.py
               name: config
