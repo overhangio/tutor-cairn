@@ -106,9 +106,7 @@ def command_migrate(args):
     migrations = sorted(glob(os.path.join(args.path, "*")))
     for path in migrations:
         migration_name = os.path.basename(path)
-        print(
-            f"Applying migration {migration_name}... ", end=" "
-        )
+        print(f"Applying migration {migration_name}... ", end=" ")
         query = f"SELECT 'applied' FROM _migrations WHERE name='{migration_name}'"
         is_applied = run_query(query)
         if is_applied == "applied":
@@ -150,6 +148,7 @@ def get_client_command_no_db(*args):
         CLICKHOUSE_AUTH["password"],
         "--multiline",
         "--multiquery",
+        "--history_file=/tmp/.clickhouse-client-history",
     ]
     if CLICKHOUSE_AUTH["http_scheme"] == "https":
         command.append("--secure")
