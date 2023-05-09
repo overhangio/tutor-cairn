@@ -101,6 +101,11 @@ CELERY_CONFIG = CeleryConfig
 # Avoid duplicate logging because of propagation to root logger
 logging.getLogger("superset").propagate = False
 
+# Enable dashboard embedding
+FEATURE_FLAGS = {
+    "EMBEDDED_SUPERSET": True
+}
+
 # Enable some custom feature flags
 # Do this once native filters are fully functional https://github.com/apache/superset/projects/15+
 # def get_cairn_feature_flags(flags):
