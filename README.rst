@@ -43,9 +43,9 @@ Cairn uses the same collect/store/expose paradigm made popular by other framewor
 Installation
 ------------
 
-Cairn requires a `Tutor Wizard Edition license <https://overhang.io/tutor/wizardedition>`__. Once you have enabled your license, installing the plugin is as simple as running::
+Cairn used to be a commercial plugin, but is now available for free to all Tutor users. Install the plugin with::
 
-    tutor license install tutor-cairn
+    pip install tutor-cairn
 
 Usage
 -----
@@ -79,11 +79,11 @@ You can then access the frontend with the user credentials you just created. Ope
 
 Some event data might be missing from your dashboards: just start using your LMS and refresh your dashboard. The new events should appear immediately.
 
-.. image:: https://overhang.io/static/catalog/img/cairn/courseoverview-01.png
+.. image:: https://raw.githubusercontent.com/overhangio/tutor-cairn/master/static/screenshots/courseoverview-01.png
     :alt: Course overview dashboard part 1
-.. image:: https://overhang.io/static/catalog/img/cairn/courseoverview-02.png
+.. image:: https://raw.githubusercontent.com/overhangio/tutor-cairn/master/static/screenshots/courseoverview-02.png
     :alt: Course overview dashboard part 2
-.. image:: https://overhang.io/static/catalog/img/cairn/courseoverview-03.png
+.. image:: https://raw.githubusercontent.com/overhangio/tutor-cairn/master/static/screenshots/courseoverview-03.png
     :alt: Course overview dashboard part 3
 
 Available metrics
@@ -140,7 +140,7 @@ Or, if you want to avoid running the full plugin initialization::
 Running on Kubernetes
 ~~~~~~~~~~~~~~~~~~~~~
 
-When running on Kubernetes instead of locally, most commands above can be re-written with `tutor k8s exec service "command"` instead of `tutor local run service command`. For instance::
+When running on Kubernetes instead of locally, most commands above can be re-written with ``tutor k8s exec service "command"`` instead of ``tutor local run service command``. For instance::
 
     # Privileged user creation
     tutor k8s exec cairn-superset "superset fab create-admin --username YOURUSERNAME --email user@example.com"
@@ -232,11 +232,10 @@ Postgresql/Superset settings
 - ``CAIRN_POSTGRESQL_PASSWORD`` (default: ``"{{ 20|random_string }}"``): Postgresql password.
 - ``CAIRN_SUPERSET_SECRET_KEY`` (default: ``"{{ 20|random_string }}"``): randomly-generated secret key for the Superset frontend.
 
+Troubleshooting
+---------------
 
-Support
--------
-
-Are you having trouble with Cairn? Do you have questions about this plugin? Please get in touch with us at contact@overhang.io. Community support is also available on the official Tutor forums: https://discuss.overhang.io
+This Tutor plugin is maintained by Régis Behmo from `Overhang.IO <https://overhang.io>`__. Community support is available from the official `Open edX forum <https://discuss.openedx.org>`__. Do you need help with this plugin? See the `troubleshooting <https://docs.tutor.overhang.io/troubleshooting.html>`__ section from the Tutor documentation.
 
 License
 -------
