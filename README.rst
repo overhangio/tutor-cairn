@@ -59,7 +59,7 @@ Enable the plugin with::
 
 Then, restart your platform and run the initialization scripts::
 
-    tutor local quickstart
+    tutor local launch
 
 Create a user to access both in the Clickhouse database and the Superset frontend::
 
@@ -166,7 +166,7 @@ Adding data to your data lake
 
 Tables created in Clickhouse are managed by a lightweight migration system. You can view existing migrations that ship by default with Cairn in the following folder: ``$VIRTUAL_ENV/lib/python3.8/site-packages/tutorcairn/templates/cairn/apps/clickhouse/migrations.d/``.
 
-You are free to create your own migrations that will automatically be created in Clickhouse every time the ``tutor local quickstart`` or ``tutor local do init`` commands are run. To do so, as usual in Tutor, you should create a `Tutor plugin <https://docs.tutor.overhang.io/plugins.html>`__. This plugin should include the ``CAIRN_MIGRATIONS_FOLDER`` configuration. This setting should point to a template folder, inside the plugin, where migration templates are defined. For instance, assuming you created the "customcairn" plugin::
+You are free to create your own migrations that will automatically be created in Clickhouse every time the ``tutor local launch`` or ``tutor local do init`` commands are run. To do so, as usual in Tutor, you should create a `Tutor plugin <https://docs.tutor.overhang.io/plugins.html>`__. This plugin should include the ``CAIRN_MIGRATIONS_FOLDER`` configuration. This setting should point to a template folder, inside the plugin, where migration templates are defined. For instance, assuming you created the "customcairn" plugin::
 
     config = {
         "defaults": {
@@ -174,7 +174,7 @@ You are free to create your own migrations that will automatically be created in
         }
     }
 
-In this example, the following folder should be created in the plugin:: ``tutorcustomcairn/templates/customcairn/apps/migrations.d/``. Then, you should add your migration files there. Migrations will be applied in alphabetical order whenever you run ``tutor local quickstart`` or ``tutor local do init``.
+In this example, the following folder should be created in the plugin:: ``tutorcustomcairn/templates/customcairn/apps/migrations.d/``. Then, you should add your migration files there. Migrations will be applied in alphabetical order whenever you run ``tutor local launch`` or ``tutor local do init``.
 
 Development
 -----------
@@ -200,7 +200,7 @@ Cairn is configured by several Tutor settings. Each one of these settings may be
 
 Then apply changes with::
 
-    tutor local quickstart
+    tutor local launch
 
 General settings
 ~~~~~~~~~~~~~~~~
