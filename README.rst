@@ -5,7 +5,7 @@ Analytics are an essential component of an online learning platform: you need to
 
 We created a tool to help you answer all these questions. Cairn is a Tutor plugin that you install on top of an Open edX platform and that gives you access to a powerful, full-blown analytics stack. Cairn comes with the following features out of the box:
 
-🖴 **Unified datalake of learner events and stateful data**: both learner-triggered events, coming from the Open edX tracking logs, and stateful data, coming from the existing databases, are available for querying in a single unified interface. This means that you can, for instance, query the grades of the students that visited your platform in the past 24 hours, or collect the email addresses of the students who did not yet complete the latest assignment.
+❄️ **Unified data lake of learner events and stateful data**: both learner-triggered events, coming from the Open edX tracking logs, and stateful data, coming from the existing databases, are available for querying in a single unified interface. This means that you can, for instance, query the grades of the students that visited your platform in the past 24 hours, or collect the email addresses of the students who did not yet complete the latest assignment.
 
 ⚡﻿ **Real-time:** new events are visible immediately in your analytics interface. No more waiting for slow batch jobs to complete!
 
