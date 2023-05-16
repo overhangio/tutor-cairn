@@ -79,11 +79,11 @@ You can then access the frontend with the user credentials you just created. Ope
 
 Some event data might be missing from your dashboards: just start using your LMS and refresh your dashboard. The new events should appear immediately.
 
-.. image:: https://raw.githubusercontent.com/overhangio/tutor-cairn/master/static/screenshots/courseoverview-01.png
+.. image:: https://raw.githubusercontent.com/overhangio/tutor-cairn/master/screenshots/courseoverview-01.png
     :alt: Course overview dashboard part 1
-.. image:: https://raw.githubusercontent.com/overhangio/tutor-cairn/master/static/screenshots/courseoverview-02.png
+.. image:: https://raw.githubusercontent.com/overhangio/tutor-cairn/master/screenshots/courseoverview-02.png
     :alt: Course overview dashboard part 2
-.. image:: https://raw.githubusercontent.com/overhangio/tutor-cairn/master/static/screenshots/courseoverview-03.png
+.. image:: https://raw.githubusercontent.com/overhangio/tutor-cairn/master/screenshots/courseoverview-03.png
     :alt: Course overview dashboard part 3
 
 Available metrics
