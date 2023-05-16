@@ -5,7 +5,7 @@ Analytics are an essential component of an online learning platform: you need to
 
 We created a tool to help you answer all these questions. Cairn is a Tutor plugin that you install on top of an Open edX platform and that gives you access to a powerful, full-blown analytics stack. Cairn comes with the following features out of the box:
 
-🖴 **Unified datalake of learner events and stateful data**: both learner-triggered events, coming from the Open edX tracking logs, and stateful data, coming from the existing databases, are available for querying in a single unified interface. This means that you can, for instance, query the grades of the students that visited your platform in the past 24 hours, or collect the email addresses of the students who did not yet complete the latest assignment.
+❄️ **Unified data lake of learner events and stateful data**: both learner-triggered events, coming from the Open edX tracking logs, and stateful data, coming from the existing databases, are available for querying in a single unified interface. This means that you can, for instance, query the grades of the students that visited your platform in the past 24 hours, or collect the email addresses of the students who did not yet complete the latest assignment.
 
 ⚡﻿ **Real-time:** new events are visible immediately in your analytics interface. No more waiting for slow batch jobs to complete!
 
@@ -43,9 +43,9 @@ Cairn uses the same collect/store/expose paradigm made popular by other framewor
 Installation
 ------------
 
-Cairn requires a `Tutor Wizard Edition license <https://overhang.io/tutor/wizardedition>`__. Once you have enabled your license, installing the plugin is as simple as running::
+Cairn used to be a commercial plugin, but is now available for free to all Tutor users. Install the plugin with::
 
-    tutor license install tutor-cairn
+    pip install tutor-cairn
 
 Usage
 -----
@@ -59,7 +59,7 @@ Enable the plugin with::
 
 Then, restart your platform and run the initialization scripts::
 
-    tutor local quickstart
+    tutor local launch
 
 Create a user to access both in the Clickhouse database and the Superset frontend::
 
@@ -79,11 +79,11 @@ You can then access the frontend with the user credentials you just created. Ope
 
 Some event data might be missing from your dashboards: just start using your LMS and refresh your dashboard. The new events should appear immediately.
 
-.. image:: https://overhang.io/static/catalog/img/cairn/courseoverview-01.png
+.. image:: https://raw.githubusercontent.com/overhangio/tutor-cairn/master/screenshots/courseoverview-01.png
     :alt: Course overview dashboard part 1
-.. image:: https://overhang.io/static/catalog/img/cairn/courseoverview-02.png
+.. image:: https://raw.githubusercontent.com/overhangio/tutor-cairn/master/screenshots/courseoverview-02.png
     :alt: Course overview dashboard part 2
-.. image:: https://overhang.io/static/catalog/img/cairn/courseoverview-03.png
+.. image:: https://raw.githubusercontent.com/overhangio/tutor-cairn/master/screenshots/courseoverview-03.png
     :alt: Course overview dashboard part 3
 
 Available metrics
@@ -128,7 +128,7 @@ Refreshing course block data
 
 Course block IDs and names are loaded from the Open edX modulestore into the datalake. After making changes to your course, you might want to refresh the course structure stored in the datalake. To do so, run::
 
-    tutor local init --limit=cairn
+    tutor local do init --limit=cairn
 
 Or, if you want to avoid running the full plugin initialization::
 
@@ -140,7 +140,7 @@ Or, if you want to avoid running the full plugin initialization::
 Running on Kubernetes
 ~~~~~~~~~~~~~~~~~~~~~
 
-When running on Kubernetes instead of locally, most commands above can be re-written with `tutor k8s exec service "command"` instead of `tutor local run service command`. For instance::
+When running on Kubernetes instead of locally, most commands above can be re-written with ``tutor k8s exec service "command"`` instead of ``tutor local run service command``. For instance::
 
     # Privileged user creation
     tutor k8s exec cairn-superset "superset fab create-admin --username YOURUSERNAME --email user@example.com"
@@ -166,7 +166,7 @@ Adding data to your data lake
 
 Tables created in Clickhouse are managed by a lightweight migration system. You can view existing migrations that ship by default with Cairn in the following folder: ``$VIRTUAL_ENV/lib/python3.8/site-packages/tutorcairn/templates/cairn/apps/clickhouse/migrations.d/``.
 
-You are free to create your own migrations that will automatically be created in Clickhouse every time the ``tutor local quickstart`` or ``tutor local init`` commands are run. To do so, as usual in Tutor, you should create a `Tutor plugin <https://docs.tutor.overhang.io/plugins.html>`__. This plugin should include the ``CAIRN_MIGRATIONS_FOLDER`` configuration. This setting should point to a template folder, inside the plugin, where migration templates are defined. For instance, assuming you created the "customcairn" plugin::
+You are free to create your own migrations that will automatically be created in Clickhouse every time the ``tutor local launch`` or ``tutor local do init`` commands are run. To do so, as usual in Tutor, you should create a `Tutor plugin <https://docs.tutor.overhang.io/plugins.html>`__. This plugin should include the ``CAIRN_MIGRATIONS_FOLDER`` configuration. This setting should point to a template folder, inside the plugin, where migration templates are defined. For instance, assuming you created the "customcairn" plugin::
 
     config = {
         "defaults": {
@@ -174,7 +174,7 @@ You are free to create your own migrations that will automatically be created in
         }
     }
 
-In this example, the following folder should be created in the plugin:: ``tutorcustomcairn/templates/customcairn/apps/migrations.d/``. Then, you should add your migration files there. Migrations will be applied in alphabetical order whenever you run ``tutor local quickstart`` or ``tutor local init``.
+In this example, the following folder should be created in the plugin:: ``tutorcustomcairn/templates/customcairn/apps/migrations.d/``. Then, you should add your migration files there. Migrations will be applied in alphabetical order whenever you run ``tutor local launch`` or ``tutor local do init``.
 
 Development
 -----------
@@ -200,7 +200,7 @@ Cairn is configured by several Tutor settings. Each one of these settings may be
 
 Then apply changes with::
 
-    tutor local quickstart
+    tutor local launch
 
 General settings
 ~~~~~~~~~~~~~~~~
@@ -232,11 +232,10 @@ Postgresql/Superset settings
 - ``CAIRN_POSTGRESQL_PASSWORD`` (default: ``"{{ 20|random_string }}"``): Postgresql password.
 - ``CAIRN_SUPERSET_SECRET_KEY`` (default: ``"{{ 20|random_string }}"``): randomly-generated secret key for the Superset frontend.
 
+Troubleshooting
+---------------
 
-Support
--------
-
-Are you having trouble with Cairn? Do you have questions about this plugin? Please get in touch with us at contact@overhang.io. Community support is also available on the official Tutor forums: https://discuss.overhang.io
+This Tutor plugin is maintained by Régis Behmo from `Overhang.IO <https://overhang.io>`__. Community support is available from the official `Open edX forum <https://discuss.openedx.org>`__. Do you need help with this plugin? See the `troubleshooting <https://docs.tutor.overhang.io/troubleshooting.html>`__ section from the Tutor documentation.
 
 License
 -------

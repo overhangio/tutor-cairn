@@ -34,7 +34,7 @@ setup(
     },
     license="AGPLv3",
     author="Overhang.IO",
-    description="cairn plugin for Tutor",
+    description="Scalable, real-time analytics for Open edX",
     long_description=load_readme(),
     packages=find_packages(exclude=["tests*"]),
     include_package_data=True,
