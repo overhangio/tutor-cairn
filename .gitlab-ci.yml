@@ -1,8 +1,7 @@
 variables:
     TUTOR_PLUGIN: cairn
     TUTOR_IMAGES: cairn-clickhouse cairn-superset
-    # TODO uncomment to publish package on pypi
-    # TUTOR_PYPI_PACKAGE: tutor-cairn
+    TUTOR_PYPI_PACKAGE: tutor-cairn
     OPENEDX_RELEASE: olive
     GITHUB_REPO: overhangio/tutor-cairn
     IMAGES_BUILD_PLATFORM: "linux/amd64"
