@@ -1,0 +1,2 @@
+- ../../data/cairn/clickhouse:/data/cairn-clickhouse
+{% if CAIRN_RUN_POSTGRESQL %}- ../../data/cairn/postgresql:/data/cairn-postgresql{% endif %}

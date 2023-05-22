@@ -1,7 +1,13 @@
 import logging
+import os
+import typing as t
 
 from cachelib.redis import RedisCache
 from celery.schedules import crontab
+
+from superset.extensions import security_manager
+from superset.cairn import bootstrap as cairn_bootstrap
+from superset.cairn import sso as cairn_sso
 
 # https://superset.apache.org/docs/installation/configuring-superset
 SECRET_KEY = "{{ CAIRN_SUPERSET_SECRET_KEY }}"
@@ -46,16 +52,24 @@ REDIS_PORT = "{{ REDIS_PORT }}"
 REDIS_CELERY_DB = {{ OPENEDX_CELERY_REDIS_DB + 2 }}
 REDIS_CACHE_DB = {{ OPENEDX_CACHE_REDIS_DB + 2 }}
 
-# Charting data queried from datasets cache (optional)
-DATA_CACHE_CONFIG = {
+# Cache configuration
+CACHE_CONFIG = {
     "CACHE_TYPE": "redis",
-    "CACHE_DEFAULT_TIMEOUT": 60 * 60 * 24,  # 1 day default (in secs)
+    "CACHE_DEFAULT_TIMEOUT": 60 * 60 * 24 * 1,  # 1 day default (in secs)
     "CACHE_KEY_PREFIX": "superset_data_cache",
     "CACHE_REDIS_URL": f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_CACHE_DB}",
 }
-# Metadata cache (optional)
-CACHE_CONFIG = DATA_CACHE_CONFIG
-# SQL Lab query results cache (optional)
+DATA_CACHE_CONFIG = CACHE_CONFIG.copy()
+FILTER_STATE_CACHE_CONFIG = CACHE_CONFIG.copy()
+FILTER_STATE_CACHE_CONFIG.update({
+    "CACHE_DEFAULT_TIMEOUT": 60 * 60 * 24 * 90,  # 90 days
+    "REFRESH_TIMEOUT_ON_RETRIEVAL": True,
+})
+EXPLORE_FORM_DATA_CACHE_CONFIG  = CACHE_CONFIG.copy()
+EXPLORE_FORM_DATA_CACHE_CONFIG.update({
+    "CACHE_DEFAULT_TIMEOUT": 60 * 60 * 24 * 7,  # 7 days
+    "REFRESH_TIMEOUT_ON_RETRIEVAL": True,
+})
 RESULTS_BACKEND = RedisCache(
     host=REDIS_HOST,
     port=REDIS_PORT,
@@ -63,7 +77,40 @@ RESULTS_BACKEND = RedisCache(
     key_prefix="superset_results",
 )
 
-# TODO implement FILTER_STATE_CACHE_CONFIG and EXPLORE_FORM_DATA_CACHE_CONFIG such that we get rid of the warning messages
+{% if CAIRN_ENABLE_SSO %}
+# Authentication
+# https://superset.apache.org/docs/installation/configuring-superset/#custom-oauth2-configuration
+# https://flask-appbuilder.readthedocs.io/en/latest/security.html#authentication-oauth
+from flask_appbuilder.security.manager import AUTH_OAUTH
+AUTH_TYPE = AUTH_OAUTH
+OPENEDX_LMS_ROOT_URL = "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}"
+OPENEDX_SSO_CLIENT_ID = "{{ CAIRN_SSO_CLIENT_ID }}"
+if os.environ.get("FLASK_ENV") == "development":
+    OPENEDX_LMS_ROOT_URL = "http://{{ LMS_HOST }}:8000"
+    OPENEDX_SSO_CLIENT_ID = "{{ CAIRN_SSO_CLIENT_ID }}-dev"
+OAUTH_PROVIDERS = [
+    {
+        "name": cairn_sso.OPENEDX_SSO_PROVIDER,
+        "token_key": "access_token",
+        "icon": "fa-right-to-bracket",
+        "remote_app": {
+            "client_id": OPENEDX_SSO_CLIENT_ID,
+            "client_secret": "{{ CAIRN_SSO_CLIENT_SECRET }}",
+            "client_kwargs": {"scope": "read"},
+            "access_token_method": "POST",
+            "api_base_url": f"{OPENEDX_LMS_ROOT_URL}",
+            "access_token_url": f"{OPENEDX_LMS_ROOT_URL}/oauth2/access_token/",
+            "authorize_url": f"{OPENEDX_LMS_ROOT_URL}/oauth2/authorize/",
+        }
+    }
+]
+CUSTOM_SECURITY_MANAGER = cairn_sso.OpenEdxSsoSecurityManager
+# Update roles on login: this will cause all roles (except those that are preserved) to
+# be ovewritten.
+AUTH_ROLES_SYNC_AT_LOGIN = True
+# Login will create user
+AUTH_USER_REGISTRATION = True
+{% endif %}
 
 class CeleryConfig:  # pylint: disable=too-few-public-methods
     BROKER_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_CELERY_DB}"
@@ -101,16 +148,10 @@ CELERY_CONFIG = CeleryConfig
 # Avoid duplicate logging because of propagation to root logger
 logging.getLogger("superset").propagate = False
 
-# Enable dashboard embedding
+# https://github.com/apache/superset/blob/master/RESOURCES/FEATURE_FLAGS.md
 FEATURE_FLAGS = {
+    # Enable dashboard embedding
     "EMBEDDED_SUPERSET": True
 }
-
-# Enable some custom feature flags
-# Do this once native filters are fully functional https://github.com/apache/superset/projects/15+
-# def get_cairn_feature_flags(flags):
-#     flags["DASHBOARD_NATIVE_FILTERS"] = True
-#     return flags
-# GET_FEATURE_FLAGS_FUNC = get_cairn_feature_flags
 
 {{ patch("cairn-superset-settings") }}
