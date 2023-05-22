@@ -196,7 +196,7 @@ spec:
               subPath: superset_config.py
             - mountPath: /app/bootstrap/
               name: bootstrap
-            - mountPath: /scripts/clickhouse-auth.json
+            - mountPath: /app/superset/cairn/clickhouse-auth.json
               name: clickhouse-auth
               subPath: auth.json
           securityContext:

@@ -1,9 +1,7 @@
 #! /usr/bin/env python3
 
 import argparse
-from getpass import getpass
 import json
-import os
 from time import time
 
 from superset.app import create_app
@@ -16,8 +14,10 @@ from superset.models.core import Database
 from superset.models.slice import Slice
 from superset.extensions import db, security_manager
 import superset.dashboards.commands.importers.v0 as importers
-from superset.utils.database import get_or_create_db
 from werkzeug.security import generate_password_hash
+
+# Our convenient library
+from superset.cairn import bootstrap as cairn_bootstrap
 
 
 now = time()
@@ -46,23 +46,21 @@ def main():
         help=("Make the user an administrator."),
     )
     parser_user.add_argument(
-        "-r",
-        "--role",
-        help=(
-            "Name of the role to which the user should be assigned."
-            " Defaults to the username."
-        ),
-    )
-    parser_user.add_argument(
         "-p",
         "--password",
-        help="User password. If undefined, you will be prompted for one.",
+        help="User password.",
     )
     parser_user.add_argument(
         "--firstname", default="", help="User first name (optional)."
     )
     parser_user.add_argument(
         "--lastname", default="", help="User last name (optional)."
+    )
+    parser_user.add_argument(
+        "-c",
+        "--course-id",
+        action="append",
+        help="Restrict user to access data only from these courses.",
     )
     parser_user.add_argument("username")
     parser_user.add_argument("email")
@@ -95,30 +93,20 @@ def main():
 def bootstrap_user(args):
     # Bootstrap database
     database_name = args.db or args.username
-    bootstrap_database(args.username, database_name)
+    cairn_bootstrap.create_superset_db(args.username, database_name)
 
     # Get or create user
     user = security_manager.find_user(args.username)
     if user:
         print(f"User '{args.username}' already exists. Skipping creation.")
-        if args.password:
-            print("Setting user password...")
-            user.password = generate_password_hash(args.password)
-            db.session.add(user)
-            db.session.commit()
     else:
         print(f"Creating user '{args.username}'...")
-        password = args.password
-        while not password:
-            password = getpass()
-        base_role_name = "Admin" if args.admin else "Gamma"
         user = security_manager.add_user(
             args.username,
             args.firstname,
             args.lastname,
             args.email,
-            security_manager.find_role(base_role_name),
-            password=password,
+            "Gamma",
         )
         if user is None or user is False:
             # This may happen for instance when the email address is already associated
@@ -127,52 +115,31 @@ def bootstrap_user(args):
                 f"Failed to create user '{args.username}' email='{args.email}'"
             )
 
-    # Associate role with the same name to user, if it exists
-    role_name = args.role or args.username
-
-    def check_permission(permission_view):
-        permission_name = str(permission_view)
-        if permission_name in [
-            "can save on Datasource",
-            "can sqllab on Superset",
-            "can sql json on Superset",
-            "menu access on Datasets",
-            "menu access on SQL Lab",
-        ]:
-            return True
-        if permission_name.startswith(f"database access on [{database_name}]"):
-            return True
-        if permission_name.startswith(f"schema access on [{database_name}]"):
-            return True
-        return False
-
-    security_manager.set_role(role_name, check_permission)
-    role = security_manager.find_role(role_name)
-    if role in user.roles:
-        print(f"Role '{role_name}' is already associated to user.")
-    else:
-        print(f"Associating role '{role_name}' to user...")
-        user.roles.append(role)
+    # Set password
+    if args.password:
+        print("Setting user password...")
+        user.password = generate_password_hash(args.password)
         db.session.add(user)
         db.session.commit()
+
+    # Create user role, clickhouse db, etc.
+    cairn_bootstrap.setup_user(args.username, course_ids=args.course_id)
+
+    # Associate user to roles
+    user_roles = cairn_bootstrap.get_role_names(args.username)
+    if args.admin:
+        user_roles.append("Admin")
+    for role_name in user_roles:
+        role = security_manager.find_role(role_name)
+        if role in user.roles:
+            print(f"Role '{role_name}' is already associated to user.")
+        else:
+            print(f"Associating role '{role_name}' to user...")
+            user.roles.append(role)
+            db.session.add(user)
+            db.session.commit()
+
     print("Done.")
-
-
-def bootstrap_database(username, database_name):
-    with open(
-        os.path.join(os.path.dirname(__file__), "clickhouse-auth.json"),
-        encoding="utf-8",
-    ) as f:
-        CLICKHOUSE_AUTH = json.load(f)
-
-    host = CLICKHOUSE_AUTH["host"]
-    port = CLICKHOUSE_AUTH["port"]
-    database = CLICKHOUSE_AUTH["database"]
-    uri = f"clickhouse+native://{username}:@{host}:{port}/{database}"
-    database = get_or_create_db(database_name, uri, always_create=True)
-
-    db.session.add(database)
-    db.session.commit()
 
 
 # Note: we would like to start using superset's native export/import-dashboards command

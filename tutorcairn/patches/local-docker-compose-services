@@ -28,20 +28,17 @@ cairn-clickhouse:
             hard: 262144
     restart: unless-stopped
     depends_on:
-        - cairn-clickhouse-permissions
-cairn-clickhouse-permissions:
-    image: {{ DOCKER_IMAGE_PERMISSIONS }}
-    command: ["1000", "/data/clickhouse"]
-    restart: on-failure
-    volumes:
-      - ../../data/cairn/clickhouse:/data/clickhouse
+        - permissions
 {% endif %}
 cairn-superset:
     image: {{ CAIRN_SUPERSET_DOCKER_IMAGE }}
     volumes:
         - ../plugins/cairn/apps/superset/superset_config.py:/app/superset_config.py:ro
-        - ../plugins/cairn/apps/clickhouse/auth.json:/scripts/clickhouse-auth.json:ro
+        - ../plugins/cairn/apps/clickhouse/auth.json:/app/superset/cairn/clickhouse-auth.json:ro
         - ../plugins/cairn/apps/superset/bootstrap:/app/bootstrap:ro
+        {%- for mount in iter_mounts(MOUNTS, "cairn-superset") %}
+        - {{ mount }}
+        {%- endfor %}
     restart: unless-stopped
     depends_on:
         {% if RUN_REDIS %}- redis{% endif %}
@@ -50,6 +47,9 @@ cairn-superset-worker:
     image: {{ CAIRN_SUPERSET_DOCKER_IMAGE }}
     volumes:
         - ../plugins/cairn/apps/superset/superset_config.py:/app/superset_config.py:ro
+        {%- for mount in iter_mounts(MOUNTS, "cairn-superset") %}
+        - {{ mount }}
+        {%- endfor %}
     command: celery --app=superset.tasks.celery_app:app worker -Ofair -l INFO
     restart: unless-stopped
     healthcheck:
@@ -61,6 +61,9 @@ cairn-superset-worker-beat:
     image: {{ CAIRN_SUPERSET_DOCKER_IMAGE }}
     volumes:
         - ../plugins/cairn/apps/superset/superset_config.py:/app/superset_config.py:ro
+        {%- for mount in iter_mounts(MOUNTS, "cairn-superset") %}
+        - {{ mount }}
+        {%- endfor %}
     command: celery --app=superset.tasks.celery_app:app beat --pidfile /tmp/celerybeat.pid -l INFO --schedule=/tmp/celerybeat-schedule
     restart: unless-stopped
     healthcheck:
@@ -80,11 +83,5 @@ cairn-postgresql:
     restart: unless-stopped
     user: "70:70"
     depends_on:
-        - cairn-postgresql-permissions
-cairn-postgresql-permissions:
-    image: {{ DOCKER_IMAGE_PERMISSIONS }}
-    command: ["70", "/data/postgresql"]
-    restart: on-failure
-    volumes:
-      - ../../data/cairn/postgresql:/data/postgresql
+        - permissions
 {% endif %}

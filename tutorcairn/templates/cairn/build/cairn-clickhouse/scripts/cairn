@@ -6,7 +6,9 @@ import os
 import subprocess
 
 
-with open(os.path.join(os.path.dirname(__file__), "clickhouse-auth.json")) as f:
+with open(
+    os.path.join(os.path.dirname(__file__), "clickhouse-auth.json"), encoding="utf-8"
+) as f:
     CLICKHOUSE_AUTH = json.load(f)
 
 
@@ -17,23 +19,6 @@ def main():
     # Run a clickhouse client
     parser_client = subparsers.add_parser("client")
     parser_client.set_defaults(func=command_client)
-
-    # Create user
-    parser_createuser = subparsers.add_parser("createuser")
-    parser_createuser.add_argument(
-        "-c",
-        "--course-id",
-        action="append",
-        help="Restrict user to access data only from these courses.",
-    )
-    parser_createuser.add_argument(
-        "-o",
-        "--org-id",
-        action="append",
-        help="Restrict user to access data only from these organizations.",
-    )
-    parser_createuser.add_argument("username")
-    parser_createuser.set_defaults(func=command_create_user)
 
     # Apply migrations
     parser_migrate = subparsers.add_parser("migrate")
@@ -64,33 +49,8 @@ def main():
         parser.print_help()
 
 
-def command_client(args):
+def command_client(_args):
     subprocess.check_call(get_client_command())
-
-
-def command_create_user(args):
-    conditions = []
-    course_ids = args.course_id or []
-    org_ids = args.org_id or []
-    for course_id in course_ids:
-        conditions.append(f"course_id = '{course_id}'")
-    for org_id in org_ids:
-        conditions.append(f"course_id LIKE 'course-v1:{org_id}+%'")
-    condition = " OR ".join(conditions) if conditions else "1"
-    username = args.username
-    # Note that the "CREATE TEMPORARY TABLE" grant is required to make use of "numbers()" functions.
-    run_query(
-        f"""CREATE USER IF NOT EXISTS {username};
-GRANT CREATE TEMPORARY TABLE ON *.* TO {username};"""
-    )
-    # Find the list of tables to which the user should have access: all tables that do not start with "_"
-    tables = run_query("SHOW TABLES").strip().split("\n")
-    for table in tables:
-        if not table.startswith("_"):
-            query = f"""GRANT SELECT ON {table} TO {username};
-CREATE ROW POLICY OR REPLACE {username} ON {table} AS RESTRICTIVE FOR SELECT USING {condition} TO {username};"""
-            print(query)
-            run_query(query)
 
 
 def command_migrate(args):

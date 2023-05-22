@@ -19,6 +19,7 @@ hooks.Filters.CONFIG_UNIQUE.add_items(
         ("CAIRN_CLICKHOUSE_PASSWORD", "{{ 20|random_string }}"),
         ("CAIRN_POSTGRESQL_PASSWORD", "{{ 20|random_string }}"),
         ("CAIRN_SUPERSET_SECRET_KEY", "{{ 20|random_string }}"),
+        ("CAIRN_SSO_CLIENT_SECRET", "{{ 20|random_string }}"),
     ]
 )
 hooks.Filters.CONFIG_DEFAULTS.add_items(
@@ -47,6 +48,9 @@ hooks.Filters.CONFIG_DEFAULTS.add_items(
             "{{ DOCKER_REGISTRY }}overhangio/cairn-superset:{{ CAIRN_VERSION }}",
         ),
         ("CAIRN_SUPERSET_LANGUAGE_CODE", "{{ LANGUAGE_CODE[:2] }}"),
+        # SSO
+        ("CAIRN_ENABLE_SSO", True),
+        ("CAIRN_SSO_CLIENT_ID", "cairn"),
         # Vector
         # https://hub.docker.com/r/timberio/vector/tags
         # https://github.com/vectordotdev/vector/releases
@@ -106,6 +110,15 @@ hooks.Filters.IMAGES_PUSH.add_items(
 )
 
 
+@hooks.Filters.APP_PUBLIC_HOSTS.add()
+def _print_superset_host(hosts: list[str], context_name: t.Literal["local", "dev"]):
+    if context_name == "dev":
+        hosts.append("{{ CAIRN_HOST }}:2247")
+    else:
+        hosts.append("{{ CAIRN_HOST }}")
+    return hosts
+
+
 @click.command(
     name="cairn-createuser", help="Create a Cairn user, both in Clickhouse and Superset"
 )
@@ -118,27 +131,41 @@ hooks.Filters.IMAGES_PUSH.add_items(
 @click.option(
     "-p",
     "--password",
-    help="Specify password from the command line. If undefined, you will be prompted to input a password",
-    prompt=True,
+    help="Specify password from the command line. If undefined, no password will be set. (Ignored with SSO)",
+    hide_input=True,
+)
+@click.option(
+    "-c",
+    "--course-id",
+    "course_ids",
+    help="Limit access to a selection of courses (Ignored with SSO).",
+    multiple=True,
     hide_input=True,
 )
 @click.argument("username")
 @click.argument("email")
 def create_user_command(
-    bootstrap_dashboards: bool, admin: bool, password: str, username: str, email: str
+    bootstrap_dashboards: bool, admin: bool, password: str, course_ids: list[str], username: str, email: str
 ) -> t.Iterable[tuple[str, str]]:
     admin_opt = " --admin" if admin else ""
-    yield from [
-        ("cairn-clickhouse", f"cairn createuser {username}"),
-        (
-            "cairn-superset",
-            f"cairn createuser{admin_opt} --password {shlex.quote(password)} {username} {email}",
-        ),
-    ]
+
+    # TODO can we now simplify the clickhouse image?
+    # - get rid of the cairn utility
+    # - remove the auth.json file
+
+    create_superset_user = "python ./superset/cairn/ctl.py createuser"
+    if password:
+        create_superset_user += f" --password={shlex.quote(password)}"
+    for course_id in course_ids:
+        create_superset_user += f" --course-id={course_id}"
+    create_superset_user += f" {admin_opt} {username} {email}"
+    yield ("cairn-superset", create_superset_user)
+
+    # Bootstrap dashboards
     if bootstrap_dashboards:
         yield (
             "cairn-superset",
-            f"cairn bootstrap-dashboards {username} /app/bootstrap/courseoverview.json",
+            f"python ./superset/cairn/ctl.py bootstrap-dashboards {username} /app/bootstrap/courseoverview.json",
         )
 
 
