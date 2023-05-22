@@ -45,7 +45,7 @@ Installation
 
 Cairn used to be a commercial plugin, but is now available for free to all Tutor users. Install the plugin with::
 
-    tutor plugins install tutor-cairn
+    tutor plugins install cairn
 
 Usage
 -----
