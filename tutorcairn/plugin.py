@@ -1,6 +1,7 @@
 from __future__ import annotations
 from glob import glob
 import os
+import shlex
 import typing as t
 
 import click
@@ -131,7 +132,7 @@ def create_user_command(
         ("cairn-clickhouse", f"cairn createuser {username}"),
         (
             "cairn-superset",
-            f"cairn createuser{admin_opt} --password={password} {username} {email}",
+            f"cairn createuser{admin_opt} --password {shlex.quote(password)} {username} {email}",
         ),
     ]
     if bootstrap_dashboards:
