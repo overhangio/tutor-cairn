@@ -17,7 +17,7 @@ cairn-superset-job:
     image: {{ CAIRN_SUPERSET_DOCKER_IMAGE }}
     volumes:
         - ../plugins/cairn/apps/superset/superset_config.py:/app/superset_config.py:ro
-        - ../plugins/cairn/apps/clickhouse/auth.json:/scripts/clickhouse-auth.json:ro
+        - ../plugins/cairn/apps/clickhouse/auth.json:/app/superset/cairn/clickhouse-auth.json:ro
         - ../plugins/cairn/apps/superset/bootstrap:/app/bootstrap:ro
     healthcheck:
         disable: true

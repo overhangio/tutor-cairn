@@ -1,0 +1,15 @@
+cairn-superset:
+    command: ["superset", "run", "--host=0.0.0.0", "--port=2247"]
+    environment:
+        FLASK_ENV: development
+    ports:
+        - "2247:2247"
+
+cairn-superset-worker:
+    environment:
+        FLASK_ENV: development
+
+cairn-superset-worker-beat:
+    environment:
+        FLASK_ENV: development
+

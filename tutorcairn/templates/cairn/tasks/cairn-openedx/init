@@ -1,1 +1,29 @@
+{% if  CAIRN_ENABLE_SSO %}
+# SSO user
+./manage.py lms manage_user cairn cairn@openedx
+
+# Production app
+./manage.py lms create_dot_application \
+    --grant-type authorization-code \
+    --redirect-uris "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ CAIRN_HOST }}/oauth-authorized/openedx" \
+    --client-id {{ CAIRN_SSO_CLIENT_ID }} \
+    --client-secret {{ CAIRN_SSO_CLIENT_SECRET }} \
+    --scopes "user_id" \
+    --skip-authorization \
+    --update \
+    cairn-sso cairn
+
+# Development app
+./manage.py lms create_dot_application \
+    --grant-type authorization-code \
+    --redirect-uris "http://{{ CAIRN_HOST }}:2247/oauth-authorized/openedx" \
+    --client-id {{ CAIRN_SSO_CLIENT_ID }}-dev \
+    --client-secret {{ CAIRN_SSO_CLIENT_SECRET }} \
+    --scopes "user_id" \
+    --skip-authorization \
+    --update \
+    cairn-sso-dev cairn
+{% endif %}
+
+# Update course blocks data
 python /openedx/scripts/importcoursedata.py
