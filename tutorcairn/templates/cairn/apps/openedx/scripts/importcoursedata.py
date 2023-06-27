@@ -42,13 +42,14 @@ def import_course(course_key):
     print("======================", course_id, course.display_name)
     values = [
         sql_format(
-            "('{}', '{}', '{}', '{}', '{}', '{}')",
+            "('{}', '{}', '{}', '{}', '{}', '{}', '{}')",
             course_id,
             str(child.location),
             child.location.block_id,
             str(position),
             child.display_name or "N/A",
             full_name,
+            str(1 if child.graded==True else 0),
         )
         for position, (child, full_name) in enumerate(iter_course_blocks(course))
     ]
@@ -63,7 +64,7 @@ def import_course(course_key):
             ),
         )
         insert_query = sql_format(
-            "INSERT INTO course_blocks (course_id, block_key, block_id, position, display_name, full_name) VALUES "
+            "INSERT INTO course_blocks (course_id, block_key, block_id, position, display_name, full_name, graded) VALUES "
         )
         insert_query += ", ".join(values)
         make_query(insert_query)
