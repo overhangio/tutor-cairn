@@ -106,7 +106,7 @@ def bootstrap_user(args):
             args.firstname,
             args.lastname,
             args.email,
-            "Gamma",
+            security_manager.find_role("Gamma"),
         )
         if user is None or user is False:
             # This may happen for instance when the email address is already associated

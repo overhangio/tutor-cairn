@@ -1,0 +1,1 @@
+- [Bugfix] Fixed User creation command issue with Palm release. (by @jramnai)
