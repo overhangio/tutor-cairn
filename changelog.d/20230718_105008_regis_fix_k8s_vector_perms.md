@@ -1,0 +1,1 @@
+- [Bugfix] Fix "cannot list resource 'pods'" on Kubernetes. (by @regisb)
