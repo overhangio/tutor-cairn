@@ -49,7 +49,7 @@ def import_course(course_key):
             str(position),
             child.display_name or "N/A",
             full_name,
-            str(1 if child.graded == True else 0),
+            "true" if child.graded else "false",
         )
         for position, (child, full_name) in enumerate(iter_course_blocks(course))
     ]
