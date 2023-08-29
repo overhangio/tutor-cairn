@@ -110,11 +110,6 @@ By default, authentication uses single sign-on (SSO) with the LMS such that user
     tutor config save --set CAIRN_ENABLE_SSO=false
     tutor local restart
 
-By default, AUTH_ROLES_SYNC_AT_LOGIN is True which will cause all roles (except those that are preserved) to be ovewritten. To disable this behaviour, modify the ``CAIRN_AUTH_ROLES_SYNC_AT_LOGIN`` setting::
-
-    tutor config save --set CAIRN_AUTH_ROLES_SYNC_AT_LOGIN=false
-    tutor local restart
-
 SSO will then disabled, and only manually created users will be able to login. To create a user, run::
 
     tutor local do cairn-createuser --password=yourpassword YOURUSERNAME YOURUSERNAME@YOUREMAIL.COM
@@ -131,7 +126,12 @@ To add the default dashboards to the new user, add the ``--bootstrap-dashboards`
 
     tutor local do cairn-createuser --course-id='course-v1:edX+DemoX+Demo_Course' YOURUSERNAME YOURUSERNAME@YOUREMAIL.COM
 
+By default, AUTH_ROLES_SYNC_AT_LOGIN is True which will cause all roles (except those that are preserved) to be ovewritten. To disable this behaviour, modify the ``CAIRN_AUTH_ROLES_SYNC_AT_LOGIN`` setting::
 
+    tutor config save --set CAIRN_AUTH_ROLES_SYNC_AT_LOGIN=false
+    tutor local restart
+
+    
 Refreshing course block data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
