@@ -1,3 +1,0 @@
-LOGIN_REDIRECT_WHITELIST.append("{{ CAIRN_HOST }}")
-CORS_ORIGIN_WHITELIST.append("{% if ENABLE_HTTPS %}https://{% else %}http://{% endif %}{{ CAIRN_HOST }}")
-CSRF_TRUSTED_ORIGINS.append("{{ CAIRN_HOST }}")
