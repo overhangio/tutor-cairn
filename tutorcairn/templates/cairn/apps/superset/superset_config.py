@@ -104,6 +104,13 @@ OAUTH_PROVIDERS = [
     }
 ]
 CUSTOM_SECURITY_MANAGER = cairn_sso.OpenEdxSsoSecurityManager
+
+# Visual Customizations
+APP_NAME = "{{ CAIRN_APP_NAME }}"
+APP_ICON = "{{ CAIRN_APP_ICON }}"
+APP_ICON_WIDTH = 200
+FAVICONS = [{"href": "{{ CAIRN_APP_FAVICONS }}"}]
+
 # Update roles on login: this will cause all roles (except those that are preserved) to
 # be ovewritten.
 AUTH_ROLES_SYNC_AT_LOGIN = {{ CAIRN_AUTH_ROLES_SYNC_AT_LOGIN }}
