@@ -60,8 +60,6 @@ hooks.Filters.CONFIG_DEFAULTS.add_items(
         ("CAIRN_APP_NAME", "Edly Dashboard"),
         ("CAIRN_APP_ICON", "https://d19mbak9hk3cwy.cloudfront.net/wp-content/uploads/2022/10/edly-site-logo-new.svg"),
         ("CAIRN_APP_FAVICONS", "https://d19mbak9hk3cwy.cloudfront.net/wp-content/uploads/2022/10/edly-site-logo-new.svg"),
-
-        
     ]
 )
 
