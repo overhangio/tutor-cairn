@@ -19,6 +19,23 @@ instructions, because git commits are used to generate release notes:
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-16.0.3'></a>
+## v16.0.3 (2023-09-07)
+
+- [Bugfix] Fix "Error: invalid_request Mismatching redirect URI" - ensure superset respects X-Forwarded-For/X-Forwarded-Proto headers set by Caddy. This effectively fixes running Cairn on HTTPS without a 3rd-party web proxy. (by @ravikhetani)
+
+<a id='changelog-16.0.2'></a>
+## v16.0.2 (2023-09-04)
+
+- [Bugfix] Fix "cannot list resource 'pods'" on Kubernetes. (by @regisb)
+- [Bugfix] Fix superset database name in user creation with `do cairn-createuser`. (by @regisb)
+- [Improvement] Users will now have the access to graded field in course_blocks table with this change which indicates if course unit is graded or not. (by @Faraz32123)
+
+<a id='changelog-16.0.1'></a>
+## v16.0.1 (2023-07-17)
+
+- [Bugfix] Fixed user creation command issue with Palm release. (by @jramnai)
+
 <a id='changelog-16.0.0'></a>
 ## v16.0.0 (2023-06-15)
 
