@@ -77,7 +77,7 @@ def main():
         "--database",
         help=(
             "Name of the Superset database to which the objects should be linked."
-            " By default, this will be the same as the username."
+            " By default, this will be the 'openedx-<username>'."
         ),
     )
     parser_dashboards.add_argument("username")
@@ -92,7 +92,7 @@ def main():
 # but the "create-user" command fails if the user already exists.
 def bootstrap_user(args):
     # Bootstrap database
-    database_name = args.db or args.username
+    database_name = args.db or f"openedx-{args.username}"
     cairn_bootstrap.create_superset_db(args.username, database_name)
 
     # Get or create user
@@ -106,7 +106,7 @@ def bootstrap_user(args):
             args.firstname,
             args.lastname,
             args.email,
-            "Gamma",
+            security_manager.find_role("Gamma"),
         )
         if user is None or user is False:
             # This may happen for instance when the email address is already associated

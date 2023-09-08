@@ -26,7 +26,7 @@ ABOUT = load_about()
 
 setup(
     name="tutor-cairn",
-    version=ABOUT["__version__"],
+    version=ABOUT["__package_version__"],
     url="https://github.com/overhangio/tutor-cairn",
     project_urls={
         "Code": "https://github.com/overhangio/tutor-cairn",
@@ -42,7 +42,7 @@ setup(
     install_requires=["tutor>=16.0.0,<17.0.0"],
     entry_points={"tutor.plugin.v1": ["cairn = tutorcairn.plugin"]},
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: GNU Affero General Public License v3",
         "Operating System :: OS Independent",
