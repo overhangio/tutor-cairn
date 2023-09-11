@@ -42,7 +42,7 @@ def import_course(course_key):
     print("======================", course_id, course.display_name)
     values = [
         sql_format(
-            "('{}', '{}', '{}', '{}', '{}', '{}', '{}')",
+            "('{}', '{}', '{}', '{}', '{}', '{}', {})",
             course_id,
             str(child.location),
             child.location.block_id,
