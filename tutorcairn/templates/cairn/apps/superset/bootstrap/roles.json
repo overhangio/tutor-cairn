@@ -1,0 +1,15 @@
+[
+    {
+    "name":"Gamma",
+    "permissions":[
+      {
+        "permission":{
+          "name":"all_datasource_access"
+        },
+        "view_menu":{
+          "name":"all_datasource_access"
+        }
+      }
+    ]
+    }
+]

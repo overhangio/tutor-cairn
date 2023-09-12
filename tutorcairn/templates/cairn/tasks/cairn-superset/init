@@ -4,5 +4,8 @@ superset db upgrade
 # Create default roles and permissions
 superset init
 
+# Update Gamma Role
+superset fab import-roles -p /app/bootstrap/roles.json
+
 # Create/Update database with full access
 superset set-database-uri --database-name={{ CAIRN_CLICKHOUSE_DATABASE }} --uri='clickhousedb://{{ CAIRN_CLICKHOUSE_USERNAME }}:{{ CAIRN_CLICKHOUSE_PASSWORD }}@{{ CAIRN_CLICKHOUSE_HOST }}:{{ CAIRN_CLICKHOUSE_HTTP_PORT }}/{{ CAIRN_CLICKHOUSE_DATABASE }}'
