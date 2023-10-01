@@ -3,7 +3,8 @@
 # https://github.com/apache/superset/releases
 # https://github.com/apache/superset/blob/master/Dockerfile
 # https://superset.apache.org/docs/databases/installing-database-drivers
-FROM docker.io/apache/superset:2.1.0
+ARG DOCKER_REGISTRY={{ DOCKER_REGISTRY }}
+FROM ${DOCKER_REGISTRY}/apache/superset:2.1.0
 
 USER root
 

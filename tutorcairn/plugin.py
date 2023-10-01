@@ -54,7 +54,10 @@ hooks.Filters.CONFIG_DEFAULTS.add_items(
         # Vector
         # https://hub.docker.com/r/timberio/vector/tags
         # https://github.com/vectordotdev/vector/releases
-        ("CAIRN_VECTOR_DOCKER_IMAGE", "docker.io/timberio/vector:0.25.1-alpine"),
+        (
+            "CAIRN_VECTOR_DOCKER_IMAGE",
+            "{{ DOCKER_REGISTRY }}/timberio/vector:0.25.1-alpine",
+        ),
     ]
 )
 

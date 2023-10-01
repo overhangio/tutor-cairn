@@ -1,5 +1,6 @@
 # https://hub.docker.com/r/yandex/clickhouse-server/tags
-FROM docker.io/yandex/clickhouse-server:22.1.3.7
+ARG DOCKER_REGISTRY={{ DOCKER_REGISTRY }}
+FROM ${DOCKER_REGISTRY}/yandex/clickhouse-server:22.1.3.7
 
 # The clickhouse repo is currently unavailable in some parts of the world. If we don't
 # remove this repo here then `apt update` will fail. Check if the problem is resolved with:

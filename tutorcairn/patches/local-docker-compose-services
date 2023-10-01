@@ -73,7 +73,7 @@ cairn-superset-worker-beat:
         - cairn-postgresql
 {% if CAIRN_RUN_POSTGRESQL %}
 cairn-postgresql:
-    image: docker.io/postgres:9.6-alpine
+    image: {{ DOCKER_REGISTRY }}/postgres:9.6-alpine
     environment:
         POSTGRES_USER: "{{ CAIRN_POSTGRESQL_USERNAME }}"
         POSTGRES_PASSWORD: "{{ CAIRN_POSTGRESQL_PASSWORD }}"
