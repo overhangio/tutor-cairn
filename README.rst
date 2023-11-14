@@ -128,7 +128,7 @@ To add the default dashboards to the new user, add the ``--bootstrap-dashboards`
 
 By default, AUTH_ROLES_SYNC_AT_LOGIN is False which means admin can customize the permissions associated to a user. To disable this behaviour, modify the ``CAIRN_AUTH_ROLES_SYNC_AT_LOGIN`` setting::
 
-    tutor config save --set CAIRN_AUTH_ROLES_SYNC_AT_LOGIN=True
+    tutor config save --set CAIRN_AUTH_ROLES_SYNC_AT_LOGIN=true
     tutor local restart
 
 Refreshing course block data
