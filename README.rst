@@ -126,6 +126,10 @@ To add the default dashboards to the new user, add the ``--bootstrap-dashboards`
 
     tutor local do cairn-createuser --course-id='course-v1:edX+DemoX+Demo_Course' YOURUSERNAME YOURUSERNAME@YOUREMAIL.COM
 
+By default, AUTH_ROLES_SYNC_AT_LOGIN is False which means admin can customize the permissions associated to a user. To disable this behaviour, modify the ``CAIRN_AUTH_ROLES_SYNC_AT_LOGIN`` setting::
+
+    tutor config save --set CAIRN_AUTH_ROLES_SYNC_AT_LOGIN=True
+    tutor local restart
 
 Refreshing course block data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~

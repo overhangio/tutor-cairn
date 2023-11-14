@@ -106,7 +106,7 @@ OAUTH_PROVIDERS = [
 CUSTOM_SECURITY_MANAGER = cairn_sso.OpenEdxSsoSecurityManager
 # Update roles on login: this will cause all roles (except those that are preserved) to
 # be ovewritten.
-AUTH_ROLES_SYNC_AT_LOGIN = True
+AUTH_ROLES_SYNC_AT_LOGIN = {{ CAIRN_AUTH_ROLES_SYNC_AT_LOGIN }}
 # Login will create user
 AUTH_USER_REGISTRATION = True
 {% endif %}
