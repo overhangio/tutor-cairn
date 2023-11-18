@@ -1,12 +1,12 @@
 from __future__ import annotations
-from glob import glob
+
 import os
 import shlex
 import typing as t
+from glob import glob
 
 import click
 import pkg_resources
-
 from tutor import hooks
 from tutor.__about__ import __version_suffix__
 
@@ -120,7 +120,9 @@ hooks.Filters.IMAGES_PUSH.add_items(
 
 
 @hooks.Filters.APP_PUBLIC_HOSTS.add()
-def _print_superset_host(hosts: list[str], context_name: t.Literal["local", "dev"]):
+def _print_superset_host(
+    hosts: list[str], context_name: t.Literal["local", "dev"]
+) -> list[str]:
     if context_name == "dev":
         hosts.append("{{ CAIRN_HOST }}:2247")
     else:
@@ -154,7 +156,12 @@ def _print_superset_host(hosts: list[str], context_name: t.Literal["local", "dev
 @click.argument("username")
 @click.argument("email")
 def create_user_command(
-    bootstrap_dashboards: bool, admin: bool, password: str, course_ids: list[str], username: str, email: str
+    bootstrap_dashboards: bool,
+    admin: bool,
+    password: str,
+    course_ids: list[str],
+    username: str,
+    email: str,
 ) -> t.Iterable[tuple[str, str]]:
     admin_opt = " --admin" if admin else ""
 
