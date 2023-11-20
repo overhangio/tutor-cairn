@@ -26,7 +26,7 @@ ABOUT = load_about()
 
 setup(
     name="tutor-cairn",
-    version=ABOUT["__package_version__"],
+    version=ABOUT["__version__"],
     url="https://github.com/overhangio/tutor-cairn",
     project_urls={
         "Code": "https://github.com/overhangio/tutor-cairn",
