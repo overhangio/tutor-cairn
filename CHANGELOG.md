@@ -19,6 +19,14 @@ instructions, because git commits are used to generate release notes:
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-17.0.0'></a>
+## v17.0.0 (2023-12-09)
+
+- 💥[Feature] Upgrade to Quince. (by @Fahadkhalid210)
+- 💥[Improvement] Convert the `course_blocks.graded` field from String to Boolean. (by @regisb)
+- 💥[Improvement] Superset auto_sync roles updated. (by @FahadKhalid210)
+- [Improvement] Added Typing to code, Makefile and test action to the repository and formatted code with Black and isort. (by @CodeWithEmad)
+
 <a id='changelog-16.0.3'></a>
 ## v16.0.3 (2023-09-07)
 

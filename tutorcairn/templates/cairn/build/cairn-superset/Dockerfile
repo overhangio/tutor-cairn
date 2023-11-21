@@ -3,7 +3,7 @@
 # https://github.com/apache/superset/releases
 # https://github.com/apache/superset/blob/master/Dockerfile
 # https://superset.apache.org/docs/databases/installing-database-drivers
-FROM docker.io/apache/superset:2.1.0
+FROM docker.io/apache/superset:3.0.1
 
 USER root
 
@@ -13,12 +13,16 @@ USER root
 # https://pypi.org/project/clickhouse-sqlalchemy/
 # https://pypi.org/project/Authlib/
 # We preserve the clickhouse-sqlalchemy package to keep backward compatibility with existing dashboards
-RUN {% if is_buildkit_enabled() %}--mount=type=cache,target=/root/.cache/pip,sharing=shared {% endif %}pip install \
+RUN apt-get update \
+    && apt-get install -y \
+        pkg-config
+
+RUN --mount=type=cache,target=/root/.cache/pip,sharing=shared pip install \
     clickhouse-driver==0.2.6 \
-    mysqlclient==2.1.1 \
-    clickhouse-connect==0.5.24 \
+    mysqlclient==2.2.0 \
+    clickhouse-connect==0.6.20 \
     clickhouse-sqlalchemy==0.2.4 \
-    authlib==1.2.0
+    authlib==1.2.1
 
 USER superset
 

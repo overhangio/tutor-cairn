@@ -18,21 +18,30 @@ SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://{{ CAIRN_POSTGRESQL_USERNAME }}
 # https://superset.apache.org/docs/installation/configuring-superset/#configuration-behind-a-load-balancer
 ENABLE_PROXY_FIX = True
 
+# Superset 3.0 ships with a default CSP (Content Security Policy) configuration via Talisman(Forces all connects to https)
+# https://preset.io/blog/superset-3-0-release-notes/#default-csp-is-now-in-place
+
+{% if not ENABLE_HTTPS %}
+TALISMAN_ENABLED = False
+{% endif %}
+
 # Languages
 # https://github.com/apache/superset/blob/dc575080d7e43d40b1734bb8f44fdc291cb95b11/superset/config.py#L324
 available_languages = {
+    "de": {"flag": "de", "name": "German"},
     "en": {"flag": "us", "name": "English"},
     "es": {"flag": "es", "name": "Spanish"},
-    "it": {"flag": "it", "name": "Italian"},
     "fr": {"flag": "fr", "name": "French"},
-    "zh": {"flag": "cn", "name": "Chinese"},
+    "it": {"flag": "it", "name": "Italian"},
     "ja": {"flag": "jp", "name": "Japanese"},
-    "de": {"flag": "de", "name": "German"},
+    "ko": {"flag": "kr", "name": "Korean"},
+    "nl": {"flag": "nl", "name": "Dutch"},
     "pt": {"flag": "pt", "name": "Portuguese"},
     "pt_BR": {"flag": "br", "name": "Brazilian Portuguese"},
     "ru": {"flag": "ru", "name": "Russian"},
-    "ko": {"flag": "kr", "name": "Korean"},
+    "sk": {"flag": "sk", "name": "Slovak"},
     "sl": {"flag": "si", "name": "Slovenian"},
+    "zh": {"flag": "cn", "name": "Chinese"},    
 }
 {#- https://github.com/apache/superset/blob/master/docs/docs/contributing/translations.mdx#enabling-language-selection #}
 enabled_language_codes = ["en"]
