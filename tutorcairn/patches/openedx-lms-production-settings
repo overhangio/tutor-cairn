@@ -1,0 +1,1 @@
+CORS_ORIGIN_WHITELIST.append("{% if ENABLE_HTTPS %}https://{% else %}http://{% endif %}{{ CAIRN_HOST }}")
