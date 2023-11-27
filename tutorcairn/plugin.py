@@ -1,12 +1,12 @@
 from __future__ import annotations
-from glob import glob
+
 import os
 import shlex
 import typing as t
+from glob import glob
 
 import click
 import pkg_resources
-
 from tutor import hooks
 from tutor.__about__ import __version_suffix__
 
@@ -18,51 +18,53 @@ if __version_suffix__:
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
-
-hooks.Filters.CONFIG_UNIQUE.add_items(
-    [
-        ("CAIRN_CLICKHOUSE_PASSWORD", "{{ 20|random_string }}"),
-        ("CAIRN_POSTGRESQL_PASSWORD", "{{ 20|random_string }}"),
-        ("CAIRN_SUPERSET_SECRET_KEY", "{{ 20|random_string }}"),
-        ("CAIRN_SSO_CLIENT_SECRET", "{{ 20|random_string }}"),
-    ]
-)
-hooks.Filters.CONFIG_DEFAULTS.add_items(
-    [
-        ("CAIRN_VERSION", __version__),
-        ("CAIRN_DOCKER_HOST_SOCK_PATH", "/var/run/docker.sock"),
-        ("CAIRN_HOST", "data.{{ LMS_HOST }}"),
+config: t.Dict[str, t.Dict[str, t.Any]] = {
+    "defaults": {
+        "VERSION": __version__,
+        "DOCKER_HOST_SOCK_PATH": "/var/run/docker.sock",
+        "HOST": "data.{{ LMS_HOST }}",
         # Clickhouse
-        ("CAIRN_RUN_CLICKHOUSE", True),
-        (
-            "CAIRN_CLICKHOUSE_DOCKER_IMAGE",
-            "{{ DOCKER_REGISTRY }}overhangio/cairn-clickhouse:{{ CAIRN_VERSION }}",
-        ),
-        ("CAIRN_CLICKHOUSE_HOST", "cairn-clickhouse"),
-        ("CAIRN_CLICKHOUSE_HTTP_PORT", 8123),
-        ("CAIRN_CLICKHOUSE_HTTP_SCHEME", "http"),
-        ("CAIRN_CLICKHOUSE_PORT", 9000),
-        ("CAIRN_CLICKHOUSE_DATABASE", "openedx"),
-        ("CAIRN_CLICKHOUSE_USERNAME", "openedx"),
+        "RUN_CLICKHOUSE": True,
+        "CLICKHOUSE_DOCKER_IMAGE": "{{ DOCKER_REGISTRY }}overhangio/cairn-clickhouse:{{ CAIRN_VERSION }}",
+        "CLICKHOUSE_HOST": "cairn-clickhouse",
+        "CLICKHOUSE_HTTP_PORT": 8123,
+        "CLICKHOUSE_HTTP_SCHEME": "http",
+        "CLICKHOUSE_PORT": 9000,
+        "CLICKHOUSE_DATABASE": "openedx",
+        "CLICKHOUSE_USERNAME": "openedx",
         # Superset/Postgresql
-        ("CAIRN_RUN_POSTGRESQL", True),
-        ("CAIRN_POSTGRESQL_DATABASE", "superset"),
-        ("CAIRN_POSTGRESQL_USERNAME", "superset"),
-        (
-            "CAIRN_SUPERSET_DOCKER_IMAGE",
-            "{{ DOCKER_REGISTRY }}overhangio/cairn-superset:{{ CAIRN_VERSION }}",
-        ),
-        ("CAIRN_SUPERSET_LANGUAGE_CODE", "{{ LANGUAGE_CODE[:2] }}"),
+        "RUN_POSTGRESQL": True,
+        "POSTGRESQL_DATABASE": "superset",
+        "POSTGRESQL_USERNAME": "superset",
+        "SUPERSET_DOCKER_IMAGE": "{{ DOCKER_REGISTRY }}overhangio/cairn-superset:{{ CAIRN_VERSION }}",
+        "SUPERSET_LANGUAGE_CODE": "{{ LANGUAGE_CODE[:2] }}",
         # SSO
-        ("CAIRN_ENABLE_SSO", True),
-        ("CAIRN_SSO_CLIENT_ID", "cairn"),
+        "ENABLE_SSO": True,
+        "SSO_CLIENT_ID": "cairn",
         # Vector
         # https://hub.docker.com/r/timberio/vector/tags
         # https://github.com/vectordotdev/vector/releases
-        ("CAIRN_VECTOR_DOCKER_IMAGE", "docker.io/timberio/vector:0.25.1-alpine"),
-        #Auto sync user roles
-        ("CAIRN_AUTH_ROLES_SYNC_AT_LOGIN", False),
-    ]
+        "VECTOR_DOCKER_IMAGE": "docker.io/timberio/vector:0.25.1-alpine",
+        # Auto sync user roles
+        "AUTH_ROLES_SYNC_AT_LOGIN": False,
+    },
+    "unique": {
+        "CLICKHOUSE_PASSWORD": "{{ 20|random_string }}",
+        "POSTGRESQL_PASSWORD": "{{ 20|random_string }}",
+        "SUPERSET_SECRET_KEY": "{{ 20|random_string }}",
+        "SSO_CLIENT_SECRET": "{{ 20|random_string }}",
+    },
+}
+
+# Add configuration entries
+hooks.Filters.CONFIG_DEFAULTS.add_items(
+    [(f"CAIRN_{key}", value) for key, value in config.get("defaults", {}).items()]
+)
+hooks.Filters.CONFIG_UNIQUE.add_items(
+    [(f"CAIRN_{key}", value) for key, value in config.get("unique", {}).items()]
+)
+hooks.Filters.CONFIG_OVERRIDES.add_items(
+    list(config.get("overrides", {}).items())
 )
 
 # Init scripts
@@ -118,7 +120,9 @@ hooks.Filters.IMAGES_PUSH.add_items(
 
 
 @hooks.Filters.APP_PUBLIC_HOSTS.add()
-def _print_superset_host(hosts: list[str], context_name: t.Literal["local", "dev"]):
+def _print_superset_host(
+    hosts: list[str], context_name: t.Literal["local", "dev"]
+) -> list[str]:
     if context_name == "dev":
         hosts.append("{{ CAIRN_HOST }}:2247")
     else:
@@ -152,7 +156,12 @@ def _print_superset_host(hosts: list[str], context_name: t.Literal["local", "dev
 @click.argument("username")
 @click.argument("email")
 def create_user_command(
-    bootstrap_dashboards: bool, admin: bool, password: str, course_ids: list[str], username: str, email: str
+    bootstrap_dashboards: bool,
+    admin: bool,
+    password: str,
+    course_ids: list[str],
+    username: str,
+    email: str,
 ) -> t.Iterable[tuple[str, str]]:
     admin_opt = " --admin" if admin else ""
 
