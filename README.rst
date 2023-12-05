@@ -174,7 +174,7 @@ Adding data to your data lake
 
 Tables created in Clickhouse are managed by a lightweight migration system. You can view existing migrations that ship by default with Cairn in the following folder: ``$VIRTUAL_ENV/lib/python3.8/site-packages/tutorcairn/templates/cairn/apps/clickhouse/migrations.d/``.
 
-You are free to create your own migrations that will automatically be created in Clickhouse every time the ``tutor local launch`` or ``tutor local do init`` commands are run. To do so, as usual in Tutor, you should create a `Tutor plugin <https://docs.tutor.overhang.io/plugins.html>`__. This plugin should include the ``CAIRN_MIGRATIONS_FOLDER`` configuration. This setting should point to a template folder, inside the plugin, where migration templates are defined. For instance, assuming you created the "customcairn" plugin::
+You are free to create your own migrations that will automatically be created in Clickhouse every time the ``tutor local launch`` or ``tutor local do init`` commands are run. To do so, as usual in Tutor, you should create a `Tutor plugin <https://docs.tutor.edly.io/plugins.html>`__. This plugin should include the ``CAIRN_MIGRATIONS_FOLDER`` configuration. This setting should point to a template folder, inside the plugin, where migration templates are defined. For instance, assuming you created the "customcairn" plugin::
 
     config = {
         "defaults": {
@@ -245,7 +245,7 @@ Postgresql/Superset settings
 Troubleshooting
 ---------------
 
-This Tutor plugin is maintained by Fahad Khalid from `Edly <https://edly.io>`__. Community support is available from the official `Open edX forum <https://discuss.openedx.org>`__. Do you need help with this plugin? See the `troubleshooting <https://docs.tutor.overhang.io/troubleshooting.html>`__ section from the Tutor documentation.
+This Tutor plugin is maintained by Fahad Khalid from `Edly <https://edly.io>`__. Community support is available from the official `Open edX forum <https://discuss.openedx.org>`__. Do you need help with this plugin? See the `troubleshooting <https://docs.tutor.edly.io/troubleshooting.html>`__ section from the Tutor documentation.
 
 License
 -------
