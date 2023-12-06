@@ -63,9 +63,7 @@ hooks.Filters.CONFIG_DEFAULTS.add_items(
 hooks.Filters.CONFIG_UNIQUE.add_items(
     [(f"CAIRN_{key}", value) for key, value in config.get("unique", {}).items()]
 )
-hooks.Filters.CONFIG_OVERRIDES.add_items(
-    list(config.get("overrides", {}).items())
-)
+hooks.Filters.CONFIG_OVERRIDES.add_items(list(config.get("overrides", {}).items()))
 
 # Init scripts
 for service in ["cairn-clickhouse", "cairn-superset", "cairn-openedx"]:
