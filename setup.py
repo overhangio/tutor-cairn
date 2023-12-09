@@ -42,6 +42,7 @@ setup(
     include_package_data=True,
     python_requires=">=3.7",
     install_requires=["tutor>=16.0.0,<17.0.0"],
+    extras_require={"dev": ["tutor[dev]>=16.0.0,<17.0.0"]},
     entry_points={"tutor.plugin.v1": ["cairn = tutorcairn.plugin"]},
     classifiers=[
         "Development Status :: 5 - Production/Stable",
