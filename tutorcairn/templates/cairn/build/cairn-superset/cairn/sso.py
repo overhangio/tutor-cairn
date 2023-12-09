@@ -29,7 +29,7 @@ class OpenEdxSsoSecurityManager(SupersetSecurityManager):
     def get_user_info(self):
         """
         Make calls to the LMS API to fetch user information
-        http://local.overhang.io:8000/api-docs/#/user/user_v1_me_read
+        http://local.edly.io:8000/api-docs/#/user/user_v1_me_read
         """
         username = self.get_lms_api("/api/user/v1/me")["username"]
         account = self.get_lms_api(f"/api/user/v1/accounts/{username}")
