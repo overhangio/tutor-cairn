@@ -5,45 +5,14 @@ metadata:
   name: fss-pv-cairn-vector
 spec:
   capacity:
-    storage: 50Gi
+    storage: 100Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   csi:
     driver: fss.csi.oraclecloud.com
-    volumeHandle: "{{ OCI_FILE_SYSTEM_OCID }}:{{ OCI_FILE_SYSTEM_MOUNT_IP }}:{{ CAIRN_VECTOR_OCI_FILE_SYSTEM_MOUNT_PATH }}"
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: fss-pv-cairn-clickhouse
-spec:
-  capacity:
-    storage: 50Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
-  csi:
-    driver: fss.csi.oraclecloud.com
-    volumeHandle: "{{ OCI_FILE_SYSTEM_OCID }}:{{ OCI_FILE_SYSTEM_MOUNT_IP }}:{{ CAIRN_CLICKHOUSE_OCI_FILE_SYSTEM_MOUNT_PATH }}"
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: fss-pv-cairn-postgresql
-spec:
-  capacity:
-    storage: 50Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
-  csi:
-    driver: fss.csi.oraclecloud.com
-    volumeHandle: "{{ OCI_FILE_SYSTEM_OCID }}:{{ OCI_FILE_SYSTEM_MOUNT_IP }}:{{ CAIRN_POSTGRESQL_OCI_FILE_SYSTEM_MOUNT_PATH }}"
-
+    volumeHandle: "{{ CAIRN_VECTOR_OCI_FILE_SYSTEM_OCID }}:{{ CAIRN_VECTOR_OCI_FILE_SYSTEM_MOUNT_IP }}:{{ CAIRN_VECTOR_OCI_FILE_SYSTEM_MOUNT_PATH }}"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -72,12 +41,10 @@ metadata:
     app.kubernetes.io/name: cairn-clickhouse
 spec:
   accessModes:
-    - ReadWriteMany
-  storageClassName: ""
+    - ReadWriteOnce
   resources:
     requests:
-      storage: 20Gi
-  volumeName: fss-pv-cairn-clickhouse
+      storage: 5Gi
 
 {% endif %}
 {% if CAIRN_RUN_POSTGRESQL %}
@@ -91,10 +58,8 @@ metadata:
     app.kubernetes.io/name: cairn-postgresql
 spec:
   accessModes:
-    - ReadWriteMany
-  storageClassName: ""
+    - ReadWriteOnce
   resources:
     requests:
-      storage: 30Gi
-  volumeName: fss-pv-cairn-postgresql
+      storage: 2Gi
 {% endif %}
