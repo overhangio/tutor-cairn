@@ -55,14 +55,27 @@ spec:
       labels:
         name: cairn-vector
     spec:
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
-        fsGroupChangePolicy: "OnRootMismatch"
+      # securityContext:
+      #   runAsUser: 1000
+      #   runAsGroup: 1000
+      #   fsGroup: 1000
+      #   fsGroupChangePolicy: "OnRootMismatch"
       serviceAccountName: cairn-vector
       # Run vector next to LMS
       affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-pool
+                operator: In
+                values:
+                - sdaia-prod-node-pool-0
+            - matchExpressions:
+              - key: name
+                operator: In
+                values:
+                - sdaia-prod-node-pool-1
         podAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             - labelSelector:
