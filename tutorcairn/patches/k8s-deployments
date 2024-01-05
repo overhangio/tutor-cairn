@@ -122,7 +122,7 @@ spec:
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: cairn-vector
+            claimName: cairn-vector-fss
         - name: var-log
           hostPath:
             path: /var/log/

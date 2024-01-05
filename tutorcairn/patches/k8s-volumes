@@ -17,10 +17,10 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: cairn-vector
+  name: cairn-vector-fss
   labels:
     app.kubernetes.io/component: volume
-    app.kubernetes.io/name: cairn-vector
+    app.kubernetes.io/name: cairn-vector-fss
 spec:
   accessModes:
     - ReadWriteMany
