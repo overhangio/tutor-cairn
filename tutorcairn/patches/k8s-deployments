@@ -55,11 +55,6 @@ spec:
       labels:
         name: cairn-vector
     spec:
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
-        fsGroupChangePolicy: "OnRootMismatch"
       serviceAccountName: cairn-vector
       # Run vector next to LMS
       affinity:
