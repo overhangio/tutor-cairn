@@ -6,7 +6,7 @@ import typing as t
 from glob import glob
 
 import click
-import pkg_resources
+import importlib_resources
 from tutor import hooks
 from tutor.__about__ import __version_suffix__
 
@@ -188,7 +188,7 @@ hooks.Filters.CLI_DO_COMMANDS.add_item(create_user_command)
 ####### Boilerplate code
 # Add the "templates" folder as a template root
 hooks.Filters.ENV_TEMPLATE_ROOTS.add_item(
-    pkg_resources.resource_filename("tutorcairn", "templates")
+    str(importlib_resources.files("tutorcairn") / "templates")
 )
 # Render the "build" and "apps" folders
 hooks.Filters.ENV_TEMPLATE_TARGETS.add_items(
@@ -198,8 +198,6 @@ hooks.Filters.ENV_TEMPLATE_TARGETS.add_items(
     ],
 )
 # Load patches from files
-for path in glob(
-    os.path.join(pkg_resources.resource_filename("tutorcairn", "patches"), "*")
-):
+for path in glob(str(importlib_resources.files("tutorcairn") / "patches" / "*")):
     with open(path, encoding="utf-8") as patch_file:
         hooks.Filters.ENV_PATCHES.add_item((os.path.basename(path), patch_file.read()))
