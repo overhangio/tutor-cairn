@@ -19,6 +19,12 @@ instructions, because git commits are used to generate release notes:
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-17.1.0'></a>
+## v17.1.0 (2024-02-09)
+
+- 💥[Improvement] Convert `events.user_id` and `video_events.user_id` fields from Int64 to UInt64. (by @FahadKhalid210)
+- 💥[[Bugfix] Fix the security context for Vector to ensure it works correctly on Kubernetes. Note that the Vector container will now run in privileged mode. (by @FahadKhalid210)
+
 <a id='changelog-17.0.0'></a>
 ## v17.0.0 (2023-12-09)
 
