@@ -2,7 +2,6 @@ variables:
     TUTOR_PLUGIN: cairn
     TUTOR_IMAGES: cairn-clickhouse cairn-superset
     TUTOR_PYPI_PACKAGE: tutor-cairn
-    OPENEDX_RELEASE: quince
     GITHUB_REPO: overhangio/tutor-cairn
     IMAGES_BUILD_PLATFORM: "linux/amd64"
 
