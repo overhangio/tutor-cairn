@@ -10,7 +10,6 @@ RUN apt update && apt install -y git build-essential libssl-dev zlib1g-dev \
 libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
 libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev
 
-
 COPY ./scripts /scripts
 RUN chmod a+x /scripts/*
 # Install pyenv
@@ -21,9 +20,6 @@ ENV PYENV_ROOT /opt/pyenv
 RUN git clone https://github.com/pyenv/pyenv $PYENV_ROOT --branch v2.3.36 --depth 1
 # Install Python
 RUN $PYENV_ROOT/bin/pyenv install $PYTHON_VERSION
-
-
 RUN $PYENV_ROOT/bin/pyenv global $PYTHON_VERSION
-
 
 ENV PATH /opt/pyenv/shims:/opt/pyenv/bin:/scripts:${PATH}
