@@ -1909,7 +1909,7 @@
                 "offset": 0,
                 "params": "{\"remote_id\": 49, \"database_name\": \"admin\"}",
                 "schema": "openedx",
-                "sql": "SELECT user_id,\n  course_id,\n  time,\n  arrayJoin(range(floor(toUInt64(toUnixTimestamp(time) - 5)), ceil(toUInt64(toUnixTimestamp(time) + 5)))) AS timestamp\nFROM events\nWHERE event_source = 'browser'",
+                "sql": "SELECT user_id,\n  course_id,\n  time,\n  arrayJoin(range(floor(toUInt64(toUnixTimestamp(time))), ceil(toUInt64(toUnixTimestamp(time) + 120)))) AS timestamp\nFROM events\nWHERE course_id <> '' and user_id > 0",
                 "table_name": "User activity",
                 "template_params": null
             }
