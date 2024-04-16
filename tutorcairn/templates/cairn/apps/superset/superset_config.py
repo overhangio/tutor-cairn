@@ -162,4 +162,13 @@ FEATURE_FLAGS = {
     "EMBEDDED_SUPERSET": True
 }
 
+# Embedded Dashboard CORS
+ENABLE_CORS=True
+CORS_OPTIONS={
+    "supports_credentials": True,
+    "allow_headers": ["*"],
+    "resources": ["*"],
+    'origins': ["{{ LMS_HOST }}","{{ CMS_HOST }}"],
+}
+
 {{ patch("cairn-superset-settings") }}
