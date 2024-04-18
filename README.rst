@@ -240,6 +240,13 @@ Postgresql/Superset settings
 - ``CAIRN_POSTGRESQL_PASSWORD`` (default: ``"{{ 20|random_string }}"``): Postgresql password.
 - ``CAIRN_SUPERSET_SECRET_KEY`` (default: ``"{{ 20|random_string }}"``): randomly-generated secret key for the Superset frontend.
 
+Add/Update Superset Configurations
+----------------------------------
+
+Use ``cairn-superset-settings`` patch to add or update `Superset configurations <https://github.com/apache/superset/blob/master/superset/config.py>`__.
+Then apply changes with::
+    tutor local launch
+
 Troubleshooting
 ---------------
 

@@ -163,12 +163,17 @@ FEATURE_FLAGS = {
 }
 
 # Embedded Dashboard CORS
+OPENEDX_CMS_ROOT_URL = "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ CMS_HOST }}"
+
+if os.environ.get("FLASK_ENV") == "development":
+    OPENEDX_CMS_ROOT_URL = "http://{{ CMS_HOST }}:8001"
+
 ENABLE_CORS=True
 CORS_OPTIONS={
-    "supports_credentials": True,
-    "allow_headers": ["*"],
-    "resources": ["*"],
-    'origins': ["{{ LMS_HOST }}","{{ CMS_HOST }}"],
+    "origins": [
+    f"{OPENEDX_LMS_ROOT_URL}", 
+    f"{OPENEDX_CMS_ROOT_URL}"
+    ],
 }
 
 {{ patch("cairn-superset-settings") }}
