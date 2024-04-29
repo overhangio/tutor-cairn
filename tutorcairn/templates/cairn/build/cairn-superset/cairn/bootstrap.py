@@ -117,11 +117,17 @@ def grant_clickhouse_row_based_access(clickhouse_username, course_ids=None):
     for table in make_clickhouse_query("SHOW TABLES").split("\n"):
         if not table.startswith("_"):
             make_clickhouse_query(
-                f"""GRANT SELECT ON {table} TO '{clickhouse_username}';"""
-            )
-            make_clickhouse_query(
-                f"""CREATE ROW POLICY OR REPLACE '{clickhouse_username}' ON {table} AS RESTRICTIVE FOR SELECT USING {condition} TO '{clickhouse_username}';"""
-            )
+                        f"""GRANT SELECT ON {table} TO '{clickhouse_username}';"""
+                    )
+                    
+            if table in ["openedx_users", "openedx_user_profiles", "openedx_block_completion"]:
+                make_clickhouse_query(
+                    f"""CREATE ROW POLICY OR REPLACE '{clickhouse_username}' ON {table} AS RESTRICTIVE FOR SELECT USING 1 TO '{clickhouse_username}';"""
+                )
+            else:
+                make_clickhouse_query(
+                    f"""CREATE ROW POLICY OR REPLACE '{clickhouse_username}' ON {table} AS RESTRICTIVE FOR SELECT USING {condition} TO '{clickhouse_username}';"""
+                )
 
 
 def make_clickhouse_query(query):
