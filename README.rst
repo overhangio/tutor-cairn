@@ -244,7 +244,15 @@ Add/Update Superset Configurations
 ----------------------------------
 
 Use ``cairn-superset-settings`` patch to add or update `Superset configurations <https://github.com/apache/superset/blob/master/superset/config.py>`__.
+
+e.g, to customize visualizations, add following configurations in ``cairn-superset-settings`` patch::
+
+    APP_NAME = "<APP_NAME>"
+    APP_ICON = "<APP_ICON>"
+    APP_ICON_WIDTH = <APP_ICON_WIDTH>
+
 Then apply changes with::
+    
     tutor local launch
 
 Troubleshooting
