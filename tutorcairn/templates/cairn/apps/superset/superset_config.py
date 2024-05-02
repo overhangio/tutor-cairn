@@ -84,6 +84,12 @@ RESULTS_BACKEND = RedisCache(
     db=REDIS_CACHE_DB,
     key_prefix="superset_results",
 )
+OPENEDX_LMS_ROOT_URL = "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}"
+OPENEDX_CMS_ROOT_URL = "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ CMS_HOST }}"
+
+if os.environ.get("FLASK_ENV") == "development":
+    OPENEDX_LMS_ROOT_URL = "http://{{ LMS_HOST }}:8000"
+    OPENEDX_CMS_ROOT_URL = "http://{{ CMS_HOST }}:8001"
 
 {% if CAIRN_ENABLE_SSO %}
 # Authentication
@@ -91,10 +97,9 @@ RESULTS_BACKEND = RedisCache(
 # https://flask-appbuilder.readthedocs.io/en/latest/security.html#authentication-oauth
 from flask_appbuilder.security.manager import AUTH_OAUTH
 AUTH_TYPE = AUTH_OAUTH
-OPENEDX_LMS_ROOT_URL = "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}"
+
 OPENEDX_SSO_CLIENT_ID = "{{ CAIRN_SSO_CLIENT_ID }}"
 if os.environ.get("FLASK_ENV") == "development":
-    OPENEDX_LMS_ROOT_URL = "http://{{ LMS_HOST }}:8000"
     OPENEDX_SSO_CLIENT_ID = "{{ CAIRN_SSO_CLIENT_ID }}-dev"
 OAUTH_PROVIDERS = [
     {
@@ -161,12 +166,6 @@ FEATURE_FLAGS = {
     # Enable dashboard embedding
     "EMBEDDED_SUPERSET": True
 }
-
-# Embedded Dashboard CORS
-OPENEDX_CMS_ROOT_URL = "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ CMS_HOST }}"
-
-if os.environ.get("FLASK_ENV") == "development":
-    OPENEDX_CMS_ROOT_URL = "http://{{ CMS_HOST }}:8001"
 
 ENABLE_CORS=True
 CORS_OPTIONS={
