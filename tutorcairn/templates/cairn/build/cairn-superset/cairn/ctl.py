@@ -13,7 +13,7 @@ from superset.connectors.sqla.models import SqlaTable
 from superset.models.core import Database
 from superset.models.slice import Slice
 from superset.extensions import db, security_manager
-import superset.dashboards.commands.importers.v0 as importers
+import superset.commands.dashboard.importers.v0 as importers
 from werkzeug.security import generate_password_hash
 
 # Our convenient library

@@ -19,6 +19,15 @@ instructions, because git commits are used to generate release notes:
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-18.0.0'></a>
+## v18.0.0 (2024-06-20)
+
+- 💥[Feature] Upgrade to Redwood. (by @Fahadkhalid210)
+- [Bugfix] Make plugin compatible with Python 3.12 by removing dependency on `pkg_resources`. (by @regisb)
+- [Improvement] Update User Activity dataset query by extending time span to 120 seconds and selecting all events where course ID is not null to improve average time spent in course. (by @Fahadkhalid210)
+- [Improvement] Added CORS for embedded Dashboards. (by @Fahadkhalid210)
+- 💥[Feature] Upgrade Clickhouse to version 24.1.8.22 and fix query issues due to deprecation of live views. (by @Fahadkhalid210)
+
 <a id='changelog-17.1.0'></a>
 ## v17.1.0 (2024-02-09)
 

@@ -88,7 +88,8 @@ def create_superset_db_role(role_name: str, superset_database_name: str) -> None
         return False
 
     # Create or update role with the same name as the user
-    security_manager.set_role(role_name, check_permission)
+    pvms = security_manager._get_all_pvms()
+    security_manager.set_role(role_name, check_permission, pvms)
 
 
 def create_clickhouse_user(clickhouse_username):

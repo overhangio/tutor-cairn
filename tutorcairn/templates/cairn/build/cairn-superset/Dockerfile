@@ -3,7 +3,7 @@
 # https://github.com/apache/superset/releases
 # https://github.com/apache/superset/blob/master/Dockerfile
 # https://superset.apache.org/docs/databases/installing-database-drivers
-FROM docker.io/apache/superset:3.0.1
+FROM docker.io/apache/superset:4.0.0
 
 USER root
 
@@ -18,11 +18,11 @@ RUN apt-get update \
         pkg-config
 
 RUN --mount=type=cache,target=/root/.cache/pip,sharing=shared pip install \
-    clickhouse-driver==0.2.6 \
-    mysqlclient==2.2.0 \
-    clickhouse-connect==0.6.20 \
+    clickhouse-driver==0.2.7 \
+    mysqlclient==2.2.4 \
+    clickhouse-connect==0.7.8 \
     clickhouse-sqlalchemy==0.2.4 \
-    authlib==1.2.1
+    authlib==1.3.0
 
 USER superset
 
