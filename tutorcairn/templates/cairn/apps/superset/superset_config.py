@@ -41,6 +41,7 @@ available_languages = {
     "ru": {"flag": "ru", "name": "Russian"},
     "sk": {"flag": "sk", "name": "Slovak"},
     "sl": {"flag": "si", "name": "Slovenian"},
+    "uk": {"flag": "uk", "name": "Ukranian"},
     "zh": {"flag": "cn", "name": "Chinese"},    
 }
 {#- https://github.com/apache/superset/blob/master/docs/docs/contributing/translations.mdx#enabling-language-selection #}
