@@ -47,6 +47,8 @@ config: t.Dict[str, t.Dict[str, t.Any]] = {
         "VECTOR_DOCKER_IMAGE": "docker.io/timberio/vector:0.25.1-alpine",
         # Auto sync user roles
         "AUTH_ROLES_SYNC_AT_LOGIN": False,
+        "WATCHCOURSES_HOST": "cairn-watchcourses",
+        "WATCHCOURSES_PORT": 8999,
     },
     "unique": {
         "CLICKHOUSE_PASSWORD": "{{ 20|random_string }}",

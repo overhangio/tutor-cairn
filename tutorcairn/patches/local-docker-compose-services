@@ -85,3 +85,17 @@ cairn-postgresql:
     depends_on:
         - permissions
 {% endif %}
+cairn-watchcourses:
+    image: {{ DOCKER_IMAGE_OPENEDX }}
+    command: >
+        bash -c "pip install -qr /openedx/scripts/requirements.txt
+        && uvicorn --app-dir /openedx/scripts/ main:app --host 0.0.0.0 --port {{ CAIRN_WATCHCOURSES_PORT }}"
+    restart: unless-stopped
+    environment:
+      SETTINGS: ${TUTOR_EDX_PLATFORM_SETTINGS:-tutor.production}
+    volumes:
+      - ../apps/openedx/settings/lms:/openedx/edx-platform/lms/envs/tutor:ro
+      - ../apps/openedx/settings/cms:/openedx/edx-platform/cms/envs/tutor:ro
+      - ../apps/openedx/config:/openedx/config:ro
+      - ../plugins/cairn/apps/openedx/scripts:/openedx/scripts:ro
+      - ../plugins/cairn/apps/clickhouse/auth.json:/openedx/clickhouse-auth.json:ro

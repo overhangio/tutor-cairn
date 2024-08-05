@@ -327,3 +327,57 @@ spec:
           persistentVolumeClaim:
             claimName: cairn-postgresql
 {% endif %}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cairn-watchcourses
+  labels:
+    app.kubernetes.io/name: cairn-watchcourses
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cairn-cairn-watchcourses
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: cairn-cairn-watchcourses
+    spec:
+      containers:
+        - name: cairn-watchcourses
+          image: {{ DOCKER_IMAGE_OPENEDX }}
+          env:
+            - name: DJANGO_SETTINGS_MODULE
+              value: lms.envs.tutor.production
+          command: ["/bin/bash"]
+          args: ["-c", "pip install -qr /openedx/scripts/requirements.txt && uvicorn --app-dir /openedx/scripts/ main:app --host 0.0.0.0 --port {{ CAIRN_WATCHCOURSES_PORT }}"]
+          volumeMounts:
+            - mountPath: /openedx/edx-platform/lms/envs/tutor/
+              name: settings-lms
+            - mountPath: /openedx/edx-platform/cms/envs/tutor/
+              name: settings-cms
+            - mountPath: /openedx/config
+              name: config
+            - mountPath: /openedx/scripts
+              name: scripts
+            - mountPath: /openedx/clickhouse-auth.json
+              name: clickhouse-auth
+              subPath: auth.json
+          securityContext:
+            allowPrivilegeEscalation: false
+      volumes:
+      - name: settings-lms
+        configMap:
+          name: openedx-settings-lms
+      - name: settings-cms
+        configMap:
+          name: openedx-settings-cms
+      - name: config
+        configMap:
+          name: openedx-config
+      - name: scripts
+        configMap:
+          name: cairn-openedx-scripts
+      - name: clickhouse-auth
+        configMap:
+          name: cairn-clickhouse-auth
