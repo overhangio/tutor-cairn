@@ -86,7 +86,6 @@ type = "http"
 method = "post"
 encoding.codec = "json"
 inputs = ["course_published"]
-uri = "http://{{ CAIRN_WATCHCOURSES_HOST }}:{{ CAIRN_WATCHCOURSES_PORT }}/import_course/"
-
+uri = "http://cairn-watchcourses:9282/import_course/"
 
 {{ patch("cairn-vector-common-toml") }}

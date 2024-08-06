@@ -15,10 +15,9 @@ cairn-superset-worker-beat:
 
 cairn-watchcourses:
     <<: *openedx-service
-    command: "uvicorn --app-dir /openedx/scripts/ main:app --host 0.0.0.0 --port {{ CAIRN_WATCHCOURSES_PORT }}"
     ports:
-        - "8999:8999"
+        - "9282:9282"
     networks:
         default:
             aliases:
-                - "{{ CAIRN_WATCHCOURSES_HOST }}"
+                - "cairn-watchcourses"
