@@ -346,11 +346,8 @@ spec:
       containers:
         - name: cairn-watchcourses
           image: {{ DOCKER_IMAGE_OPENEDX }}
-          env:
-            - name: DJANGO_SETTINGS_MODULE
-              value: lms.envs.tutor.production
           command: ["/bin/bash"]
-          args: ["-c", "pip install -qr /openedx/scripts/requirements.txt && uvicorn --app-dir /openedx/scripts/ main:app --host 0.0.0.0 --port {{ CAIRN_WATCHCOURSES_PORT }}"]
+          args: ["-c", "python /openedx/scripts/server.py"]
           volumeMounts:
             - mountPath: /openedx/edx-platform/lms/envs/tutor/
               name: settings-lms
