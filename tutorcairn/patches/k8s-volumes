@@ -44,3 +44,17 @@ spec:
     requests:
       storage: 2Gi
 {% endif %}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cairn-watchcourses
+  labels:
+    app.kubernetes.io/component: volume
+    app.kubernetes.io/name: cairn-watchcourses
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
