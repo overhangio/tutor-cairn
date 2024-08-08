@@ -24,7 +24,8 @@ def main():
         description="Import course block information into the datalake"
     )
     parser.add_argument(
-        "-c", "--course-id", action="append", help="Limit import to these courses"
+        "-c", "--course-id", action="extend", nargs='*', 
+        help="Limit import to these courses"
     )
     args = parser.parse_args()
 

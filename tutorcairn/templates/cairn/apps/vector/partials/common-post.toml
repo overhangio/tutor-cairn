@@ -86,6 +86,8 @@ type = "http"
 method = "post"
 encoding.codec = "json"
 inputs = ["course_published"]
+batch.timeout_secs = 300
+batch.max_events = 10
 uri = "http://cairn-watchcourses:9282/import_course/"
 
 {{ patch("cairn-vector-common-toml") }}
