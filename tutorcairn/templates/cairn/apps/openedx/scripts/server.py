@@ -1,13 +1,26 @@
 from aiohttp import web
 import subprocess
+import logging
 from opaque_keys.edx.locator import CourseLocator
 
-async def import_course_to_clickhouse(request):
+# Configure logging
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+# Get a logger instance
+log = logging.getLogger(__name__)
+
+async def import_courses_to_clickhouse(request):
 
     data = await request.json()
-    if not isinstance(data, list) or 'course_id' not in data[0]:
-        return web.json_response({"error":"Value course_id is required."}, status=400)
-    
+    if not isinstance(data, list):
+        return web.json_response({"error": f"Incorrect data format. Expected list, got {data.__class__}."}, status=400)
+    course_ids = []
+    for course in data:
+        course_id = course.get("course_id")
+        if not isinstance(course_id, str):
+            return web.json_response({"error": f"Incorrect course_id format. Expected str, got {course_id.__class__}."}, status=400)
+        
     # Get the list of unique course_ids
     unique_courses = list({course['course_id']: course for course in data}.values())
 
@@ -18,26 +31,17 @@ async def import_course_to_clickhouse(request):
         # Verify course_id is a valid course_id
         try:
             CourseLocator.from_string(course_id)
-        except:
-            continue
+        except Exception as e:
+            log.exception(f"An error occured: {str(e)}")
+            return web.json_response({"error": f"Incorrect arguments. Expected valid course_id, got {course_id}."}, status=400)
 
         course_ids.append(course_id)
-    
-    # If none of the course_ids are valid, return an error
-    if not course_ids:
-        return web.json_response({"error": f"Invalid course_id"}, status=400)
 
-    command = ["python", "/openedx/scripts/importcoursedata.py", "-c"]
-    command.extend(course_ids)
-    
-    try:
-        subprocess.run(command)
-        return web.json_response({"result": "success"}, status=200)
-    except Exception as e:
-        return web.json_response({'error': str(e)}, status=400)
+    subprocess.run(["python", "/openedx/scripts/importcoursedata.py", "-c", *course_ids], check=True)
+    return web.Response(status=204)
     
 
 app = web.Application()
-app.router.add_post('/import_course/', import_course_to_clickhouse)
+app.router.add_post('/courses/published/', import_courses_to_clickhouse)
 
 web.run_app(app, host='0.0.0.0', port=9282)

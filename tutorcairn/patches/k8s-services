@@ -49,7 +49,7 @@ kind: Service
 metadata:
   name: cairn-watchcourses
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - port: 9282
       protocol: TCP

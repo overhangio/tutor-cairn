@@ -86,8 +86,12 @@ type = "http"
 method = "post"
 encoding.codec = "json"
 inputs = ["course_published"]
+# Batch events together to reduce the number of times
+# the importcoursedata script is run
+# Vector will wait 300 secs (5 mins) from the first event
+# or until there are 10 events to trigger the watchcourses service
 batch.timeout_secs = 300
 batch.max_events = 10
-uri = "http://cairn-watchcourses:9282/import_course/"
+uri = "http://cairn-watchcourses:9282/courses/published/"
 
 {{ patch("cairn-vector-common-toml") }}
