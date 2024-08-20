@@ -3,11 +3,9 @@ import subprocess
 import logging
 from opaque_keys.edx.locator import CourseLocator
 
-# Configure logging
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-# Get a logger instance
 log = logging.getLogger(__name__)
 
 async def import_courses_to_clickhouse(request):
