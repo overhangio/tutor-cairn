@@ -1,6 +1,23 @@
-from aiohttp import web
-import subprocess
+"""
+This module provides an HTTP service for importing course data into ClickHouse.
+
+It defines a single HTTP endpoint that allows for the submission of course IDs,
+which are then processed and used to trigger a subprocess for data import.
+
+Functions:
+- import_courses_to_clickhouse(request): Handles POST requests to '/courses/published/'.
+  Validates the input data, verifies course IDs, and triggers an external Python script
+  to import the data into ClickHouse.
+
+Usage:
+- python server.py
+- Run this module to start the HTTP server. It listens on port 9282 and processes
+  requests sent to the '/courses/published/' endpoint.
+"""
 import logging
+import subprocess
+
+from aiohttp import web
 from opaque_keys.edx.locator import CourseLocator
 
 logging.basicConfig(level=logging.INFO,
