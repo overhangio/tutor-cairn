@@ -43,3 +43,15 @@ spec:
       protocol: TCP
   selector:
     app.kubernetes.io/name: cairn-superset
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cairn-watchcourses
+spec:
+  type: NodePort
+  ports:
+    - port: 9282
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: cairn-watchcourses

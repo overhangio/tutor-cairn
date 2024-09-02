@@ -38,6 +38,21 @@ source = '''
 .message = parse_json!(.message)
 '''
 
+# Parse CMS logs for course publishing event
+[transforms.course_published]
+type="remap"
+inputs = ["openedx_containers"]
+source = '''
+parsed, err_regex = parse_regex(.message, r'Updating course overview for (?P<course_id>\S+?)(?:\s|\.|$)')
+  if err_regex != null {
+    log("Unable to parse course_id from log message: " +  err_regex, level: "error")
+    abort
+  }
+. = {"course_id": parsed.course_id}
+'''
+drop_on_error = true
+drop_on_abort = true
+
 ### Sinks
 
 # Log all events to stdout, for debugging
@@ -57,5 +72,26 @@ endpoint = "{{ CAIRN_CLICKHOUSE_HTTP_SCHEME }}://{{ CAIRN_CLICKHOUSE_HOST }}:{{ 
 database = "{{ CAIRN_CLICKHOUSE_DATABASE }}"
 table = "_tracking"
 healthcheck = true
+
+# Log course_published event to stdout for debugging
+[sinks.course_published_out]
+type = "console"
+inputs = ["course_published"]
+encoding.codec = "json"
+encoding.only_fields = ["course_id"]
+
+# Send course_id to watchcourses
+[sinks.watchcourse]
+type = "http"
+method = "post"
+encoding.codec = "json"
+inputs = ["course_published"]
+# Batch events together to reduce the number of times
+# the importcoursedata script is run
+# Vector will wait 300 secs (5 mins) from the first event
+# or until there are 10 events to trigger the watchcourses service
+batch.timeout_secs = 300
+batch.max_events = 10
+uri = "http://cairn-watchcourses:9282/courses/published/"
 
 {{ patch("cairn-vector-common-toml") }}

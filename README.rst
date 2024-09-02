@@ -132,7 +132,9 @@ To restrict a given user to one or more courses or organizations, select the cou
 Refreshing course block data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Course block IDs and names are loaded from the Open edX modulestore into the datalake. After making changes to your course, you might want to refresh the course structure stored in the datalake. To do so, run::
+Cairn has a ``cairn-watchcourses`` service that looks for changes to the course structure and refreshes the course structure in the datalake automatically. However, the changes may take up to 5 minutes to show up in superset as this service utilizes batch processing. 
+
+If you would like to manually refresh the course structure, run::
 
     tutor local do init --limit=cairn
 

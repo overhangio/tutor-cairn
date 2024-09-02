@@ -327,3 +327,56 @@ spec:
           persistentVolumeClaim:
             claimName: cairn-postgresql
 {% endif %}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cairn-watchcourses
+  labels:
+    app.kubernetes.io/name: cairn-watchcourses
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cairn-watchcourses
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: cairn-watchcourses
+    spec:
+      containers:
+        - name: cairn-watchcourses
+          image: {{ DOCKER_IMAGE_OPENEDX }}
+          command: ["/bin/bash"]
+          args: ["-c", "python /openedx/scripts/server.py"]
+          volumeMounts:
+            - mountPath: /openedx/edx-platform/lms/envs/tutor/
+              name: settings-lms
+            - mountPath: /openedx/edx-platform/cms/envs/tutor/
+              name: settings-cms
+            - mountPath: /openedx/config
+              name: config
+            - mountPath: /openedx/scripts
+              name: scripts
+            - mountPath: /openedx/clickhouse-auth.json
+              name: clickhouse-auth
+              subPath: auth.json
+          securityContext:
+            allowPrivilegeEscalation: false
+          ports:
+            - containerPort: 9282
+      volumes:
+      - name: settings-lms
+        configMap:
+          name: openedx-settings-lms
+      - name: settings-cms
+        configMap:
+          name: openedx-settings-cms
+      - name: config
+        configMap:
+          name: openedx-config
+      - name: scripts
+        configMap:
+          name: cairn-openedx-scripts
+      - name: clickhouse-auth
+        configMap:
+          name: cairn-clickhouse-auth

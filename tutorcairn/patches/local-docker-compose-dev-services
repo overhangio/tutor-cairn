@@ -13,3 +13,11 @@ cairn-superset-worker-beat:
     environment:
         FLASK_ENV: development
 
+cairn-watchcourses:
+    <<: *openedx-service
+    ports:
+        - "9282:9282"
+    networks:
+        default:
+            aliases:
+                - "cairn-watchcourses"
