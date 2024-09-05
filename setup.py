@@ -35,7 +35,7 @@ setup(
     license="AGPLv3",
     author="Overhang.IO",
     maintainer="Edly",
-    maintainer_email="fahad.khalid@arbisoft.com",
+    maintainer_email="danyal.faheem@arbisoft.com",
     description="Scalable, real-time analytics for Open edX",
     long_description=load_readme(),
     long_description_content_type="text/x-rst",
