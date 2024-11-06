@@ -19,6 +19,19 @@ instructions, because git commits are used to generate release notes:
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-19.0.0'></a>
+## v19.0.0 (2024-10-22)
+
+- [Improvement] Added CORS for embeded Dashboards. (by @Fahadkhalid210)
+
+- [Bugfix] Fix legacy warnings during Docker build. (by @regisb)
+
+- [Improvement] Auto import course structure to clickhouse on course publish by parsing CMS logs. (by @Danyal-Faheem)
+
+- [Feature] Upgrade Clickhouse base image to 24.2.3.70. (by @Danyal-Faheem)
+
+- 💥[Feature] Upgrade to Sumac. (by @Danyal-Faheem)
+
 <a id='changelog-18.0.0'></a>
 ## v18.0.0 (2024-06-20)
 
