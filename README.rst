@@ -73,11 +73,11 @@ To add the default dashboards to the new user, add the ``--bootstrap-dashboards`
 
 Some event data might be missing from your dashboards: just start using your LMS and refresh your dashboard. The new events should appear immediately.
 
-.. image:: https://raw.githubusercontent.com/overhangio/tutor-cairn/master/screenshots/courseoverview-01.png
+.. image:: https://raw.githubusercontent.com/overhangio/tutor-cairn/release/screenshots/courseoverview-01.png
     :alt: Course overview dashboard part 1
-.. image:: https://raw.githubusercontent.com/overhangio/tutor-cairn/master/screenshots/courseoverview-02.png
+.. image:: https://raw.githubusercontent.com/overhangio/tutor-cairn/release/screenshots/courseoverview-02.png
     :alt: Course overview dashboard part 2
-.. image:: https://raw.githubusercontent.com/overhangio/tutor-cairn/master/screenshots/courseoverview-03.png
+.. image:: https://raw.githubusercontent.com/overhangio/tutor-cairn/release/screenshots/courseoverview-03.png
     :alt: Course overview dashboard part 3
 
 By default, ``AUTH_ROLES_SYNC_AT_LOGIN`` is ``false`` which means admin can customize the permissions associated to a user. To disable this behaviour, modify the ``CAIRN_AUTH_ROLES_SYNC_AT_LOGIN`` setting::
