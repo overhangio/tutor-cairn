@@ -19,6 +19,25 @@ instructions, because git commits are used to generate release notes:
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-19.0.0'></a>
+## v19.0.0 (2024-10-22)
+
+- [Improvement] Added CORS for embeded Dashboards. (by @Fahadkhalid210)
+
+- [Bugfix] Fix legacy warnings during Docker build. (by @regisb)
+
+- [Improvement] Auto import course structure to clickhouse on course publish by parsing CMS logs. (by @Danyal-Faheem)
+
+- [Feature] Upgrade Clickhouse base image to 24.2.3.70. (by @Danyal-Faheem)
+
+- [Deprecation] Drop support for python 3.8 as it has reached end of life. (by @Danyal-Faheem)
+
+- 💥[Improvement] Rename Tutor's two branches (by @DawoudSheraz):
+  * Rename **master** to **release**, as this branch runs the latest official Open edX release tag.
+  * Rename **nightly** to **main**, as this branch runs the Open edX master branches, which are the basis for the next Open edX release.
+
+- 💥[Feature] Upgrade to Sumac. (by @Danyal-Faheem)
+
 <a id='changelog-18.0.0'></a>
 ## v18.0.0 (2024-06-20)
 
