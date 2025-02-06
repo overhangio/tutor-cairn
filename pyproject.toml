@@ -3,6 +3,7 @@
 
 [project]
 name = "tutor-cairn"
+license = { text = "AGPL-3.0-only" }
 authors = [
   {name = "Edly", email = "hello@edly.io"},
 ]
