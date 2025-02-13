@@ -5,10 +5,10 @@
 name = "tutor-cairn"
 license = { text = "AGPL-3.0-only" }
 authors = [
-  {name = "Edly", email = "hello@edly.io"},
+  {name = "Edly"}, {email = "hello@edly.io"},
 ]
 maintainers = [
-  {name = "Danyal Faheem", email = "danyal.faheem@arbisoft.com"}
+  {name = "Danyal Faheem"}, {email = "danyal.faheem@arbisoft.com"}
 ]
 description = "Scalable, real-time analytics for Open edX"
 readme = {file = "README.rst", content-type = "text/x-rst"}
