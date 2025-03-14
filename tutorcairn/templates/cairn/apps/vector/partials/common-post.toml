@@ -65,8 +65,9 @@ encoding.only_fields = ["time", "message.context.course_id", "message.context.us
 # # Send logs to clickhouse
 [sinks.clickhouse]
 type = "clickhouse"
-# Required: https://github.com/timberio/vector/issues/5797
-encoding.timestamp_format = "unix"
+# support time field with microseconds
+date_time_best_effort = true
+encoding.timestamp_format = "rfc3339"
 inputs = ["tracking"]
 endpoint = "{{ CAIRN_CLICKHOUSE_HTTP_SCHEME }}://{{ CAIRN_CLICKHOUSE_HOST }}:{{ CAIRN_CLICKHOUSE_HTTP_PORT }}"
 database = "{{ CAIRN_CLICKHOUSE_DATABASE }}"
