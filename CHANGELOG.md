@@ -19,6 +19,13 @@ instructions, because git commits are used to generate release notes:
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-19.0.2'></a>
+## v19.0.2 (2025-03-14)
+
+- [Bugfix] Do not add cairn-postgresql as a dependency when CAIRN_RUN_POSTGRESQL is false. (by @Danyal-Faheem)
+- [Bugfix] Add missing CAIRN_POSTGRESQL_HOST and CAIRN_POSTGRESQL_PORT settings to allow usage with external postgresql dbs. (by @Danyal-Faheem)
+- [Bugfix] Do not manage cairn-clickhouse permissions CAIRN_RUN_CLICKHOUSE is false. (by @Danyal-Faheem)
+
 <a id='changelog-19.0.1'></a>
 ## v19.0.1 (2025-03-12)
 
