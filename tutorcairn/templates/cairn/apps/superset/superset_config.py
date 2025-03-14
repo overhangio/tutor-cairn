@@ -11,7 +11,7 @@ from superset.cairn import sso as cairn_sso
 
 # https://superset.apache.org/docs/installation/configuring-superset
 SECRET_KEY = "{{ CAIRN_SUPERSET_SECRET_KEY }}"
-SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://{{ CAIRN_POSTGRESQL_USERNAME }}:{{ CAIRN_POSTGRESQL_PASSWORD }}@cairn-postgresql/{{ CAIRN_POSTGRESQL_DATABASE }}"
+SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://{{ CAIRN_POSTGRESQL_USERNAME }}:{{ CAIRN_POSTGRESQL_PASSWORD }}@{{ CAIRN_POSTGRESQL_HOST }}:{{ CAIRN_POSTGRESQL_PORT }}/{{ CAIRN_POSTGRESQL_DATABASE }}"
 
 # Caddy is running behind a proxy: Superset needs to handle x-forwarded-* headers
 # https://flask.palletsprojects.com/en/latest/deploying/proxy_fix/
