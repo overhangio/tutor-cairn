@@ -34,6 +34,8 @@ config: t.Dict[str, t.Dict[str, t.Any]] = {
         "CLICKHOUSE_USERNAME": "openedx",
         # Superset/Postgresql
         "RUN_POSTGRESQL": True,
+        "POSTGRESQL_HOST": "cairn-postgresql",
+        "POSTGRESQL_PORT": "5432",
         "POSTGRESQL_DATABASE": "superset",
         "POSTGRESQL_USERNAME": "superset",
         "SUPERSET_DOCKER_IMAGE": "{{ DOCKER_REGISTRY }}overhangio/cairn-superset:{{ CAIRN_VERSION }}",
