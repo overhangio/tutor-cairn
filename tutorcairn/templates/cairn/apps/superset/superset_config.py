@@ -142,10 +142,6 @@ class CeleryConfig:  # pylint: disable=too-few-public-methods
         },
     }
     CELERYBEAT_SCHEDULE = {
-        "email_reports.schedule_hourly": {
-            "task": "email_reports.schedule_hourly",
-            "schedule": crontab(minute=1, hour="*"),
-        },
         "reports.scheduler": {
             "task": "reports.scheduler",
             "schedule": crontab(minute="*", hour="*"),
@@ -159,13 +155,32 @@ class CeleryConfig:  # pylint: disable=too-few-public-methods
 
 CELERY_CONFIG = CeleryConfig
 
+# Email configuration
+SMTP_HOST = "{{ SMTP_HOST }}"
+SMTP_PORT = {{ SMTP_PORT }}
+SMTP_STARTTLS = {{ SMTP_USE_TLS }}
+SMTP_SSL = {{ SMTP_USE_SSL }}
+SMTP_USER = "{{ SMTP_USERNAME }}" # use the empty string "" if using an unauthenticated SMTP server
+SMTP_PASSWORD = "{{ SMTP_PASSWORD }}" # use the empty string "" if using an unauthenticated SMTP server
+SMTP_MAIL_FROM = "{{ CONTACT_EMAIL }}"
+EMAIL_REPORTS_SUBJECT_PREFIX = "[{{ PLATFORM_NAME }}] "
+
+ALERT_REPORTS_NOTIFICATION_DRY_RUN = False
+WEBDRIVER_BASEURL = "http://cairn-superset:8000/"
+# The base URL for the email report hyperlinks.
+WEBDRIVER_BASEURL_USER_FRIENDLY = "{{ CAIRN_HOST }}"
+
+WEBDRIVER_OPTION_ARGS = ["--headless"]
+
 # Avoid duplicate logging because of propagation to root logger
 logging.getLogger("superset").propagate = False
 
 # https://github.com/apache/superset/blob/master/RESOURCES/FEATURE_FLAGS.md
 FEATURE_FLAGS = {
     # Enable dashboard embedding
-    "EMBEDDED_SUPERSET": True
+    "EMBEDDED_SUPERSET": True,
+    "ALERT_REPORTS": True,
+    
 }
 
 ENABLE_CORS=True
