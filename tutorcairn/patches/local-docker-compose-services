@@ -42,7 +42,7 @@ cairn-superset:
     restart: unless-stopped
     depends_on:
         {% if RUN_REDIS %}- redis{% endif %}
-        - cairn-postgresql
+        {% if CAIRN_RUN_POSTGRESQL %}- cairn-postgresql{% endif %}
 cairn-superset-worker:
     image: {{ CAIRN_SUPERSET_DOCKER_IMAGE }}
     volumes:
@@ -56,7 +56,7 @@ cairn-superset-worker:
         disable: true
     depends_on:
         {% if RUN_REDIS %}- redis{% endif %}
-        - cairn-postgresql
+        {% if CAIRN_RUN_POSTGRESQL %}- cairn-postgresql{% endif %}
 cairn-superset-worker-beat:
     image: {{ CAIRN_SUPERSET_DOCKER_IMAGE }}
     volumes:
@@ -70,7 +70,7 @@ cairn-superset-worker-beat:
         disable: true
     depends_on:
         {% if RUN_REDIS %}- redis{% endif %}
-        - cairn-postgresql
+        {% if CAIRN_RUN_POSTGRESQL %}- cairn-postgresql{% endif %}
 {% if CAIRN_RUN_POSTGRESQL %}
 cairn-postgresql:
     image: docker.io/postgres:9.6-alpine

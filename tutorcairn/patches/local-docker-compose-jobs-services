@@ -23,7 +23,7 @@ cairn-superset-job:
         disable: true
     depends_on:
         {% if RUN_REDIS %}- redis{% endif %}
-        - cairn-postgresql
+        {% if CAIRN_RUN_POSTGRESQL %}- cairn-postgresql{% endif %}
 cairn-openedx-job:
     image: {{ DOCKER_IMAGE_OPENEDX }}
     environment:
