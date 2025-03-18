@@ -128,7 +128,7 @@ AUTH_USER_REGISTRATION = True
 
 class CeleryConfig:  # pylint: disable=too-few-public-methods
     BROKER_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_CELERY_DB}"
-    CELERY_IMPORTS = ("superset.sql_lab", "superset.tasks")
+    CELERY_IMPORTS = ("superset.sql_lab", "superset.tasks","superset.tasks.thumbnails",)
     CELERYD_LOG_LEVEL = "DEBUG"
     CELERYD_PREFETCH_MULTIPLIER = 1
     CELERY_ACKS_LATE = False
@@ -170,8 +170,6 @@ WEBDRIVER_BASEURL = "http://cairn-superset:8000/"
 # The base URL for the email report hyperlinks.
 WEBDRIVER_BASEURL_USER_FRIENDLY = "{{ CAIRN_HOST }}"
 
-WEBDRIVER_OPTION_ARGS = ["--headless"]
-
 # Avoid duplicate logging because of propagation to root logger
 logging.getLogger("superset").propagate = False
 
@@ -179,6 +177,8 @@ logging.getLogger("superset").propagate = False
 FEATURE_FLAGS = {
     # Enable dashboard embedding
     "EMBEDDED_SUPERSET": True,
+    # This feature is stable but known to have bugs from time to time
+    # Alerts and Reports also do not work on arm64 base images
     "ALERT_REPORTS": True,
     
 }
