@@ -166,7 +166,7 @@ SMTP_MAIL_FROM = "{{ CONTACT_EMAIL }}"
 EMAIL_REPORTS_SUBJECT_PREFIX = "[{{ PLATFORM_NAME }}] "
 
 ALERT_REPORTS_NOTIFICATION_DRY_RUN = False
-WEBDRIVER_BASEURL = "http://cairn-superset:8000/"
+WEBDRIVER_BASEURL = "http://cairn-superset:2247/"
 # The base URL for the email report hyperlinks.
 WEBDRIVER_BASEURL_USER_FRIENDLY = "{{ CAIRN_HOST }}"
 
