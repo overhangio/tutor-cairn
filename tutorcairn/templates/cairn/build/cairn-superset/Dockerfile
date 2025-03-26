@@ -30,11 +30,11 @@ USER superset
 COPY --chown=superset:superset ./cairn /app/superset/cairn
 
 # This is required to have a proper healthcheck
-ENV SUPERSET_PORT=8000
+ENV SUPERSET_PORT=2247
 
 ENTRYPOINT []
 CMD gunicorn \
-    --bind  "0.0.0.0:8000" \
+    --bind  "0.0.0.0:2247" \
     --access-logfile '-' \
     --error-logfile '-' \
     --workers 2 \
