@@ -39,7 +39,7 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 8000
+    - port: 2247
       protocol: TCP
   selector:
     app.kubernetes.io/name: cairn-superset

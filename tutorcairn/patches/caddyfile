@@ -1,4 +1,4 @@
 # Cairn
 {{ CAIRN_HOST }}{$default_site_port} {
-    reverse_proxy cairn-superset:8000
+    reverse_proxy cairn-superset:2247
 }
