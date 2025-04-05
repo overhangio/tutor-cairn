@@ -21,7 +21,7 @@ Cairn vs alternatives
 ---------------------
 
 ========================================== =====  ===================================================================================  ===================================================
-List of features                           Cairn  `Open edX Insights <https://edx.readthedocs.io/projects/edx-insights/en/latest/>`__  `Figures <https://github.com/appsembler/figures>`__
+List of features                           Cairn  `Open edX Insights <https://docs.openedx.org/en/latest/site_ops/install_configure_run_guide/insights/index.html>`__  `Figures <https://github.com/appsembler/figures>`__
 ========================================== =====  ===================================================================================  ===================================================
 Event aggregation                            ✅      ✅                                                                                    ❌
 Real-time data                               ✅      ❌                                                                                    ✅
