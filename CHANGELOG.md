@@ -19,6 +19,15 @@ instructions, because git commits are used to generate release notes:
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-19.0.3'></a>
+## v19.0.3 (2025-04-03)
+
+- [Bugfix] Migrate to native filters instead of filter box charts on default course overview dashboard which have been completely deprecated as of superset 4.0.0 release. (by @Danyal-Faheem)
+
+- [Improvement] Enable Alerts and Reports in superset. (by @Danyal-Faheem)
+
+- [Improvement] Make superset ports consistent on local and dev by running it on 2247 in both environments. (by @Danyal-Faheem)
+
 <a id='changelog-19.0.2'></a>
 ## v19.0.2 (2025-03-14)
 
