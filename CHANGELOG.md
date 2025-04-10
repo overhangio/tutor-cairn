@@ -19,6 +19,11 @@ instructions, because git commits are used to generate release notes:
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-19.0.4'></a>
+## v19.0.4 (2025-04-10)
+
+- [Bugfix] Remove deprecated filter_scopes from import_dashboard script. (by @Danyal-Faheem)
+
 <a id='changelog-19.0.3'></a>
 ## v19.0.3 (2025-04-03)
 
