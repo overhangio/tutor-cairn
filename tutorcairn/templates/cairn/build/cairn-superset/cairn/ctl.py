@@ -229,20 +229,6 @@ def import_dashboard(data, user, database):
 
         # Update filter mapping
         metadata = json.loads(dashboard.json_metadata)
-        new_filter_scopes = {}
-        for old_slice_id, filter_scope in metadata["filter_scopes"].items():
-            new_filter_scope = {}
-            for filter_name, properties in filter_scope.items():
-                properties["immune"] = [
-                    old_to_new_slice_id_map[old_immune_id]
-                    for old_immune_id in properties["immune"]
-                ]
-                new_filter_scope[filter_name] = properties
-            # Note that filter scope keys are str, not int
-            new_filter_scopes[
-                str(old_to_new_slice_id_map[int(old_slice_id)])
-            ] = new_filter_scope
-        metadata["filter_scopes"] = new_filter_scopes
         dashboard.json_metadata = json.dumps(metadata)
 
         # Load dashboard
