@@ -15,7 +15,7 @@ test-lint: ## Run code linting tests
 test-types: ## Run type checks.
 	mypy --exclude=templates --ignore-missing-imports --implicit-reexport --strict ${SRC_DIRS}
 
-build-pythonpackage: ## Build the "tutor" python package for upload to pypi
+build-pythonpackage: ## Build the "tutor-cairn" python package for upload to pypi
 	python -m build --sdist
 
 test-pythonpackage: build-pythonpackage ## Test that package can be uploaded to pypi
@@ -33,7 +33,7 @@ changelog-entry: ## Create a new changelog entry.
 changelog: ## Collect changelog entries in the CHANGELOG.md file.
 	scriv collect
 
-version: ## Print the current tutor version
+version: ## Print the current tutor-cairn version
 	@python -c 'import io, os; about = {}; exec(io.open(os.path.join("tutorcairn", "__about__.py"), "rt", encoding="utf-8").read(), about); print(about["__version__"])'
 
 ESCAPE = 
