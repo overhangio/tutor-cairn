@@ -20,7 +20,7 @@ instructions, because git commits are used to generate release notes:
 <!-- scriv-insert-here -->
 
 <a id='changelog-20.0.0'></a>
-## v20.0.0 (2025-04-18)
+## v20.0.0 (2025-06-05)
 
 - 💥[Feature] Upgrade to teak. (by @Danyal-Faheem)
 
