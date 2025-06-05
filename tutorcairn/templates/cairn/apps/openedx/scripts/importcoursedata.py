@@ -8,9 +8,9 @@ import requests
 # https://mysqlclient.readthedocs.io/user_guide.html#mysql-c-api-function-mapping
 from MySQLdb._mysql import escape_string as sql_escape_string
 
-import lms.startup
+import django
 
-lms.startup.run()
+django.setup()
 
 from lms.djangoapps.courseware.courses import get_course
 from xmodule.modulestore.django import modulestore
