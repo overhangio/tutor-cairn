@@ -22,6 +22,8 @@ instructions, because git commits are used to generate release notes:
 <a id='changelog-20.0.0'></a>
 ## v20.0.0 (2025-06-05)
 
+- [Improvement] Test python package distribution build when running make test. (by @Danyal-Faheem)
+
 - 💥[Feature] Upgrade to teak. (by @Danyal-Faheem)
 
 <a id='changelog-19.0.4'></a>
