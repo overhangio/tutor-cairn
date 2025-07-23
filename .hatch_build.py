@@ -18,5 +18,5 @@ def load_about() -> dict[str, str]:
     with open(
         os.path.join(HERE, "tutorcairn", "__about__.py"), "rt", encoding="utf-8"
     ) as f:
-        exec(f.read(), about)  # pylint: disable=exec-used
+        exec(f.read(), about)
     return about

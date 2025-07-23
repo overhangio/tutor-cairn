@@ -126,7 +126,7 @@ AUTH_ROLES_SYNC_AT_LOGIN = {{ CAIRN_AUTH_ROLES_SYNC_AT_LOGIN }}
 AUTH_USER_REGISTRATION = True
 {% endif %}
 
-class CeleryConfig:  # pylint: disable=too-few-public-methods
+class CeleryConfig:
     BROKER_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_CELERY_DB}"
     CELERY_IMPORTS = ("superset.sql_lab", "superset.tasks","superset.tasks.thumbnails",)
     CELERYD_LOG_LEVEL = "DEBUG"
