@@ -25,7 +25,7 @@ config: t.Dict[str, t.Dict[str, t.Any]] = {
         "HOST": "data.{{ LMS_HOST }}",
         # Clickhouse
         "RUN_CLICKHOUSE": True,
-        "CLICKHOUSE_DOCKER_IMAGE": "{{ DOCKER_REGISTRY }}overhangio/cairn-clickhouse:{{ CAIRN_VERSION }}",
+        "CLICKHOUSE_DOCKER_IMAGE": "{{ DOCKER_REGISTRY }}overhangio/cairn-clickhouse:{{ CAIRN_VERSION }}",  # noqa: E501
         "CLICKHOUSE_HOST": "cairn-clickhouse",
         "CLICKHOUSE_HTTP_PORT": 8123,
         "CLICKHOUSE_HTTP_SCHEME": "http",
@@ -38,7 +38,7 @@ config: t.Dict[str, t.Dict[str, t.Any]] = {
         "POSTGRESQL_PORT": "5432",
         "POSTGRESQL_DATABASE": "superset",
         "POSTGRESQL_USERNAME": "superset",
-        "SUPERSET_DOCKER_IMAGE": "{{ DOCKER_REGISTRY }}overhangio/cairn-superset:{{ CAIRN_VERSION }}",
+        "SUPERSET_DOCKER_IMAGE": "{{ DOCKER_REGISTRY }}overhangio/cairn-superset:{{ CAIRN_VERSION }}",  # noqa: E501
         "SUPERSET_LANGUAGE_CODE": "{{ LANGUAGE_CODE[:2] }}",
         # SSO
         "ENABLE_SSO": True,
@@ -142,7 +142,7 @@ def _print_superset_host(
 @click.option(
     "-p",
     "--password",
-    help="Specify password from the command line. If undefined, no password will be set. (Ignored with SSO)",
+    help="Specify password from the command line. If undefined, no password will be set. (Ignored with SSO)",  # noqa: E501
     hide_input=True,
 )
 @click.option(
@@ -181,7 +181,7 @@ def create_user_command(
     if bootstrap_dashboards:
         yield (
             "cairn-superset",
-            f"python ./superset/cairn/ctl.py bootstrap-dashboards {username} /app/bootstrap/courseoverview.json",
+            f"python ./superset/cairn/ctl.py bootstrap-dashboards {username} /app/bootstrap/courseoverview.json",  # noqa: E501
         )
 
 
