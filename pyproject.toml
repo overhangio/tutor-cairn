@@ -8,7 +8,7 @@ authors = [
   {name = "Edly"}, {email = "hello@edly.io"},
 ]
 maintainers = [
-  {name = "Danyal Faheem"}, {email = "danyal.faheem@arbisoft.com"}
+  {name = "Eemaan Amir"}, {email = "eemaan.amir@arbisoft.com"}
 ]
 description = "Scalable, real-time analytics for Open edX"
 readme = {file = "README.rst", content-type = "text/x-rst"}
