@@ -22,12 +22,17 @@ RUN apt-get update -qq \
         libxtst6 \
         wget \
         pkg-config \
+        default-libmysqlclient-dev \
+        build-essential \
     # Install GeckoDriver WebDriver
     && wget -q https://github.com/mozilla/geckodriver/releases/download/${GECKODRIVER_VERSION}/geckodriver-${GECKODRIVER_VERSION}-linux64.tar.gz -O - | tar xfz - -C /usr/local/bin \
     # Install Firefox
     && wget -q https://download-installer.cdn.mozilla.net/pub/firefox/releases/${FIREFOX_VERSION}/linux-x86_64/en-US/firefox-${FIREFOX_VERSION}.tar.bz2 -O - | tar xfj - -C /opt \
     && ln -s /opt/firefox/firefox /usr/local/bin/firefox \
     && apt-get autoremove -yqq --purge wget && rm -rf /var/[log,tmp]/* /tmp/* /var/lib/apt/lists/*
+
+# Upgrade pip to avoid hash verification issues
+RUN pip install --upgrade pip
 
 # https://pypi.org/project/clickhouse-driver/
 # https://pypi.org/project/mysqlclient/

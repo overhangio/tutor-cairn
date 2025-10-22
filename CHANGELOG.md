@@ -19,6 +19,13 @@ instructions, because git commits are used to generate release notes:
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-21.0.0'></a>
+## v21.0.0 (2025-10-21)
+
+- [Improvement] Migrate from pylint and black to ruff. (by @Danyal-Faheem)
+
+- 💥[Feature] Upgrade to ulmo. (by @eemaanamir)
+
 <a id='changelog-20.0.0'></a>
 ## v20.0.0 (2025-06-05)
 
