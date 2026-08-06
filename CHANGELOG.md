@@ -19,6 +19,14 @@ instructions, because git commits are used to generate release notes:
 
 <!-- scriv-insert-here -->
 
+<a id='changelog-22.0.0'></a>
+## v22.0.0 (2026-08-06)
+
+[Chore] Remove unnecessary hatch definition for version. (by @eemaanamir)
+
+- 💥[Feature] Upgrade to Verawood. (by @ahmed-arb)
+- 💥[Improvement] Add Python 3.13 and 3.14 support. Drop Python 3.9 (end-of-life). Update CI matrix from Python 3.9/3.12 to 3.10/3.14. (by @Syed-Ali-Abbas-568)
+
 <a id='changelog-21.0.0'></a>
 ## v21.0.0 (2025-10-21)
 
