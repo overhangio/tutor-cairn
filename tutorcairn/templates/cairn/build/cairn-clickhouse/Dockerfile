@@ -1,5 +1,5 @@
 # https://hub.docker.com/r/clickhouse/clickhouse-server/tags
-FROM docker.io/clickhouse/clickhouse-server:24.2.3.70
+FROM docker.io/clickhouse/clickhouse-server:26.9.19.9
 
 RUN apt update && apt install -y python3
 COPY ./scripts /scripts
