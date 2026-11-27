@@ -163,26 +163,55 @@ def create_user_command(
     username: str,
     email: str,
 ) -> t.Iterable[tuple[str, str]]:
-    admin_opt = " --admin" if admin else ""
-
     # TODO can we now simplify the clickhouse image?
     # - get rid of the cairn utility
     # - remove the auth.json file
 
-    create_superset_user = "python ./superset/cairn/ctl.py createuser"
+    # Commands are rendered as templates, then run by the shell: user-provided values
+    # must be escaped for both.
+    create_superset_user = ["python", "./superset/cairn/ctl.py", "createuser"]
     if password:
-        create_superset_user += f" --password={shlex.quote(password)}"
+        create_superset_user.append(f"--password={password}")
     for course_id in course_ids:
-        create_superset_user += f" --course-id={course_id}"
-    create_superset_user += f" {admin_opt} {username} {email}"
-    yield ("cairn-superset", create_superset_user)
+        create_superset_user.append(f"--course-id={course_id}")
+    if admin:
+        create_superset_user.append("--admin")
+    create_superset_user += ["--", username, email]
+    yield ("cairn-superset", shell_command(create_superset_user))
 
     # Bootstrap dashboards
     if bootstrap_dashboards:
         yield (
             "cairn-superset",
-            f"python ./superset/cairn/ctl.py bootstrap-dashboards {username} /app/bootstrap/courseoverview.json",  # noqa: E501
+            shell_command(
+                [
+                    "python",
+                    "./superset/cairn/ctl.py",
+                    "bootstrap-dashboards",
+                    "--",
+                    username,
+                    "/app/bootstrap/courseoverview.json",
+                ]
+            ),
         )
+
+
+def shell_command(words: list[str]) -> str:
+    """
+    Return a shell command that runs `words`, escaped such that it is rendered unchanged
+    by Tutor.
+    """
+    return escape_template(shlex.join(words))
+
+
+def escape_template(text: str) -> str:
+    """
+    Escape `text` such that it renders to itself in a template.
+
+    This is the same as `tutor.env.escape_template`, which is not available in older
+    versions of Tutor.
+    """
+    return "{{ " + repr(text) + " }}"
 
 
 hooks.Filters.CLI_DO_COMMANDS.add_item(create_user_command)
